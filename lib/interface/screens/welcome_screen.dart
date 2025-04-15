@@ -68,46 +68,43 @@ class WelcomeScreen extends StatelessWidget {
                 ),
               ),
             ),
-
-            SizedBox(height: 10,),
+            SizedBox(
+              height: 10,
+            ),
             Container(
-            height: 60,
+              height: 60,
               width: 380,
-             
               decoration: BoxDecoration(
                 gradient: const LinearGradient(
                   begin: Alignment.topLeft,
                   end: Alignment.bottomRight,
                   colors: [
-                    Color(0xFF0F38C2), 
-                    Color(0xFF072182), 
+                    Color(0xFF0F38C2),
+                    Color(0xFF072182),
                   ],
                 ),
                 borderRadius: BorderRadius.circular(10),
               ),
               child: TextButton(
-                  onPressed: () {
-                   
-                  },
+                  onPressed: () {},
                   child: const Text(
                     'Login',
                     textAlign: TextAlign.center,
                     style: TextStyle(
-                      fontFamily: 'Manrope',
-                      fontWeight: FontWeight.w500,
-                      fontSize: 16,
-                      height: 1.0, // line-height 100%
-                      letterSpacing: 0.0,
-                      textBaseline: TextBaseline.alphabetic,
-                  color: CommonColor.White
-                    ),
+                        fontFamily: 'Manrope',
+                        fontWeight: FontWeight.w500,
+                        fontSize: 16,
+                        height: 1.0, // line-height 100%
+                        letterSpacing: 0.0,
+                        textBaseline: TextBaseline.alphabetic,
+                        color: CommonColor.white),
                   )),
-            ), const SizedBox(height: 120),
-            SizedBox(
-              height: 200,
-              width: double.infinity,
-              child: Image.asset('assets/png/Illustration.png')
             ),
+            const SizedBox(height: 120),
+            SizedBox(
+                height: 200,
+                width: double.infinity,
+                child: Image.asset('assets/png/Illustration.png')),
           ],
         ),
       ),
