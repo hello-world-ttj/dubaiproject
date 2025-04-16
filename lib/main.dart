@@ -1,4 +1,5 @@
 import 'package:dubaiprojectxyvin/interface/screens/splash_screen.dart';
+import 'package:dubaiprojectxyvin/interface/screens/verify_otp_screen.dart';
 import 'package:dubaiprojectxyvin/interface/screens/verify_phone.dart';
 import 'package:dubaiprojectxyvin/interface/screens/welcome_screen.dart';
 import 'package:flutter/material.dart';
@@ -14,7 +15,7 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
-      home: VerifyPhone(),
+      home: VerifyOtpScreen(),
     );
   }
 }

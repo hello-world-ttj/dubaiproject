@@ -1,9 +1,9 @@
 import 'package:dubaiprojectxyvin/interface/compon/common_color.dart';
 import 'package:flutter/material.dart';
 
+
 class WelcomeScreen extends StatelessWidget {
   const WelcomeScreen({super.key});
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -46,16 +46,13 @@ class WelcomeScreen extends StatelessWidget {
               height: 60,
               width: 380,
               child: OutlinedButton(
-                onPressed: () {
-                  // Your action here
-                },
+                onPressed: () {},
                 style: OutlinedButton.styleFrom(
-                  side: BorderSide(
-                      color: Colors.teal, width: 1.5), // Outline color
+                  side: BorderSide(color: Colors.teal, width: 1.5),
                   shape: RoundedRectangleBorder(
                     borderRadius: BorderRadius.circular(10),
                   ),
-                  backgroundColor: Colors.transparent, // Optional
+                  backgroundColor: Colors.transparent,
                 ),
                 child: Text(
                   'Request to join',
@@ -94,7 +91,7 @@ class WelcomeScreen extends StatelessWidget {
                         fontFamily: 'Manrope',
                         fontWeight: FontWeight.w500,
                         fontSize: 16,
-                        height: 1.0, // line-height 100%
+                        height: 1.0,
                         letterSpacing: 0.0,
                         textBaseline: TextBaseline.alphabetic,
                         color: CommonColor.white),

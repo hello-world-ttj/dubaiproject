@@ -1,3 +1,4 @@
+import 'package:dubaiprojectxyvin/interface/compon/common_color.dart';
 import 'package:flutter/material.dart';
 
 class CustomBackButton extends StatelessWidget {
@@ -13,13 +14,17 @@ class CustomBackButton extends StatelessWidget {
         height: 48,
         width: 48,
         decoration: BoxDecoration(
-          color: const Color(0xFFF1F4FF), 
-          borderRadius: BorderRadius.circular(12), 
+          color: CommonColor.lightBlueBackground,
+          borderRadius: BorderRadius.circular(12),
+          border: Border.all(
+            color: Colors.white,
+            width: 1.5, 
+          ),
         ),
         child: const Center(
           child: Icon(
             Icons.arrow_back,
-            color: Color(0xFF072182), 
+            color: Color(0xFF072182),
             size: 24,
           ),
         ),
