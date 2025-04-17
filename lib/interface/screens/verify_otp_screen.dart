@@ -1,13 +1,14 @@
 import 'package:dubaiprojectxyvin/interface/compon/common_color.dart';
+import 'package:dubaiprojectxyvin/interface/compon/common_divider.dart';
 import 'package:flutter/material.dart';
+import 'package:pin_code_fields/pin_code_fields.dart';
 
 import '../compon/GradientButton.dart';
 import '../compon/custom_back_bar.dart';
 
 class VerifyOtpScreen extends StatelessWidget {
   VerifyOtpScreen({super.key});
-  final List<TextEditingController> _controllers =
-      List.generate(4, (index) => TextEditingController());
+ final TextEditingController _otpController = TextEditingController();
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -55,28 +56,40 @@ class VerifyOtpScreen extends StatelessWidget {
                 textAlign: TextAlign.left,
               ),
               SizedBox(height: 30),
+               PinCodeTextField(
+                  appContext: context,
+                  length: 6, // Number of OTP digits
+                  obscureText: false,
+                  keyboardType: TextInputType.number, // Number-only keyboard
+                  animationType: AnimationType.fade,
+                  textStyle: const TextStyle(
+                    fontSize: 25,
+                    fontWeight: FontWeight.w300,
+                    letterSpacing: 4.0,
+                  ),
+                  pinTheme: PinTheme(
+                    shape: PinCodeFieldShape.box,
+                    borderRadius: BorderRadius.circular(5),
+                    fieldHeight: 55,
+                    fieldWidth: 50, selectedColor: CommonColor.lightBlueBackground,
+                    activeColor: const Color.fromARGB(255, 232, 226, 226),
+                    inactiveColor: Color(0xFFF6F8FF),
+                    activeFillColor:  Color(0xFFF6F8FF), // Box color when focused
+                    selectedFillColor:  Color(0xFFF6F8FF), // Box color when selected
+                    inactiveFillColor:
+                         Color(0xFFF6F8FF), // Box fill color when not selected
+                  ),
+                  animationDuration: const Duration(milliseconds: 300),
+                  backgroundColor: Colors.transparent,
+                  enableActiveFill: true,
+                  controller: _otpController,
+                  onChanged: (value) {
+                    // Handle input change
+                  },
+                ),
+              SizedBox(height: 30),
               Row(
-                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                children: List.generate(4, (index) {
-                  return SizedBox(
-                    width: 60,
-                    height: 60,
-                    child: TextField(
-                      controller: _controllers[index],
-                      keyboardType: TextInputType.number,
-                      textAlign: TextAlign.center,
-                      maxLength: 1,
-                      decoration: InputDecoration(
-                        counterText: '',
-                        border: OutlineInputBorder(),
-                      ),
-                      style: TextStyle(fontSize: 24),
-                    ),
-                  );
-                }),
-              ),
-                      SizedBox(height: 30),
-              Row(mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
                   Text(
                     'A 4 digit verification code will be sent',
@@ -89,28 +102,29 @@ class VerifyOtpScreen extends StatelessWidget {
                     ),
                     textAlign: TextAlign.left,
                   ),
-                      Text(
-                'Resend OTP',
-                style: TextStyle(
-                  fontFamily: 'Manrope',
-                  fontWeight: FontWeight.w400,
-                  fontSize: 14,
-                  height: 1.0, 
-                  letterSpacing: -0.01 * 14, 
-                  color: Colors.red
-                ),
-                textAlign: TextAlign.left,
-              ),
+                  Text(
+                    'Resend OTP',
+                    style: TextStyle(
+                        fontFamily: 'Manrope',
+                        fontWeight: FontWeight.w400,
+                        fontSize: 14,
+                        height: 1.0,
+                        letterSpacing: -0.01 * 14,
+                        color: Colors.red),
+                    textAlign: TextAlign.left,
+                  ),
                 ],
               ),
-                 SizedBox(
+              SizedBox(
                 height: 30,
               ),
               GradientButton(
                 title: 'Confirm',
-                onPressed: () {
-                  
-                },
+                onPressed: () {},
+              ),
+              SizedBox(height: 50,),
+              Center(
+                child: CommonDivider()
               ),
             ],
           ),

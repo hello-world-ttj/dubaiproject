@@ -3,6 +3,7 @@ import 'package:dubaiprojectxyvin/interface/compon/custom_back_bar.dart';
 import 'package:flutter/material.dart';
 
 import '../compon/GradientButton.dart';
+import '../compon/common_divider.dart';
 
 class VerifyPhone extends StatelessWidget {
   const VerifyPhone({super.key});
@@ -84,6 +85,10 @@ class VerifyPhone extends StatelessWidget {
                 onPressed: () {
                   
                 },
+              ),
+              SizedBox(height: 50,),
+              Center(
+                child: CommonDivider()
               ),
             ],
           ),
