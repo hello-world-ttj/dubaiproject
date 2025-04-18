@@ -6,5 +6,8 @@ class CommonColor {
    static const Color white = Color(0xFFF7F7F7);
     static const Color backgroundColor = Color(0xFFE5EAFF);
     static const Color lightBlueBackground = Color(0xFFE1E7FF); 
+ 
+    
+       static const Color greenColor = Color(0xFF016A03); 
   
 }
