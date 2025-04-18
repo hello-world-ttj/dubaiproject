@@ -22,9 +22,9 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
-     //   onGenerateRoute: router.,
-    initialRoute: 'Splash',
-   //home: Payment1Screen(),
+        onGenerateRoute: router.generateRoute,
+    initialRoute: 'Payment1Screen',
+  
     );
   }
 }
