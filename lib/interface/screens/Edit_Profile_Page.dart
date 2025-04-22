@@ -406,7 +406,7 @@ TextField(
     letterSpacing: -0.01, // -1% letter-spacing
   ),
 ),
-
+SizedBox(height: 10,),
             SwitchListTile(
               title: const Text(
                 'Business Social Accounts',
@@ -446,6 +446,48 @@ TextField(
                     ),
                   ),
                 ),
+                 Container(
+                  decoration: BoxDecoration(
+                    color: Color(0xFFF5F8FF),
+                    borderRadius: BorderRadius.circular(12),
+                  ),
+                  child: TextField(
+                    controller: webController,
+                    decoration: InputDecoration(
+                      prefixIcon: Padding(
+                        padding: const EdgeInsets.all(12.0),
+                        child: Image.asset(
+                        'assets/png/Symbol.svg.png',
+                          width: 24,
+                          height: 24,
+                        ),
+                      ),
+                      hintText: 'Link',
+                      border: InputBorder.none,
+                    ),
+                  ),
+                ),
+                 Container(
+                  decoration: BoxDecoration(
+                    color: Color(0xFFF5F8FF),
+                    borderRadius: BorderRadius.circular(12),
+                  ),
+                  child: TextField(
+                    controller: webController,
+                    decoration: InputDecoration(
+                      prefixIcon: Padding(
+                        padding: const EdgeInsets.all(12.0),
+                        child: Image.asset(
+                        'assets/png/x.png',
+                          width: 24,
+                          height: 24,
+                        ),
+                      ),
+                      hintText: 'Link',
+                      border: InputBorder.none,
+                    ),
+                  ),
+                ),
                  Align(
               alignment: Alignment.centerRight,
               child: GestureDetector(
@@ -464,6 +506,120 @@ TextField(
                   ],
                 ),
               ),
+            ),
+            SizedBox(height: 20,),
+               SwitchListTile(
+              title: const Text(
+                'Certificates',
+                style: TextStyle(
+                  fontFamily: 'Manrope',
+                  fontWeight: FontWeight.w500,
+                  fontSize: 16,
+                ),
+              ),
+              activeColor: const Color(0xFF0027FF),
+              value: businessSocialToggle,
+              onChanged: (value) {
+                setState(() {
+                  businessSocialToggle = value;
+                });
+              },
+            ),
+            Container(
+      height: 150, // You can adjust height as needed
+      width: double.infinity,
+      margin: const EdgeInsets.all(16),
+      decoration: BoxDecoration(
+        color: const Color(0xFFF5F8FF), // Light blue background
+        borderRadius: BorderRadius.circular(12),
+        border: Border.all(color: Colors.blue.shade100), // Optional border
+      ),
+      child: Center(
+        child: Column(
+          mainAxisSize: MainAxisSize.min,
+          children: const [
+            Icon(
+              Icons.add,
+              color: Colors.blue,
+              size: 30,
+            ),
+            SizedBox(height: 8),
+            Text(
+              "Certificates",
+              style: TextStyle(
+                fontSize: 16,
+                color: Colors.grey,
+              ),
+            ),
+          ],
+        ),
+      ),
+    ),
+     SizedBox(height: 20,),
+               SwitchListTile(
+              title: const Text(
+                'Enter Awards',
+                style: TextStyle(
+                  fontFamily: 'Manrope',
+                  fontWeight: FontWeight.w500,
+                  fontSize: 16,
+                ),
+              ),
+              activeColor: const Color(0xFF0027FF),
+              value: businessSocialToggle,
+              onChanged: (value) {
+                setState(() {
+                  businessSocialToggle = value;
+                });
+              },
+            ),
+    Container(
+      height: 150, // You can adjust height as needed
+      width: double.infinity,
+      margin: const EdgeInsets.all(16),
+      decoration: BoxDecoration(
+        color: const Color(0xFFF5F8FF), // Light blue background
+        borderRadius: BorderRadius.circular(12),
+        border: Border.all(color: Colors.blue.shade100), // Optional border
+      ),
+      child: Center(
+        child: Column(
+          mainAxisSize: MainAxisSize.min,
+          children: const [
+            Icon(
+              Icons.add,
+              color: Colors.blue,
+              size: 30,
+            ),
+            SizedBox(height: 8),
+            Text(
+              "Certificates",
+              style: TextStyle(
+                fontSize: 16,
+                color: Colors.grey,
+              ),
+            ),
+          ],
+        ),
+      ),
+    ),
+  SizedBox(height: 20,),
+               SwitchListTile(
+              title: const Text(
+                'Activate Form',
+                style: TextStyle(
+                  fontFamily: 'Manrope',
+                  fontWeight: FontWeight.w500,
+                  fontSize: 16,
+                ),
+              ),
+              activeColor: const Color(0xFF0027FF),
+              value: businessSocialToggle,
+              onChanged: (value) {
+                setState(() {
+                  businessSocialToggle = value;
+                });
+              },
             ),
             const SizedBox(height: 16),
           
