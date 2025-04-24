@@ -15,7 +15,7 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
         onGenerateRoute: router.generateRoute,
-    initialRoute: 'SentRequestApprovedScreen',
+    initialRoute: 'ProfilePreviewPage',
   
     );
   }

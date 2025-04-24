@@ -17,7 +17,9 @@ class SentRequestApprovedScreen extends StatelessWidget {
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
             Image.asset('assets/png/approved.png'),
-            SizedBox(height: 20,),
+            SizedBox(
+              height: 20,
+            ),
             Text(
               "Your request has been approved!",
               textAlign: TextAlign.center,
@@ -33,22 +35,21 @@ class SentRequestApprovedScreen extends StatelessWidget {
             SizedBox(
               height: 20,
             ),
-         Text(
-  "Unfortunately, your request to access the app has been declined by the admin. Please contact support or try again later if you believe this is a mistake.",
-  style: TextStyle(
-    fontFamily: 'Manrope',
-    fontWeight: FontWeight.w400,
-    fontSize: 14,
-    height: 1.0, 
-    letterSpacing: -1.0, 
-    color: Color(0xFF6C6C6C), 
-  
-  ),
-)
-
+            Text(
+              "Unfortunately, your request to access the app has been declined by the admin. Please contact support or try again later if you believe this is a mistake.",
+              style: TextStyle(
+                fontFamily: 'Manrope',
+                fontWeight: FontWeight.w400,
+                fontSize: 14,
+                height: 1.0,
+                letterSpacing: -1.0,
+                color: Color(0xFF6C6C6C),
+              ),
+            )
           ],
         )),
       ),
-    );;
+    );
+    ;
   }
 }
