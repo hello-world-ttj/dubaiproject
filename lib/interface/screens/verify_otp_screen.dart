@@ -120,7 +120,9 @@ class VerifyOtpScreen extends StatelessWidget {
               ),
               GradientButton(
                 title: 'Confirm',
-                onPressed: () {},
+                onPressed: () {
+                     Navigator.of(context).pushNamed('SentRequestScreen');
+                  },
               ),
               SizedBox(height: 50,),
               Center(

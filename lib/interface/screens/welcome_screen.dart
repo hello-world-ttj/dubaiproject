@@ -83,7 +83,7 @@ class WelcomeScreen extends StatelessWidget {
               ),
               child: TextButton(
                   onPressed: () {
-                  Navigator.of(context).pushReplacementNamed('VerifyPhone');
+                  Navigator.of(context).pushNamed('VerifyPhone');
 
                   },
                   child: const Text(

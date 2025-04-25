@@ -25,8 +25,12 @@ class SentRequestScreen extends StatelessWidget {
               ),
               Row(
                 children: [
-                  CustomBackButton(onTap: () { Navigator.pop(context); },), // Positioned left
-          
+                  CustomBackButton(
+                    onTap: () {
+                      Navigator.pop(context);
+                    },
+                  ), // Positioned left
+
                   Expanded(
                     // Takes up the remaining space
                     child: Row(
@@ -52,51 +56,51 @@ class SentRequestScreen extends StatelessWidget {
                   ),
                 ],
               ),
-            /// 👤 Profile Avatar with exact size and style
-Center(
-  child: SizedBox(
-    width: 149,
-    height: 149,
-    child: Stack(
-      alignment: Alignment.center,
-      children: [
-        // Dashed circular border
-        CustomPaint(
-          size: const Size(149, 149),
-          painter: DottedBorderPainter(width: 2),
-        ),
 
-        // Inner white circle with avatar/icon
-        Container(
-          width: 125,
-          height: 125,
-          decoration: const BoxDecoration(
-            color: Colors.white,
-            shape: BoxShape.circle,
-          ),
-         
-        ),
+              /// 👤 Profile Avatar with exact size and style
+              Center(
+                child: SizedBox(
+                  width: 149,
+                  height: 149,
+                  child: Stack(
+                    alignment: Alignment.center,
+                    children: [
+                      // Dashed circular border
+                      CustomPaint(
+                        size: const Size(149, 149),
+                        painter: DottedBorderPainter(width: 2),
+                      ),
 
-        // Edit icon
-        Positioned(
-          bottom: 0,
-          right: 0,
-          child: Container(
-            width: 36,
-            height: 36,
-            decoration: BoxDecoration(
-              shape: BoxShape.circle,
-              color: const Color(0xFFE8EBFF),
-              border: Border.all(color: const Color(0xFFCBD5FF)),
-            ),
-            child: const Icon(Icons.edit, size: 20, color: Color(0xFF1A2F71)),
-          ),
-        ),
-      ],
-    ),
-  ),
-),
+                      // Inner white circle with avatar/icon
+                      Container(
+                        width: 125,
+                        height: 125,
+                        decoration: const BoxDecoration(
+                          color: Colors.white,
+                          shape: BoxShape.circle,
+                        ),
+                      ),
 
+                      // Edit icon
+                      Positioned(
+                        bottom: 0,
+                        right: 0,
+                        child: Container(
+                          width: 36,
+                          height: 36,
+                          decoration: BoxDecoration(
+                            shape: BoxShape.circle,
+                            color: const Color(0xFFE8EBFF),
+                            border: Border.all(color: const Color(0xFFCBD5FF)),
+                          ),
+                          child: const Icon(Icons.edit,
+                              size: 20, color: Color(0xFF1A2F71)),
+                        ),
+                      ),
+                    ],
+                  ),
+                ),
+              ),
 
               SizedBox(height: 20),
               Text(
@@ -161,7 +165,7 @@ Center(
                   ),
                 ),
               ),
-               SizedBox(height: 20),
+              SizedBox(height: 20),
               Text(
                 'Designation',
                 style: TextStyle(
@@ -182,7 +186,7 @@ Center(
                   ),
                 ),
               ),
-               SizedBox(height: 20),
+              SizedBox(height: 20),
               Text(
                 'Company',
                 style: TextStyle(
@@ -203,17 +207,19 @@ Center(
                   ),
                 ),
               ),
-               SizedBox(
-                  height: 20,
-                ),
-                GradientButton(
-                  title: 'Confirm',
-                  onPressed: () {},
-                ),
-                SizedBox(height: 10,),
-                Center(
-                  child: CommonDivider()
-                ),
+              SizedBox(
+                height: 20,
+              ),
+              GradientButton(
+                title: 'Sent Request',
+                onPressed: () {
+                  Navigator.of(context).pushNamed('SentReq2Screen');
+                },
+              ),
+              SizedBox(
+                height: 10,
+              ),
+              Center(child: CommonDivider()),
             ],
           ),
         ),
