@@ -1,11 +1,13 @@
 // TODO Implement this library.
 import 'package:dubaiprojectxyvin/interface/screens/payment/payment_success.dart';
 import 'package:dubaiprojectxyvin/interface/screens/edit_profile/Edit_Profile_Page.dart';
+import 'package:dubaiprojectxyvin/interface/screens/sent_request/sent_req_2_screen.dart';
 import 'package:flutter/material.dart';
 
 import '../../screens/payment/payment_1_screen.dart';
 import '../../screens/payment/payment_2_screen.dart';
 import '../../screens/edit_profile/profile_details_screen.dart';
+import '../../screens/payment/welcome_payment.dart';
 import '../../screens/sent_request/sent_request_approved_screen.dart';
 import '../../screens/sent_request/sent_request_failed_screen.dart';
 import '../../screens/sent_request/sent_request_screen.dart';
@@ -40,6 +42,11 @@ Route<dynamic> generateRoute(RouteSettings? settings) {
       return MaterialPageRoute(builder: (context) => SentRequestFailedScreen());
        case 'SentRequestApprovedScreen':
       return MaterialPageRoute(builder: (context) => SentRequestApprovedScreen());
+ case 'SentReq2Screen':
+      return MaterialPageRoute(builder: (context) =>  SentReq2Screen());
+       case 'WelcomePayment':
+      return MaterialPageRoute(builder: (context) =>  WelcomePayment());
+     
 
     default:
       return MaterialPageRoute(

@@ -68,7 +68,9 @@ class Payment1Screen extends StatelessWidget {
                 const Spacer(),
                 GradientButton(
                   title: 'View Plan',
-                  onPressed: () {},
+                  onPressed: () {
+                    Navigator.of(context).pushNamed('Payment2Screen');
+                  },
                 ),
                 const SizedBox(height: 12),
                 SizedBox(
@@ -81,7 +83,7 @@ class Payment1Screen extends StatelessWidget {
                       shape: RoundedRectangleBorder(
                           borderRadius: BorderRadius.circular(10)),
                     ),
-                    child: const Text('Skip Now',
+                    child: const Text('Start Your free trial',
                         style: TextStyle(
                             fontSize: 16,
                             fontWeight: FontWeight.w600,
@@ -90,7 +92,7 @@ class Payment1Screen extends StatelessWidget {
                 ),
                 const SizedBox(height: 20),
                 const Text(
-                  'Choose the right subscription to boost your business visibility and network.',
+                  'Discover the right subscription to boost your business visibility and network.',
                   textAlign: TextAlign.center,
                   style: TextStyle(
                     fontFamily: 'Manrope',

@@ -83,7 +83,7 @@ class VerifyPhone extends StatelessWidget {
               GradientButton(
                 title: 'Generate OTP',
                 onPressed: () {
-                     Navigator.of(context).pushReplacementNamed('VerifyOtpScreen');
+                     Navigator.of(context).pushNamed('VerifyOtpScreen');
                 },
               ),
               SizedBox(height: 50,),

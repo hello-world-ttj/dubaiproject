@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 
 import '../../compon/GradientButton.dart';
+import '../../compon/common_divider.dart';
 
 class Payment2Screen extends StatelessWidget {
   const Payment2Screen({super.key});
@@ -151,7 +152,9 @@ class Payment2Screen extends StatelessWidget {
                       const SizedBox(height: 20),
                       GradientButton(
                         title: 'Select this plan',
-                        onPressed: () {},
+                        onPressed: () {
+                           Navigator.of(context).pushNamed('PaymentSuccess');
+                        },
                       ),
                     ],
                   ),
@@ -168,7 +171,7 @@ class Payment2Screen extends StatelessWidget {
                           borderRadius: BorderRadius.circular(10)),
                     ),
                     child: const Text(
-                      'Skip For Now',
+                      'Start Your free trial',
                       style: TextStyle(
                         fontFamily: 'Manrope',
                         fontSize: 16,
@@ -188,7 +191,8 @@ class Payment2Screen extends StatelessWidget {
                       color: Colors.black54,
                     ),
                   ),
-                )
+                ),
+                Center(child: CommonDivider())
               ],
             ),
           ),
