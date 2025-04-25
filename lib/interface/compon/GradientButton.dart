@@ -28,9 +28,6 @@ class GradientButton extends StatelessWidget {
       ),
       child: TextButton(
         onPressed: onPressed,
-        
-
-        
         child: Text(
           title,
           textAlign: TextAlign.center,
