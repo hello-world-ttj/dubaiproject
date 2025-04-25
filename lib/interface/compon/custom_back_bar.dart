@@ -4,29 +4,26 @@ import 'package:flutter/material.dart';
 class CustomBackButton extends StatelessWidget {
   final VoidCallback? onTap;
 
-  const CustomBackButton({super.key, this.onTap});
+  const CustomBackButton({super.key, required this.onTap});
 
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
-      onTap: onTap ?? () => Navigator.pop(context),
+      onTap: onTap ,
       child: Container(
-        height: 32,
-        width: 32,
+        height: 40,
+        width: 40,
         decoration: BoxDecoration(
           color: CommonColor.lightBlueBackground,
-          borderRadius: BorderRadius.circular(12),
-          border: Border.all(
-            color: Colors.white,
-            width: 1.5, 
-          ),
+          borderRadius: BorderRadius.circular(50),
+         border: Border.all(
+  color: Color(0x2741980D), 
+  width: 1,
+),
+
         ),
-        child: const Center(
-          child: Icon(
-            Icons.arrow_back,
-            color: Color(0xFF072182),
-            size: 24,
-          ),
+        child:  Center(
+          child: Image.asset('assets/png/appbarbackbotton.png')
         ),
       ),
     );

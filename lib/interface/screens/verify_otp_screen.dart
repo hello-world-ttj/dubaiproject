@@ -22,7 +22,7 @@ class VerifyOtpScreen extends StatelessWidget {
               SizedBox(
                 height: 30,
               ),
-              CustomBackButton(),
+              CustomBackButton(onTap: () { Navigator.pop(context); },),
               SizedBox(
                 height: 200,
               ),
