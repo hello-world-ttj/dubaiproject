@@ -2,10 +2,10 @@ import 'dart:math';
 
 import 'package:flutter/material.dart';
 
-import '../compon/GradientButton.dart';
-import '../compon/common_color.dart';
-import '../compon/common_divider.dart';
-import '../compon/custom_back_bar.dart';
+import '../../compon/GradientButton.dart';
+import '../../compon/common_color.dart';
+import '../../compon/common_divider.dart';
+import '../../compon/custom_back_bar.dart';
 
 class SentRequestScreen extends StatelessWidget {
   const SentRequestScreen({super.key});

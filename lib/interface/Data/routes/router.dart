@@ -1,14 +1,14 @@
 // TODO Implement this library.
-import 'package:dubaiprojectxyvin/interface/screens/payment_success.dart';
-import 'package:dubaiprojectxyvin/interface/screens/Edit_Profile_Page.dart';
+import 'package:dubaiprojectxyvin/interface/screens/payment/payment_success.dart';
+import 'package:dubaiprojectxyvin/interface/screens/edit_profile/Edit_Profile_Page.dart';
 import 'package:flutter/material.dart';
 
-import '../../screens/payment_1_screen.dart';
-import '../../screens/payment_2_screen.dart';
-import '../../screens/profile_details_screen.dart';
-import '../../screens/sent_request_approved_screen.dart';
-import '../../screens/sent_request_failed_screen.dart';
-import '../../screens/sent_request_screen.dart';
+import '../../screens/payment/payment_1_screen.dart';
+import '../../screens/payment/payment_2_screen.dart';
+import '../../screens/edit_profile/profile_details_screen.dart';
+import '../../screens/sent_request/sent_request_approved_screen.dart';
+import '../../screens/sent_request/sent_request_failed_screen.dart';
+import '../../screens/sent_request/sent_request_screen.dart';
 import '../../screens/splash_screen.dart';
 import '../../screens/verify_otp_screen.dart';
 import '../../screens/verify_phone.dart';

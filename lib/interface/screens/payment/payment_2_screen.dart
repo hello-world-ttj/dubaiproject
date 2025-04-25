@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-import '../compon/GradientButton.dart';
+import '../../compon/GradientButton.dart';
 
 class Payment2Screen extends StatelessWidget {
   const Payment2Screen({super.key});

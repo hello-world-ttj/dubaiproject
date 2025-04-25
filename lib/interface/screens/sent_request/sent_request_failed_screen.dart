@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 
-import '../compon/common_color.dart';
+import '../../compon/common_color.dart';
 
-class SentRequestApprovedScreen extends StatelessWidget {
-  const SentRequestApprovedScreen({super.key});
+class SentRequestFailedScreen extends StatelessWidget {
+  const SentRequestFailedScreen({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -16,12 +16,9 @@ class SentRequestApprovedScreen extends StatelessWidget {
           crossAxisAlignment: CrossAxisAlignment.center,
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            Image.asset('assets/png/approved.png'),
-            SizedBox(
-              height: 20,
-            ),
+            Image.asset('assets/png/sentreq2.png'),
             Text(
-              "Your request has been approved!",
+              "Your request has been Rejected!",
               textAlign: TextAlign.center,
               style: TextStyle(
                 fontFamily: 'Manrope',
@@ -29,7 +26,7 @@ class SentRequestApprovedScreen extends StatelessWidget {
                 fontSize: 18,
                 height: 1.0, // line-height: 100%
                 letterSpacing: -0.18, // -1% of 18px = -0.18
-                color: Color(0xFF016A03), // #FF0004
+                color: Color(0xFFFF0004), // #FF0004
               ),
             ),
             SizedBox(
@@ -41,15 +38,15 @@ class SentRequestApprovedScreen extends StatelessWidget {
                 fontFamily: 'Manrope',
                 fontWeight: FontWeight.w400,
                 fontSize: 14,
-                height: 1.0,
-                letterSpacing: -1.0,
-                color: Color(0xFF6C6C6C),
+                height: 1.0, // line-height equivalent
+                letterSpacing: -1.0, // letter-spacing equivalent
+                color: Color(0xFF6C6C6C), // color #6C6C6C
+                // textAlign: TextAlign.center, // text-align center
               ),
             )
           ],
         )),
       ),
     );
-    ;
   }
 }

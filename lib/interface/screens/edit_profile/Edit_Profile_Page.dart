@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-import '../compon/GradientButton.dart';
+import '../../compon/GradientButton.dart';
 
 class EditProfilePage extends StatefulWidget {
   const EditProfilePage({super.key});
