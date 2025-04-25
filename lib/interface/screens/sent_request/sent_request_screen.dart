@@ -25,7 +25,7 @@ class SentRequestScreen extends StatelessWidget {
               ),
               Row(
                 children: [
-                  CustomBackButton(), // Positioned left
+                  CustomBackButton(onTap: () { Navigator.pop(context); },), // Positioned left
           
                   Expanded(
                     // Takes up the remaining space

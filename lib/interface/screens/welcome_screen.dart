@@ -1,7 +1,6 @@
 import 'package:dubaiprojectxyvin/interface/compon/common_color.dart';
 import 'package:flutter/material.dart';
 
-
 class WelcomeScreen extends StatelessWidget {
   const WelcomeScreen({super.key});
   @override
@@ -83,7 +82,10 @@ class WelcomeScreen extends StatelessWidget {
                 borderRadius: BorderRadius.circular(10),
               ),
               child: TextButton(
-                  onPressed: () {},
+                  onPressed: () {
+                  Navigator.of(context).pushReplacementNamed('VerifyPhone');
+
+                  },
                   child: const Text(
                     'Login',
                     textAlign: TextAlign.center,

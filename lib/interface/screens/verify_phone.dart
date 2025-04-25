@@ -21,7 +21,7 @@ class VerifyPhone extends StatelessWidget {
               SizedBox(
                 height: 30,
               ),
-              CustomBackButton(),
+              CustomBackButton(onTap: () { Navigator.pop(context); },),
               SizedBox(
                 height: 200,
               ),
@@ -83,7 +83,7 @@ class VerifyPhone extends StatelessWidget {
               GradientButton(
                 title: 'Generate OTP',
                 onPressed: () {
-                  
+                     Navigator.of(context).pushReplacementNamed('VerifyOtpScreen');
                 },
               ),
               SizedBox(height: 50,),
