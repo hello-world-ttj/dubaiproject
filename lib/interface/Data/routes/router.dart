@@ -1,4 +1,5 @@
 // TODO Implement this library.
+import 'package:dubaiprojectxyvin/interface/screens/navbar.dart';
 import 'package:dubaiprojectxyvin/interface/screens/payment/payment_success.dart';
 import 'package:dubaiprojectxyvin/interface/screens/edit_profile/Edit_Profile_Page.dart';
 import 'package:dubaiprojectxyvin/interface/screens/sent_request/sent_req_2_screen.dart';
@@ -46,6 +47,8 @@ Route<dynamic> generateRoute(RouteSettings? settings) {
       return MaterialPageRoute(builder: (context) =>  SentReq2Screen());
        case 'WelcomePayment':
       return MaterialPageRoute(builder: (context) =>  WelcomePayment());
+       case 'MainPage':
+      return MaterialPageRoute(builder: (context) =>  MainPage());
      
 
     default:
