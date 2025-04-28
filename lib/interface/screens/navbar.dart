@@ -1,7 +1,7 @@
 import 'dart:developer';
 
 import 'package:dubaiprojectxyvin/interface/Data/routes/nav_router.dart';
-import 'package:dubaiprojectxyvin/interface/screens/main_pages/business_page.dart';
+import 'package:dubaiprojectxyvin/interface/screens/main_pages/bussiness/Tab_bar.dart';
 import 'package:dubaiprojectxyvin/interface/screens/main_pages/home_page.dart';
 import 'package:dubaiprojectxyvin/interface/screens/main_pages/news_page.dart';
 import 'package:dubaiprojectxyvin/interface/screens/main_pages/people_page.dart';
@@ -70,7 +70,7 @@ class _MainPageState extends ConsumerState<MainPage> {
   Future<void> _initialize() async {
     _widgetOptions = <Widget>[
       HomePage(),
-      BusinessPage(),
+      TabBarPage(),
       ProfilePage(),
       NewsPage(),
       PeoplePage(),
