@@ -1,5 +1,5 @@
 
-import 'package:dubaiprojectxyvin/interface/Data/routes/models/promotion_model.dart';
+import 'package:dubaiprojectxyvin/interface/Data/models/promotion_model.dart';
 import 'package:flutter/material.dart';
 
 import 'package:youtube_player_iframe/youtube_player_iframe.dart';

@@ -1,12 +1,12 @@
 import 'dart:async';
 import 'dart:developer';
 
-import 'package:dubaiprojectxyvin/interface/Data/routes/models/event_model.dart';
-import 'package:dubaiprojectxyvin/interface/Data/routes/models/news_model.dart';
-import 'package:dubaiprojectxyvin/interface/Data/routes/models/promotion_model.dart';
+import 'package:dubaiprojectxyvin/interface/Data/models/event_model.dart';
+import 'package:dubaiprojectxyvin/interface/Data/models/news_model.dart';
+import 'package:dubaiprojectxyvin/interface/Data/models/promotion_model.dart';
 import 'package:dubaiprojectxyvin/interface/Data/routes/nav_router.dart';
-import 'package:dubaiprojectxyvin/interface/Data/routes/services/navigation_service.dart';
-import 'package:dubaiprojectxyvin/interface/Data/routes/services/webview.dart';
+import 'package:dubaiprojectxyvin/interface/Data/services/navigation_service.dart';
+import 'package:dubaiprojectxyvin/interface/Data/services/webview.dart';
 import 'package:dubaiprojectxyvin/interface/compon/common_color.dart';
 import 'package:dubaiprojectxyvin/interface/compon/common_style.dart';
 import 'package:dubaiprojectxyvin/interface/compon/custom_widgets/custom_video.dart';
@@ -267,14 +267,6 @@ class _HomePageState extends ConsumerState<HomePage> {
             // openScale: 1.0,
             disabledGestures: false,
             childDecoration: const BoxDecoration(
-              // NOTICE: Uncomment if you want to add shadow behind the page.
-              // Keep in mind that it may cause animation jerks.
-              // boxShadow: <BoxShadow>[
-              //   BoxShadow(
-              //     color: Colors.black12,
-              //     blurRadius: 0.0,
-              //   ),
-              // ],
               borderRadius: const BorderRadius.all(Radius.circular(16)),
             ),
             child: SafeArea(
@@ -658,7 +650,7 @@ class _HomePageState extends ConsumerState<HomePage> {
                                   );
                                 }).toList(),
                                 options: CarouselOptions(
-                                  height: 268,
+                                  height: 290,
                                   scrollPhysics: events.length > 1
                                       ? null
                                       : const NeverScrollableScrollPhysics(),

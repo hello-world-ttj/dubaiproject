@@ -1,4 +1,14 @@
 // TODO Implement this library.
+import 'package:dubaiprojectxyvin/interface/screens/menu_pages/about_us.dart';
+import 'package:dubaiprojectxyvin/interface/screens/menu_pages/add_product.dart';
+import 'package:dubaiprojectxyvin/interface/screens/menu_pages/my_businesses.dart';
+import 'package:dubaiprojectxyvin/interface/screens/menu_pages/my_events.dart';
+import 'package:dubaiprojectxyvin/interface/screens/menu_pages/my_products.dart';
+import 'package:dubaiprojectxyvin/interface/screens/menu_pages/my_reviews.dart';
+import 'package:dubaiprojectxyvin/interface/screens/menu_pages/my_subscription.dart';
+import 'package:dubaiprojectxyvin/interface/screens/menu_pages/privacy_policy.dart';
+import 'package:dubaiprojectxyvin/interface/screens/menu_pages/request_nfc.dart';
+import 'package:dubaiprojectxyvin/interface/screens/menu_pages/terms.dart';
 import 'package:dubaiprojectxyvin/interface/screens/navbar.dart';
 import 'package:dubaiprojectxyvin/interface/screens/payment/payment_success.dart';
 import 'package:dubaiprojectxyvin/interface/screens/edit_profile/Edit_Profile_Page.dart';
@@ -47,9 +57,32 @@ Route<dynamic> generateRoute(RouteSettings? settings) {
       return MaterialPageRoute(builder: (context) =>  SentReq2Screen());
        case 'WelcomePayment':
       return MaterialPageRoute(builder: (context) =>  WelcomePayment());
+  case 'MyEvents':
+      return MaterialPageRoute(builder: (context) => MyEventsPage());
+    case 'MyProducts':
+      return MaterialPageRoute(builder: (context) => MyProductPage());
+    case 'EnterProductsPage':
+      return MaterialPageRoute(builder: (context) => EnterProductsPage());
+    case 'MyBusinesses':
+      return MaterialPageRoute(builder: (context) => MyBusinessesPage());
+          case 'RequestNFC':
+      return MaterialPageRoute(builder: (context) => RequestNFCPage());
+        case 'MyReviews':
+      return MaterialPageRoute(builder: (context) => MyReviewsPage());
+      
+    case 'MySubscriptionPage':
+      return MaterialPageRoute(builder: (context) => MySubscriptionPage());
+
+    case 'Terms':
+      return MaterialPageRoute(builder: (context) => TermsAndConditionsPage());
+
+    case 'PrivacyPolicy':
+      return MaterialPageRoute(builder: (context) => PrivacyPolicyPage());
+
        case 'MainPage':
       return MaterialPageRoute(builder: (context) =>  MainPage());
-     
+         case 'AboutPage':
+      return MaterialPageRoute(builder: (context) => AboutPage());
 
     default:
       return MaterialPageRoute(

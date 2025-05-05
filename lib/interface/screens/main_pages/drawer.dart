@@ -1,5 +1,5 @@
-import 'package:dubaiprojectxyvin/interface/Data/routes/services/navigation_service.dart';
-import 'package:dubaiprojectxyvin/interface/Data/routes/services/webview.dart';
+import 'package:dubaiprojectxyvin/interface/Data/services/navigation_service.dart';
+import 'package:dubaiprojectxyvin/interface/Data/services/webview.dart';
 import 'package:dubaiprojectxyvin/interface/compon/common_color.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
