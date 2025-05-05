@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 
 class CommonColor {
+
+  static const Color primaryColor = Color(0xFF274198);
   static const Color softBlueTransparent = Color(0x17F1F4FF);
   static const Color greyText = Color(0xFF6C6C6C); 
    static const Color white = Color(0xFFF7F7F7);

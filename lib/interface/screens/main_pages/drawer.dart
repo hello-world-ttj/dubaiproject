@@ -1,8 +1,8 @@
 import 'package:dubaiprojectxyvin/interface/Data/routes/services/navigation_service.dart';
 import 'package:dubaiprojectxyvin/interface/Data/routes/services/webview.dart';
+import 'package:dubaiprojectxyvin/interface/compon/common_color.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
-
 
 Widget customDrawer({required BuildContext context}) {
   NavigationService navigationService = NavigationService();
@@ -36,7 +36,7 @@ Widget customDrawer({required BuildContext context}) {
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
                         Text(
-                        'USER NAME',
+                          'USER NAME',
                           style: TextStyle(
                             fontSize: 18,
                             fontWeight: FontWeight.bold,
@@ -96,13 +96,13 @@ Widget customDrawer({required BuildContext context}) {
             },
           ),
 
-            _buildDrawerItem(
-              icon: 'assets/svg/icons/my_subscription.svg',
-              label: 'My Subscription',
-              onTap: () {
-                navigationService.pushNamed('MySubscriptionPage');
-              },
-            ),
+          _buildDrawerItem(
+            icon: 'assets/svg/icons/my_subscription.svg',
+            label: 'My Subscription',
+            onTap: () {
+              navigationService.pushNamed('MySubscriptionPage');
+            },
+          ),
 
           _buildDrawerItem(
             icon: 'assets/svg/icons/my_reviews.svg',
@@ -128,14 +128,14 @@ Widget customDrawer({required BuildContext context}) {
           SizedBox(
             height: 40,
           ),
-  
-            _buildDrawerItem(
-              icon: 'assets/svg/icons/about_us.svg',
-              label: 'About Us',
-              onTap: () {
-                navigationService.pushNamed('AboutPage');
-              },
-            ),
+
+          _buildDrawerItem(
+            icon: 'assets/svg/icons/about_us.svg',
+            label: 'About Us',
+            onTap: () {
+              navigationService.pushNamed('AboutPage');
+            },
+          ),
 
           _buildDrawerItem(
             icon: 'assets/svg/icons/terms.svg',
@@ -155,9 +155,7 @@ Widget customDrawer({required BuildContext context}) {
           _buildDrawerItem(
             icon: 'assets/svg/icons/logout.svg',
             label: 'Logout',
-            onTap: () async {
-
-            },
+            onTap: () async {},
           ),
           _buildDrawerItem(
             icon: 'assets/svg/icons/phone_icon.svg',
@@ -268,6 +266,9 @@ Widget customDrawer({required BuildContext context}) {
               ),
             ),
           ),
+          SizedBox(
+            height: 100,
+          )
         ],
       ),
     ),
@@ -284,7 +285,7 @@ Widget _buildDrawerItem({
     leading: SvgPicture.asset(
       icon,
       height: 24,
-      color: Colors.orange,
+      color: CommonColor.primaryColor,
     ),
     title: Text(
       label,

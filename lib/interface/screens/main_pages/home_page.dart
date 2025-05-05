@@ -252,514 +252,550 @@ class _HomePageState extends ConsumerState<HomePage> {
             // ref.invalidate(fetchPromotionsProvider);
             // ref.invalidate(fetchEventsProvider);
           },
-          child: SafeArea(
-            child: Container(
-              color: CommonColor.white,
-              child: Stack(
-                children: [
-                  SingleChildScrollView(
-                    child: Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        Container(
-                          decoration: const BoxDecoration(
-                            color: Colors.white,
-                            borderRadius: BorderRadius.only(
-                              bottomLeft: Radius.circular(30),
-                              bottomRight: Radius.circular(30),
-                            ),
-                            boxShadow: [
-                              BoxShadow(
-                                color: Color.fromARGB(80, 226, 226, 226),
-                                offset: Offset(0, 1),
-                                blurRadius: 8,
+          child: AdvancedDrawer(
+            drawer: customDrawer(context: context),
+            backdrop: Container(
+              width: double.infinity,
+              height: double.infinity,
+              decoration: const BoxDecoration(color: CommonColor.white),
+            ),
+            controller: _advancedDrawerController,
+            animationCurve: Curves.easeInOut,
+            animationDuration: const Duration(milliseconds: 300),
+            animateChildDecoration: true,
+            rtlOpening: false,
+            // openScale: 1.0,
+            disabledGestures: false,
+            childDecoration: const BoxDecoration(
+              // NOTICE: Uncomment if you want to add shadow behind the page.
+              // Keep in mind that it may cause animation jerks.
+              // boxShadow: <BoxShadow>[
+              //   BoxShadow(
+              //     color: Colors.black12,
+              //     blurRadius: 0.0,
+              //   ),
+              // ],
+              borderRadius: const BorderRadius.all(Radius.circular(16)),
+            ),
+            child: SafeArea(
+              child: Scaffold(
+                backgroundColor: CommonColor.white,
+                body: Stack(
+                  children: [
+                    SingleChildScrollView(
+                      child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          Container(
+                            decoration: const BoxDecoration(
+                              color: Colors.white,
+                              borderRadius: BorderRadius.only(
+                                bottomLeft: Radius.circular(30),
+                                bottomRight: Radius.circular(30),
                               ),
-                            ],
-                          ),
-                          padding: const EdgeInsets.symmetric(vertical: 12),
-                          child: Stack(
-                            alignment: Alignment.center,
-                            children: [
-                              Row(
-                                children: [
-                                  Padding(
-                                    padding: const EdgeInsets.only(left: 10),
-                                    child: InkWell(
-                                      onTap: () => _advancedDrawerController
-                                          .showDrawer(),
-                                      child: SizedBox(
-                                        width: 60,
-                                        child: ValueListenableBuilder<
-                                            AdvancedDrawerValue>(
-                                          valueListenable:
-                                              _advancedDrawerController,
-                                          builder: (_, value, __) {
-                                            return AnimatedSwitcher(
-                                              duration: const Duration(
-                                                  milliseconds: 250),
-                                              child: const Icon(Icons.menu),
-                                            );
-                                          },
+                              boxShadow: [
+                                BoxShadow(
+                                  color: Color.fromARGB(80, 226, 226, 226),
+                                  offset: Offset(0, 1),
+                                  blurRadius: 8,
+                                ),
+                              ],
+                            ),
+                            padding: const EdgeInsets.symmetric(vertical: 12),
+                            child: Stack(
+                              alignment: Alignment.center,
+                              children: [
+                                Row(
+                                  children: [
+                                    Padding(
+                                      padding: const EdgeInsets.only(left: 10),
+                                      child: InkWell(
+                                        onTap: () => _advancedDrawerController
+                                            .showDrawer(),
+                                        child: SizedBox(
+                                          width: 60,
+                                          child: ValueListenableBuilder<
+                                              AdvancedDrawerValue>(
+                                            valueListenable:
+                                                _advancedDrawerController,
+                                            builder: (_, value, __) {
+                                              return AnimatedSwitcher(
+                                                duration: const Duration(
+                                                    milliseconds: 250),
+                                                child: const Icon(Icons.menu),
+                                              );
+                                            },
+                                          ),
                                         ),
                                       ),
                                     ),
-                                  ),
-                                  const Spacer(),
-                                  Consumer(
-                                    builder: (context, ref, child) {
-                                      return IconButton(
-                                        icon: const Icon(
-                                            Icons.notifications_none_outlined),
-                                        onPressed: () {
-                                          // Navigate to notifications
-                                        },
+                                    const Spacer(),
+                                    Consumer(
+                                      builder: (context, ref, child) {
+                                        return IconButton(
+                                          icon: const Icon(Icons
+                                              .notifications_none_outlined),
+                                          onPressed: () {
+                                            // Navigate to notifications
+                                          },
+                                        );
+                                      },
+                                    ),
+                                    const SizedBox(width: 20),
+                                  ],
+                                ),
+                                // Centered Logo
+                                Center(
+                                  child: InkWell(
+                                    onTap: () {
+                                      Navigator.push(
+                                        context,
+                                        MaterialPageRoute(
+                                          builder: (context) =>
+                                              const WebViewScreen(
+                                            color: Color(0xFF072182),
+                                            url:
+                                                'https://www.dubaiconnect.com/',
+                                            title: 'Dubai Connect',
+                                          ),
+                                        ),
                                       );
                                     },
+                                    child: Image.asset(
+                                      'assets/png/Logo.png',
+                                      scale: 5,
+                                    ),
                                   ),
-                                  const SizedBox(width: 20),
+                                ),
+                              ],
+                            ),
+                          ),
+                          const SizedBox(height: 20),
+                          Padding(
+                            padding: const EdgeInsets.only(left: 15, top: 10),
+                            child: Text('Welcome, ${'USER NAME'}',
+                                style: kLargeTitleB.copyWith(
+                                  color: CommonColor.primaryText,
+                                )),
+                          ),
+
+                          Padding(
+                            padding: const EdgeInsets.only(
+                                left: 15, top: 10, right: 20),
+                            child: Row(
+                              children: [
+                                Expanded(
+                                  child: Text(
+                                    'Connect with the Heart of Dubai’s Business World.',
+                                    style: kSmallTitleUL.copyWith(
+                                      color: CommonColor.primaryText,
+                                    ),
+                                  ),
+                                ),
+                              ],
+                            ),
+                          ),
+                          SizedBox(
+                            height: 10,
+                          ),
+                          Center(
+                            child: Container(
+                              margin: const EdgeInsets.symmetric(
+                                  vertical: 10, horizontal: 20),
+                              decoration: BoxDecoration(
+                                gradient: const LinearGradient(
+                                  colors: [
+                                    Color(0xFF274198),
+                                    Color(0xFF0D1532)
+                                  ],
+                                  begin: Alignment.topLeft,
+                                  end: Alignment.bottomRight,
+                                ),
+                                borderRadius: BorderRadius.circular(16),
+                                boxShadow: [
+                                  BoxShadow(
+                                    color: Colors.black.withOpacity(0.12),
+                                    blurRadius: 16,
+                                    offset: const Offset(0, 8),
+                                  ),
                                 ],
                               ),
-                              // Centered Logo
-                              Center(
-                                child: InkWell(
-                                  onTap: () {
-                                    Navigator.push(
-                                      context,
-                                      MaterialPageRoute(
-                                        builder: (context) =>
-                                            const WebViewScreen(
-                                          color: Color(0xFF072182),
-                                          url: 'https://www.dubaiconnect.com/',
-                                          title: 'Dubai Connect',
-                                        ),
-                                      ),
-                                    );
-                                  },
-                                  child: Image.asset(
-                                    'assets/png/Logo.png',
-                                    scale: 5,
+                              child: Stack(
+                                children: [
+                                  Positioned(
+                                    bottom: 0,
+                                    right: 0,
+                                    child: Image.asset(
+                                      'assets/png/trial_round.png',
+                                      width: 150,
+                                      fit: BoxFit.cover,
+                                    ),
                                   ),
-                                ),
-                              ),
-                            ],
-                          ),
-                        ),
-                        const SizedBox(height: 20),
-                        Padding(
-                          padding: const EdgeInsets.only(left: 15, top: 10),
-                          child: Text('Welcome, ${'USER NAME'}',
-                              style: kLargeTitleB.copyWith(
-                                color: CommonColor.primaryText,
-                              )),
-                        ),
-
-                        Padding(
-                          padding: const EdgeInsets.only(
-                              left: 15, top: 10, right: 20),
-                          child: Row(
-                            children: [
-                              Expanded(
-                                child: Text(
-                                  'Connect with the Heart of Dubai’s Business World.',
-                                  style: kSmallTitleUL.copyWith(
-                                    color: CommonColor.primaryText,
-                                  ),
-                                ),
-                              ),
-                            ],
-                          ),
-                        ),
-                        SizedBox(
-                          height: 10,
-                        ),
-                        Center(
-                          child: Container(
-                            margin: const EdgeInsets.symmetric(
-                                vertical: 10, horizontal: 20),
-                            decoration: BoxDecoration(
-                              gradient: const LinearGradient(
-                                colors: [Color(0xFF274198), Color(0xFF0D1532)],
-                                begin: Alignment.topLeft,
-                                end: Alignment.bottomRight,
-                              ),
-                              borderRadius: BorderRadius.circular(16),
-                              boxShadow: [
-                                BoxShadow(
-                                  color: Colors.black.withOpacity(0.12),
-                                  blurRadius: 16,
-                                  offset: const Offset(0, 8),
-                                ),
-                              ],
-                            ),
-                            child: Stack(
-                              children: [
-                                Positioned(
-                                  bottom: 0,
-                                  right: 0,
-                                  child: Image.asset(
-                                    'assets/png/trial_round.png',
-                                    width: 150,
-                                    fit: BoxFit.cover,
-                                  ),
-                                ),
-                                Padding(
-                                  padding: const EdgeInsets.all(20),
-                                  child: Column(
-                                    mainAxisSize: MainAxisSize.min,
-                                    crossAxisAlignment:
-                                        CrossAxisAlignment.start,
-                                    children: [
-                                      Row(
-                                        children: [
-                                          Icon(Icons.lightbulb,
-                                              color: Colors.amber[400],
-                                              size: 24),
-                                          const SizedBox(width: 10),
-                                          const Expanded(
-                                            child: Text(
-                                              'Your 30-day free trial is active!',
-                                              style: TextStyle(
-                                                color: Colors.white,
-                                                fontWeight: FontWeight.bold,
-                                                fontSize: 16,
+                                  Padding(
+                                    padding: const EdgeInsets.all(20),
+                                    child: Column(
+                                      mainAxisSize: MainAxisSize.min,
+                                      crossAxisAlignment:
+                                          CrossAxisAlignment.start,
+                                      children: [
+                                        Row(
+                                          children: [
+                                            Icon(Icons.lightbulb,
+                                                color: Colors.amber[400],
+                                                size: 24),
+                                            const SizedBox(width: 10),
+                                            const Expanded(
+                                              child: Text(
+                                                'Your 30-day free trial is active!',
+                                                style: TextStyle(
+                                                  color: Colors.white,
+                                                  fontWeight: FontWeight.bold,
+                                                  fontSize: 16,
+                                                ),
                                               ),
                                             ),
+                                          ],
+                                        ),
+                                        const SizedBox(height: 10),
+                                        const Text(
+                                          'Enjoy premium features and grow your business with Dubai Connect.',
+                                          style: TextStyle(
+                                            color: Color(0xFFC9D2F2),
+                                            fontSize: 13,
                                           ),
-                                        ],
-                                      ),
-                                      const SizedBox(height: 10),
-                                      const Text(
-                                        'Enjoy premium features and grow your business with Dubai Connect.',
-                                        style: TextStyle(
-                                          color: Color(0xFFC9D2F2),
-                                          fontSize: 13,
                                         ),
-                                      ),
-                                      const SizedBox(height: 8),
-                                      Text(
-                                        '10 days left — upgrade anytime!',
-                                        style: const TextStyle(
-                                          color: Color(0xFFB0B9D9),
-                                          fontSize: 12,
+                                        const SizedBox(height: 8),
+                                        Text(
+                                          '10 days left — upgrade anytime!',
+                                          style: const TextStyle(
+                                            color: Color(0xFFB0B9D9),
+                                            fontSize: 12,
+                                          ),
                                         ),
-                                      ),
-                                      const SizedBox(height: 14),
-                                      SizedBox(
-                                        width: 130,
-                                        height: 36,
-                                        child: ElevatedButton(
-                                          style: const ButtonStyle(
-                                            backgroundColor:
-                                                MaterialStatePropertyAll(
-                                                    Color(0xFFE7ECFF)),
-                                            foregroundColor:
-                                                MaterialStatePropertyAll(
-                                                    Color(0xFF232C5B)),
-                                            shape: MaterialStatePropertyAll(
-                                              RoundedRectangleBorder(
-                                                borderRadius: BorderRadius.all(
-                                                    Radius.circular(8)),
+                                        const SizedBox(height: 14),
+                                        SizedBox(
+                                          width: 130,
+                                          height: 36,
+                                          child: ElevatedButton(
+                                            style: const ButtonStyle(
+                                              backgroundColor:
+                                                  MaterialStatePropertyAll(
+                                                      Color(0xFFE7ECFF)),
+                                              foregroundColor:
+                                                  MaterialStatePropertyAll(
+                                                      Color(0xFF232C5B)),
+                                              shape: MaterialStatePropertyAll(
+                                                RoundedRectangleBorder(
+                                                  borderRadius:
+                                                      BorderRadius.all(
+                                                          Radius.circular(8)),
+                                                ),
                                               ),
                                             ),
-                                          ),
-                                          onPressed: () {
-                                            navigationService
-                                                .pushNamed('MySubscription');
-                                          },
-                                          child: const Row(
-                                            mainAxisAlignment:
-                                                MainAxisAlignment.center,
-                                            children: [
-                                              Text('Subscribe',
-                                                  style: TextStyle(
-                                                      fontWeight:
-                                                          FontWeight.bold)),
-                                              Icon(Icons.arrow_outward_outlined,
-                                                  size: 16),
-                                            ],
+                                            onPressed: () {
+                                              navigationService
+                                                  .pushNamed('MySubscription');
+                                            },
+                                            child: const Row(
+                                              mainAxisAlignment:
+                                                  MainAxisAlignment.center,
+                                              children: [
+                                                Text('Subscribe',
+                                                    style: TextStyle(
+                                                        fontWeight:
+                                                            FontWeight.bold)),
+                                                Icon(
+                                                    Icons
+                                                        .arrow_outward_outlined,
+                                                    size: 16),
+                                              ],
+                                            ),
                                           ),
                                         ),
-                                      ),
-                                    ],
+                                      ],
+                                    ),
                                   ),
-                                ),
-                              ],
+                                ],
+                              ),
                             ),
                           ),
-                        ),
-                        SizedBox(
-                          height: 10,
-                        ),
-                        if (banners.isNotEmpty)
-                          Column(
-                            children: [
-                              CarouselSlider(
-                                items: banners.map((banner) {
-                                  return _buildBanners(
-                                      context: context, banner: banner);
-                                }).toList(),
-                                options: CarouselOptions(
-                                  height: 175,
-                                  scrollPhysics: banners.length > 1
-                                      ? null
-                                      : const NeverScrollableScrollPhysics(),
-                                  autoPlay: banners.length > 1 ? true : false,
-                                  viewportFraction: 1,
-                                  autoPlayInterval: const Duration(seconds: 3),
-                                  onPageChanged: (index, reason) {
-                                    setState(() {
-                                      _currentBannerIndex = index;
-                                    });
-                                  },
-                                ),
-                              ),
-                            ],
+                          SizedBox(
+                            height: 10,
                           ),
-
-                        const SizedBox(height: 30),
-
-                        if (notices.isNotEmpty)
-                          Column(
-                            children: [
-                              CarouselSlider(
-                                items: notices.map((notice) {
-                                  return customNotice(
-                                      context: context, notice: notice);
-                                }).toList(),
-                                options: CarouselOptions(
-                                  scrollPhysics: notices.length > 1
-                                      ? null
-                                      : const NeverScrollableScrollPhysics(),
-                                  autoPlay: notices.length > 1 ? true : false,
-                                  viewportFraction: 1,
-                                  height: _calculateDynamicHeight(notices),
-                                  autoPlayInterval: const Duration(seconds: 3),
-                                  onPageChanged: (index, reason) {
-                                    setState(() {
-                                      _currentNoticeIndex = index;
-                                    });
-                                  },
-                                ),
-                              ),
-                              const SizedBox(
-                                height: 10,
-                              ),
-                              if (notices.length > 1)
-                                _buildDotIndicator(
-                                    _currentNoticeIndex,
-                                    notices.length,
-                                    const Color.fromARGB(255, 39, 38, 38)),
-                            ],
-                          ),
-
-                        if (posters.isNotEmpty)
-                          Padding(
-                            padding: const EdgeInsets.only(top: 20),
-                            child: Column(
+                          if (banners.isNotEmpty)
+                            Column(
                               children: [
                                 CarouselSlider(
-                                  items: posters.asMap().entries.map((entry) {
-                                    int index = entry.key;
-                                    Promotion poster = entry.value;
-
-                                    return KeyedSubtree(
-                                      key: ValueKey(index),
-                                      child: customPoster(
-                                          context: context, poster: poster),
-                                    );
+                                  items: banners.map((banner) {
+                                    return _buildBanners(
+                                        context: context, banner: banner);
                                   }).toList(),
                                   options: CarouselOptions(
-                                    height: 420,
-                                    scrollPhysics: posters.length > 1
+                                    height: 175,
+                                    scrollPhysics: banners.length > 1
                                         ? null
                                         : const NeverScrollableScrollPhysics(),
-                                    autoPlay: posters.length > 1,
+                                    autoPlay: banners.length > 1 ? true : false,
                                     viewportFraction: 1,
                                     autoPlayInterval:
                                         const Duration(seconds: 3),
                                     onPageChanged: (index, reason) {
                                       setState(() {
-                                        _currentPosterIndex = index;
+                                        _currentBannerIndex = index;
                                       });
                                     },
                                   ),
-                                )
-                              ],
-                            ),
-                          ),
-
-                        // Events Carousel
-
-                        Column(
-                          children: [
-                            Row(
-                              children: [
-                                Padding(
-                                  padding:
-                                      const EdgeInsets.only(left: 15, top: 10),
-                                  child: Text('Latest Events',
-                                      style: kSubHeadingB.copyWith(
-                                        color: Color(0xFF072182),
-                                      )),
                                 ),
                               ],
                             ),
-                            CarouselSlider(
-                              items: events.map((event) {
-                                return Container(
-                                  width:
-                                      MediaQuery.of(context).size.width * 0.95,
-                                  child: GestureDetector(
-                                    onTap: () {
-                                      navigationService.pushNamed(
-                                          'ViewMoreEvent',
-                                          arguments: event);
+
+                          const SizedBox(height: 30),
+
+                          if (notices.isNotEmpty)
+                            Column(
+                              children: [
+                                CarouselSlider(
+                                  items: notices.map((notice) {
+                                    return customNotice(
+                                        context: context, notice: notice);
+                                  }).toList(),
+                                  options: CarouselOptions(
+                                    scrollPhysics: notices.length > 1
+                                        ? null
+                                        : const NeverScrollableScrollPhysics(),
+                                    autoPlay: notices.length > 1 ? true : false,
+                                    viewportFraction: 1,
+                                    height: _calculateDynamicHeight(notices),
+                                    autoPlayInterval:
+                                        const Duration(seconds: 3),
+                                    onPageChanged: (index, reason) {
+                                      setState(() {
+                                        _currentNoticeIndex = index;
+                                      });
                                     },
-                                    child: eventWidget(
-                                      withImage: true,
-                                      context: context,
-                                      event: event,
-                                    ),
                                   ),
-                                );
-                              }).toList(),
-                              options: CarouselOptions(
-                                height: 268,
-                                scrollPhysics: events.length > 1
-                                    ? null
-                                    : const NeverScrollableScrollPhysics(),
-                                autoPlay: events.length > 1 ? true : false,
-                                viewportFraction: 1,
-                                autoPlayInterval: const Duration(seconds: 3),
-                                onPageChanged: (index, reason) {
-                                  setState(() {
-                                    _currentEventIndex = index;
-                                  });
-                                },
-                              ),
+                                ),
+                                const SizedBox(
+                                  height: 10,
+                                ),
+                                if (notices.length > 1)
+                                  _buildDotIndicator(
+                                      _currentNoticeIndex,
+                                      notices.length,
+                                      const Color.fromARGB(255, 39, 38, 38)),
+                              ],
                             ),
-                          ],
-                        ),
 
-                        const SizedBox(height: 16),
-
-                        Column(
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          children: [
+                          if (posters.isNotEmpty)
                             Padding(
-                              padding: const EdgeInsets.only(
-                                  left: 15, top: 10, right: 15),
-                              child: Row(
+                              padding: const EdgeInsets.only(top: 20),
+                              child: Column(
                                 children: [
-                                  Text('Latest News',
-                                      style: kSubHeadingB.copyWith(
-                                          color: Color(0xFF072182))),
-                                  const Spacer(),
-                                  InkWell(
-                                    onTap: () => ref
-                                        .read(selectedIndexProvider.notifier)
-                                        .updateIndex(3),
-                                    child: const Text('see all',
-                                        style: kSmallTitleR),
+                                  CarouselSlider(
+                                    items: posters.asMap().entries.map((entry) {
+                                      int index = entry.key;
+                                      Promotion poster = entry.value;
+
+                                      return KeyedSubtree(
+                                        key: ValueKey(index),
+                                        child: customPoster(
+                                            context: context, poster: poster),
+                                      );
+                                    }).toList(),
+                                    options: CarouselOptions(
+                                      height: 420,
+                                      scrollPhysics: posters.length > 1
+                                          ? null
+                                          : const NeverScrollableScrollPhysics(),
+                                      autoPlay: posters.length > 1,
+                                      viewportFraction: 1,
+                                      autoPlayInterval:
+                                          const Duration(seconds: 3),
+                                      onPageChanged: (index, reason) {
+                                        setState(() {
+                                          _currentPosterIndex = index;
+                                        });
+                                      },
+                                    ),
                                   )
                                 ],
                               ),
                             ),
-                            const SizedBox(height: 10),
-                            SizedBox(
-                              height: 180,
-                              child: ListView.builder(
-                                controller: ScrollController(),
-                                scrollDirection: Axis.horizontal,
-                                itemCount: news.length,
-                                itemBuilder: (context, index) {
-                                  final individualNews = news[index];
-                                  return Padding(
-                                    padding: const EdgeInsets.symmetric(
-                                        horizontal: 8.0),
-                                    child: SizedBox(
-                                      width: MediaQuery.of(context).size.width *
-                                          0.45,
-                                      child: newsCard(
-                                        onTap: () {
-                                          ref
-                                              .read(selectedIndexProvider
-                                                  .notifier)
-                                              .updateIndex(3);
-                                        },
-                                        imageUrl: individualNews.media ?? '',
-                                        title: individualNews.title ?? '',
+
+                          // Events Carousel
+
+                          Column(
+                            children: [
+                              Row(
+                                children: [
+                                  Padding(
+                                    padding: const EdgeInsets.only(
+                                        left: 15, top: 10),
+                                    child: Text('Latest Events',
+                                        style: kSubHeadingB.copyWith(
+                                          color: Color(0xFF072182),
+                                        )),
+                                  ),
+                                ],
+                              ),
+                              CarouselSlider(
+                                items: events.map((event) {
+                                  return Container(
+                                    width: MediaQuery.of(context).size.width *
+                                        0.95,
+                                    child: GestureDetector(
+                                      onTap: () {
+                                        navigationService.pushNamed(
+                                            'ViewMoreEvent',
+                                            arguments: event);
+                                      },
+                                      child: eventWidget(
+                                        withImage: true,
+                                        context: context,
+                                        event: event,
                                       ),
                                     ),
                                   );
-                                },
-                              ),
-                            ),
-                          ],
-                        ),
-
-                        SizedBox(
-                          height: 20,
-                        ),
-                        // Videos Carousel
-                        if (filteredVideos.isNotEmpty)
-                          Column(
-                            children: [
-                              CarouselSlider(
-                                items: filteredVideos.map((video) {
-                                  return customVideo(
-                                      context: context, video: video);
                                 }).toList(),
                                 options: CarouselOptions(
-                                  height: 225,
-                                  scrollPhysics: videos.length > 1
+                                  height: 268,
+                                  scrollPhysics: events.length > 1
                                       ? null
                                       : const NeverScrollableScrollPhysics(),
+                                  autoPlay: events.length > 1 ? true : false,
                                   viewportFraction: 1,
+                                  autoPlayInterval: const Duration(seconds: 3),
                                   onPageChanged: (index, reason) {
                                     setState(() {
-                                      _currentVideoIndex = index;
+                                      _currentEventIndex = index;
                                     });
                                   },
                                 ),
                               ),
-                              if (videos.length > 1)
-                                _buildDotIndicator(_currentVideoIndex,
-                                    filteredVideos.length, Colors.black),
                             ],
                           ),
-                        SizedBox(
-                          height: 20,
-                        ),
-                      ],
+
+                          const SizedBox(height: 16),
+
+                          Column(
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: [
+                              Padding(
+                                padding: const EdgeInsets.only(
+                                    left: 15, top: 10, right: 15),
+                                child: Row(
+                                  children: [
+                                    Text('Latest News',
+                                        style: kSubHeadingB.copyWith(
+                                            color: Color(0xFF072182))),
+                                    const Spacer(),
+                                    InkWell(
+                                      onTap: () => ref
+                                          .read(selectedIndexProvider.notifier)
+                                          .updateIndex(3),
+                                      child: const Text('see all',
+                                          style: kSmallTitleR),
+                                    )
+                                  ],
+                                ),
+                              ),
+                              const SizedBox(height: 10),
+                              SizedBox(
+                                height: 180,
+                                child: ListView.builder(
+                                  controller: ScrollController(),
+                                  scrollDirection: Axis.horizontal,
+                                  itemCount: news.length,
+                                  itemBuilder: (context, index) {
+                                    final individualNews = news[index];
+                                    return Padding(
+                                      padding: const EdgeInsets.symmetric(
+                                          horizontal: 8.0),
+                                      child: SizedBox(
+                                        width:
+                                            MediaQuery.of(context).size.width *
+                                                0.45,
+                                        child: newsCard(
+                                          onTap: () {
+                                            ref
+                                                .read(selectedIndexProvider
+                                                    .notifier)
+                                                .updateIndex(3);
+                                          },
+                                          imageUrl: individualNews.media ?? '',
+                                          title: individualNews.title ?? '',
+                                        ),
+                                      ),
+                                    );
+                                  },
+                                ),
+                              ),
+                            ],
+                          ),
+
+                          SizedBox(
+                            height: 20,
+                          ),
+                          // Videos Carousel
+                          if (filteredVideos.isNotEmpty)
+                            Column(
+                              children: [
+                                CarouselSlider(
+                                  items: filteredVideos.map((video) {
+                                    return customVideo(
+                                        context: context, video: video);
+                                  }).toList(),
+                                  options: CarouselOptions(
+                                    height: 225,
+                                    scrollPhysics: videos.length > 1
+                                        ? null
+                                        : const NeverScrollableScrollPhysics(),
+                                    viewportFraction: 1,
+                                    onPageChanged: (index, reason) {
+                                      setState(() {
+                                        _currentVideoIndex = index;
+                                      });
+                                    },
+                                  ),
+                                ),
+                                if (videos.length > 1)
+                                  _buildDotIndicator(_currentVideoIndex,
+                                      filteredVideos.length, Colors.black),
+                              ],
+                            ),
+                          SizedBox(
+                            height: 20,
+                          ),
+                        ],
+                      ),
                     ),
-                  ),
-                  // if (widget.user.isAdmin ?? false)
-                  //   Padding(
-                  //     padding: const EdgeInsets.all(16.0),
-                  //     child: Align(
-                  //       alignment: Alignment.bottomRight,
-                  //       child: Container(
-                  //         padding: const EdgeInsets.all(13),
-                  //         decoration: BoxDecoration(
-                  //           borderRadius: BorderRadius.circular(10),
-                  //           color: kPrimaryColor,
-                  //         ),
-                  //         child: InkWell(
-                  //           onTap: () {
-                  //             navigationService
-                  //                 .pushNamed('MemberCreation');
-                  //           },
-                  //           child: const Icon(
-                  //             Icons.person_add_alt_1_outlined,
-                  //             color: kWhite,
-                  //             size: 27,
-                  //           ),
-                  //         ),
-                  //       ),
-                  //     ),
-                  //   ),
-                ],
+                    // if (widget.user.isAdmin ?? false)
+                    //   Padding(
+                    //     padding: const EdgeInsets.all(16.0),
+                    //     child: Align(
+                    //       alignment: Alignment.bottomRight,
+                    //       child: Container(
+                    //         padding: const EdgeInsets.all(13),
+                    //         decoration: BoxDecoration(
+                    //           borderRadius: BorderRadius.circular(10),
+                    //           color: kPrimaryColor,
+                    //         ),
+                    //         child: InkWell(
+                    //           onTap: () {
+                    //             navigationService
+                    //                 .pushNamed('MemberCreation');
+                    //           },
+                    //           child: const Icon(
+                    //             Icons.person_add_alt_1_outlined,
+                    //             color: kWhite,
+                    //             size: 27,
+                    //           ),
+                    //         ),
+                    //       ),
+                    //     ),
+                    //   ),
+                  ],
+                ),
               ),
             ),
           ),
