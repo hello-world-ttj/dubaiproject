@@ -66,13 +66,13 @@ Widget customDrawer({required BuildContext context}) {
           ),
           // Drawer Items
 
-          _buildDrawerItem(
-            icon: 'assets/svg/icons/analytics.svg',
-            label: 'Analytics',
-            onTap: () {
-              navigationService.pushNamed('AnalyticsPage');
-            },
-          ),
+          // _buildDrawerItem(
+          //   icon: 'assets/svg/icons/analytics.svg',
+          //   label: 'Analytics',
+          //   onTap: () {
+          //     navigationService.pushNamed('AnalyticsPage');
+          //   },
+          // ),
 
           _buildDrawerItem(
             icon: 'assets/svg/icons/my_products.svg',
@@ -209,7 +209,7 @@ Widget customDrawer({required BuildContext context}) {
                           ),
                           Image.asset(
                             scale: 15,
-                            'assets/pngs/skybertechlogo.png',
+                            'assets/png/skybertechlogo.png',
                           ),
                         ],
                       ),
@@ -256,7 +256,7 @@ Widget customDrawer({required BuildContext context}) {
                               padding: const EdgeInsets.only(bottom: 7),
                               child: Image.asset(
                                 scale: 25,
-                                'assets/pngs/acutelogo.png',
+                                'assets/png/acutelogo.png',
                               ),
                             ),
                           ],
