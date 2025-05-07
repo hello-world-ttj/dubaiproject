@@ -149,7 +149,7 @@ class _EnterProductsPageState extends ConsumerState<EnterProductsPage> {
                 child: SizedBox(
                   width: 100,
                   height: 100,
-                  child: Image.asset('assets/pngs/itcc_logo.png'),
+                  child: Image.asset( 'assets/png/Logo.png',),
                 ),
               ),
               bottom: PreferredSize(

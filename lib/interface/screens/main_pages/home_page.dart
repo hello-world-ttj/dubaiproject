@@ -770,7 +770,7 @@ class _HomePageState extends ConsumerState<HomePage> {
                     //         padding: const EdgeInsets.all(13),
                     //         decoration: BoxDecoration(
                     //           borderRadius: BorderRadius.circular(10),
-                    //           color: kPrimaryColor,
+                    //           color: CommonColor.primaryColor,
                     //         ),
                     //         child: InkWell(
                     //           onTap: () {
@@ -779,7 +779,7 @@ class _HomePageState extends ConsumerState<HomePage> {
                     //           },
                     //           child: const Icon(
                     //             Icons.person_add_alt_1_outlined,
-                    //             color: kWhite,
+                    //             color: CommonColor.white,
                     //             size: 27,
                     //           ),
                     //         ),

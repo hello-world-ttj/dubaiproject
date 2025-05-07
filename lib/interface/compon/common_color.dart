@@ -12,6 +12,7 @@ class CommonColor {
     static const Color primaryText = Color(0xFF242424); 
    
  
+static const Color greyLight = Color(0xFFE8EAED);
    
        static const Color greenColor = Color(0xFF016A03); 
   
