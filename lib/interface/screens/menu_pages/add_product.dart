@@ -1,9 +1,9 @@
 import 'dart:developer';
 import 'dart:io';
-import 'package:dubaiprojectxyvin/interface/Data/models/product_model.dart';
-import 'package:dubaiprojectxyvin/interface/compon/GradientButton.dart';
-import 'package:dubaiprojectxyvin/interface/compon/TextFields/modal_textField.dart';
-import 'package:dubaiprojectxyvin/interface/compon/loading_indicator.dart';
+import 'package:dubaiprojectxyvin/Data/models/product_model.dart';
+import 'package:dubaiprojectxyvin/interface/components/GradientButton.dart';
+import 'package:dubaiprojectxyvin/interface/components/TextFields/modal_textField.dart';
+import 'package:dubaiprojectxyvin/interface/components/loading_indicator.dart';
 import 'package:flutter_svg/svg.dart';
 
 import 'package:keyboard_avoider/keyboard_avoider.dart';

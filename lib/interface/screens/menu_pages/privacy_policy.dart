@@ -1,4 +1,4 @@
-import 'package:dubaiprojectxyvin/interface/compon/common_color.dart';
+import 'package:dubaiprojectxyvin/interface/components/common_color.dart';
 import 'package:flutter/material.dart';
 
 import 'package:google_fonts/google_fonts.dart';

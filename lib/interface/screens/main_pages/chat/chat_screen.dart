@@ -1,16 +1,21 @@
-import 'package:dubaiprojectxyvin/interface/Data/models/chat_model.dart';
-import 'package:dubaiprojectxyvin/interface/Data/models/msg_model.dart';
-import 'package:dubaiprojectxyvin/interface/Data/notifiers/user_notifier.dart';
-import 'package:dubaiprojectxyvin/interface/Data/services/api_service/chat_api/chat_api.dart';
-import 'package:dubaiprojectxyvin/interface/compon/common_color.dart';
-import 'package:dubaiprojectxyvin/interface/compon/dialogs/blockPersonDialog.dart';
-import 'package:dubaiprojectxyvin/interface/compon/dialogs/report_dialog.dart';
+import 'package:dubaiprojectxyvin/Data/models/chat_model.dart';
+import 'package:dubaiprojectxyvin/Data/models/msg_model.dart';
+import 'package:dubaiprojectxyvin/Data/notifiers/user_notifier.dart';
+import 'package:dubaiprojectxyvin/Data/services/api_routes/chat_api/chat_api.dart';
+import 'package:dubaiprojectxyvin/interface/components/common_color.dart';
+import 'package:dubaiprojectxyvin/interface/components/dialogs/blockPersonDialog.dart';
+import 'package:dubaiprojectxyvin/interface/components/dialogs/report_dialog.dart';
+import 'package:dubaiprojectxyvin/interface/components/own_message_card.dart';
+import 'package:dubaiprojectxyvin/interface/components/reply_card.dart';
+import 'package:dubaiprojectxyvin/interface/screens/profile/profile_preview.dart';
 import 'package:flutter/material.dart';
 
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_svg/svg.dart';
 
 import 'package:intl/intl.dart';
+
+import '../../../../Data/services/api_routes/user_api/user_data/user_data.dart';
 
 class IndividualPage extends ConsumerStatefulWidget {
   IndividualPage({required this.receiver, required this.sender, super.key});
@@ -152,7 +157,8 @@ class _IndividualPageState extends ConsumerState<IndividualPage> {
                           value: 'report',
                           child: Row(
                             children: [
-                              Icon(Icons.report, color: CommonColor.primaryColor),
+                              Icon(Icons.report,
+                                  color: CommonColor.primaryColor),
                               SizedBox(width: 8),
                               Text('Report'),
                             ],
@@ -238,15 +244,13 @@ class _IndividualPageState extends ConsumerState<IndividualPage> {
                                 ),
                               );
                             },
-                            child: VerifiedName(
-                              label: user.name ?? '',
-                              iconSize: 18,
-                           showBlueTick: user.blueTick??false,
+                            child: Text(
+                              user.name ?? '',
                             ),
                           );
                         },
                         loading: () => Text(
-                          '${widget.receiver.name ?? ''}',
+                          widget.receiver.name ?? '',
                           style: const TextStyle(fontSize: 18),
                         ),
                         error: (error, stackTrace) {
@@ -333,7 +337,7 @@ class _IndividualPageState extends ConsumerState<IndividualPage> {
                               vertical: 20,
                             ),
                             decoration: const BoxDecoration(
-                              color: kPrimaryColor,
+                              color: CommonColor.primaryColor,
                               boxShadow: [
                                 BoxShadow(
                                   color: Colors.black26,
@@ -426,7 +430,7 @@ class _IndividualPageState extends ConsumerState<IndividualPage> {
                                     ),
                                     child: Container(
                                       decoration: BoxDecoration(
-                                          color: kPrimaryColor,
+                                          color: CommonColor.primaryColor,
                                           borderRadius:
                                               BorderRadius.circular(5)),
                                       child: IconButton(

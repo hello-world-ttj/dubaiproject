@@ -1,10 +1,10 @@
-import 'package:dubaiprojectxyvin/interface/compon/common_color.dart';
-import 'package:dubaiprojectxyvin/interface/compon/common_divider.dart';
+import 'package:dubaiprojectxyvin/interface/components/common_color.dart';
+import 'package:dubaiprojectxyvin/interface/components/common_divider.dart';
 import 'package:flutter/material.dart';
 import 'package:pin_code_fields/pin_code_fields.dart';
 
-import '../compon/GradientButton.dart';
-import '../compon/custom_back_bar.dart';
+import '../components/GradientButton.dart';
+import '../components/custom_back_bar.dart';
 
 class VerifyOtpScreen extends StatelessWidget {
   VerifyOtpScreen({super.key});

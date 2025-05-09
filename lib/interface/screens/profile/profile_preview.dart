@@ -1,13 +1,13 @@
 import 'dart:developer';
-import 'package:dubaiprojectxyvin/interface/Data/models/review_model.dart';
-import 'package:dubaiprojectxyvin/interface/Data/models/user_model.dart';
-import 'package:dubaiprojectxyvin/interface/Data/services/extract_level_details.dart';
-import 'package:dubaiprojectxyvin/interface/Data/services/navigation_service.dart';
-import 'package:dubaiprojectxyvin/interface/compon/GradientButton.dart';
-import 'package:dubaiprojectxyvin/interface/compon/common_color.dart';
-import 'package:dubaiprojectxyvin/interface/compon/common_style.dart';
-import 'package:dubaiprojectxyvin/interface/compon/custom_widgets/glowing_animated_avatar.dart';
-import 'package:dubaiprojectxyvin/interface/compon/custom_widgets/icon_container.dart';
+import 'package:dubaiprojectxyvin/Data/models/review_model.dart';
+import 'package:dubaiprojectxyvin/Data/models/user_model.dart';
+import 'package:dubaiprojectxyvin/Data/services/extract_level_details.dart';
+import 'package:dubaiprojectxyvin/Data/services/navigation_service.dart';
+import 'package:dubaiprojectxyvin/interface/components/GradientButton.dart';
+import 'package:dubaiprojectxyvin/interface/components/common_color.dart';
+import 'package:dubaiprojectxyvin/interface/components/common_style.dart';
+import 'package:dubaiprojectxyvin/interface/components/custom_widgets/glowing_animated_avatar.dart';
+import 'package:dubaiprojectxyvin/interface/components/custom_widgets/icon_container.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_svg/flutter_svg.dart';
@@ -17,7 +17,7 @@ import 'package:smooth_page_indicator/smooth_page_indicator.dart';
 import 'package:url_launcher/url_launcher.dart';
 import 'package:youtube_player_iframe/youtube_player_iframe.dart';
 
-import '../../compon/custom_widgets/review_widgets.dart';
+import '../../components/custom_widgets/review_widgets.dart';
 
 class ReviewsState extends StateNotifier<int> {
   ReviewsState() : super(1);

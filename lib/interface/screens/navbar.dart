@@ -1,8 +1,8 @@
 import 'dart:async';
 import 'dart:developer';
 
-import 'package:dubaiprojectxyvin/interface/Data/models/user_model.dart';
-import 'package:dubaiprojectxyvin/interface/Data/routes/nav_router.dart';
+import 'package:dubaiprojectxyvin/Data/models/user_model.dart';
+import 'package:dubaiprojectxyvin/Data/routes/nav_router.dart';
 import 'package:dubaiprojectxyvin/interface/screens/main_pages/bussiness/Tab_bar.dart';
 import 'package:dubaiprojectxyvin/interface/screens/main_pages/home_page.dart';
 import 'package:dubaiprojectxyvin/interface/screens/main_pages/news_page.dart';

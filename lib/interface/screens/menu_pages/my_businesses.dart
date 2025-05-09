@@ -1,7 +1,7 @@
 import 'dart:developer';
 
-import 'package:dubaiprojectxyvin/interface/Data/models/business_model.dart';
-import 'package:dubaiprojectxyvin/interface/compon/loading_indicator.dart';
+import 'package:dubaiprojectxyvin/Data/models/business_model.dart';
+import 'package:dubaiprojectxyvin/interface/components/loading_indicator.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 

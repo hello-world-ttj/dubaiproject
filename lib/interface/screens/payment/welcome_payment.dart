@@ -1,6 +1,6 @@
-import 'package:dubaiprojectxyvin/interface/compon/GradientButton.dart';
-import 'package:dubaiprojectxyvin/interface/compon/common_color.dart';
-import 'package:dubaiprojectxyvin/interface/compon/common_divider.dart';
+import 'package:dubaiprojectxyvin/interface/components/GradientButton.dart';
+import 'package:dubaiprojectxyvin/interface/components/common_color.dart';
+import 'package:dubaiprojectxyvin/interface/components/common_divider.dart';
 import 'package:flutter/material.dart';
 
 class WelcomePayment extends StatelessWidget {

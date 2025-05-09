@@ -1,8 +1,8 @@
-import 'package:dubaiprojectxyvin/interface/Data/services/navigation_service.dart';
-import 'package:dubaiprojectxyvin/interface/compon/GradientButton.dart';
-import 'package:dubaiprojectxyvin/interface/compon/common_color.dart';
-import 'package:dubaiprojectxyvin/interface/compon/common_style.dart';
-import 'package:dubaiprojectxyvin/interface/compon/loading_indicator.dart';
+import 'package:dubaiprojectxyvin/Data/services/navigation_service.dart';
+import 'package:dubaiprojectxyvin/interface/components/GradientButton.dart';
+import 'package:dubaiprojectxyvin/interface/components/common_color.dart';
+import 'package:dubaiprojectxyvin/interface/components/common_style.dart';
+import 'package:dubaiprojectxyvin/interface/components/loading_indicator.dart';
 import 'package:flutter/material.dart';
 
 import 'package:intl_phone_field/intl_phone_field.dart';

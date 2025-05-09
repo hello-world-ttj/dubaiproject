@@ -1,6 +1,6 @@
-import 'package:dubaiprojectxyvin/interface/Data/routes/router.dart' as router;
-import 'package:dubaiprojectxyvin/interface/Data/services/navigation_service.dart';
-import 'package:dubaiprojectxyvin/interface/Data/utils/secure_storage.dart';
+import 'package:dubaiprojectxyvin/Data/routes/router.dart' as router;
+import 'package:dubaiprojectxyvin/Data/services/navigation_service.dart';
+import 'package:dubaiprojectxyvin/Data/utils/secure_storage.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_dotenv/flutter_dotenv.dart';

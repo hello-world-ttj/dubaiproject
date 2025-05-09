@@ -1,4 +1,4 @@
-import 'package:dubaiprojectxyvin/interface/Data/models/chat_model.dart';
+import 'package:dubaiprojectxyvin/Data/models/chat_model.dart';
 import 'package:dubaiprojectxyvin/interface/screens/main_pages/chat/chat_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';

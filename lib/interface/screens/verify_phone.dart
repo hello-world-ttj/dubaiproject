@@ -1,9 +1,9 @@
-import 'package:dubaiprojectxyvin/interface/compon/common_color.dart';
-import 'package:dubaiprojectxyvin/interface/compon/custom_back_bar.dart';
+import 'package:dubaiprojectxyvin/interface/components/common_color.dart';
+import 'package:dubaiprojectxyvin/interface/components/custom_back_bar.dart';
 import 'package:flutter/material.dart';
 
-import '../compon/GradientButton.dart';
-import '../compon/common_divider.dart';
+import '../components/GradientButton.dart';
+import '../components/common_divider.dart';
 
 class VerifyPhone extends StatelessWidget {
   const VerifyPhone({super.key});

@@ -1,11 +1,11 @@
-import 'package:dubaiprojectxyvin/interface/Data/globals.dart';
-import 'package:dubaiprojectxyvin/interface/Data/models/chat_model.dart';
-import 'package:dubaiprojectxyvin/interface/Data/notifiers/people_notifier.dart';
-import 'package:dubaiprojectxyvin/interface/Data/services/api_service/chat_api/chat_api.dart';
-import 'package:dubaiprojectxyvin/interface/Data/services/api_service/user_api/user_data/user_data.dart';
-import 'package:dubaiprojectxyvin/interface/compon/common_color.dart';
-import 'package:dubaiprojectxyvin/interface/compon/common_style.dart';
-import 'package:dubaiprojectxyvin/interface/compon/loading_indicator.dart';
+import 'package:dubaiprojectxyvin/Data/globals.dart';
+import 'package:dubaiprojectxyvin/Data/models/chat_model.dart';
+import 'package:dubaiprojectxyvin/Data/notifiers/people_notifier.dart';
+import 'package:dubaiprojectxyvin/Data/services/api_routes/chat_api/chat_api.dart';
+import 'package:dubaiprojectxyvin/Data/services/api_routes/user_api/user_data/user_data.dart';
+import 'package:dubaiprojectxyvin/interface/components/common_color.dart';
+import 'package:dubaiprojectxyvin/interface/components/common_style.dart';
+import 'package:dubaiprojectxyvin/interface/components/loading_indicator.dart';
 import 'package:dubaiprojectxyvin/interface/screens/main_pages/chat/chat_screen.dart';
 import 'package:dubaiprojectxyvin/interface/screens/profile/profile_preview.dart';
 import 'package:flutter/material.dart';
@@ -15,7 +15,7 @@ import 'package:shimmer/shimmer.dart';
 import 'dart:async';
 import 'dart:developer';
 
-import '../../../Data/services/api_service/levels_api/levels_api.dart';
+import '../../../../Data/services/api_routes/levels_api/levels_api.dart';
 
 class MembersPage extends ConsumerStatefulWidget {
   const MembersPage({super.key});

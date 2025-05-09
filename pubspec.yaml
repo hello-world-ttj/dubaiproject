@@ -62,6 +62,7 @@ dependencies:
   flutter_dotenv: ^5.2.1
   socket_io_client: ^3.1.2
   firebase_auth: ^5.5.3
+  riverpod_generator: ^2.6.5
 
 dev_dependencies:
   flutter_test:

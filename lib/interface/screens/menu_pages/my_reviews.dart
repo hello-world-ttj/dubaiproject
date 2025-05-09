@@ -1,5 +1,5 @@
-import 'package:dubaiprojectxyvin/interface/Data/models/review_model.dart';
-import 'package:dubaiprojectxyvin/interface/compon/custom_widgets/review_widgets.dart';
+import 'package:dubaiprojectxyvin/Data/models/review_model.dart';
+import 'package:dubaiprojectxyvin/interface/components/custom_widgets/review_widgets.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 

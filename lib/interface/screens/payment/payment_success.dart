@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
-import '../../compon/GradientButton.dart';
-import '../../compon/common_divider.dart';
+import '../../components/GradientButton.dart';
+import '../../components/common_divider.dart';
 
 class PaymentSuccess extends StatelessWidget {
   const PaymentSuccess({super.key});
