@@ -1,6 +1,13 @@
+import 'package:dubaiprojectxyvin/interface/Data/globals.dart';
+import 'package:dubaiprojectxyvin/interface/Data/models/chat_model.dart';
 import 'package:dubaiprojectxyvin/interface/Data/notifiers/people_notifier.dart';
+import 'package:dubaiprojectxyvin/interface/Data/services/api_service/chat_api/chat_api.dart';
 import 'package:dubaiprojectxyvin/interface/Data/services/api_service/user_api/user_data/user_data.dart';
+import 'package:dubaiprojectxyvin/interface/compon/common_color.dart';
+import 'package:dubaiprojectxyvin/interface/compon/common_style.dart';
 import 'package:dubaiprojectxyvin/interface/compon/loading_indicator.dart';
+import 'package:dubaiprojectxyvin/interface/screens/main_pages/chat/chat_screen.dart';
+import 'package:dubaiprojectxyvin/interface/screens/profile/profile_preview.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_svg/svg.dart';
@@ -677,13 +684,13 @@ class _MembersPageState extends ConsumerState<MembersPage> {
                                 ),
                               ),
                             ),
-                            title: VerifiedName(
-                              label: user.name ?? '',
-                                showBlueTick: user.blueTick??false,
+                            title: Text(
+                           user.name ?? '',
+                  
                             ),
                             subtitle: Text('${user.chapter?.name ?? ''}',
                                 style:
-                                    kSmallerTitleB.copyWith(color: kGreyDark)),
+                                    kSmallerTitleB.copyWith(color: CommonColor.GreyDark)),
                             trailing: SizedBox(
                               width: 40,
                               height: 40,

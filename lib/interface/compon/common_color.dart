@@ -8,7 +8,8 @@ class CommonColor {
    static const Color white = Color(0xFFF7F7F7);
     static const Color backgroundColor = Color(0xFFE5EAFF);
     static const Color lightBlueBackground = Color(0xFFE1E7FF); 
-   
+  static const Color GreyDark = Color.fromARGB(255, 118, 121, 124);
+  static const Color GreyDarker = Color(0xFF585858);
     static const Color primaryText = Color(0xFF242424); 
    
  

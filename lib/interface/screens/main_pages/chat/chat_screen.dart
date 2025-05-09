@@ -2,6 +2,9 @@ import 'package:dubaiprojectxyvin/interface/Data/models/chat_model.dart';
 import 'package:dubaiprojectxyvin/interface/Data/models/msg_model.dart';
 import 'package:dubaiprojectxyvin/interface/Data/notifiers/user_notifier.dart';
 import 'package:dubaiprojectxyvin/interface/Data/services/api_service/chat_api/chat_api.dart';
+import 'package:dubaiprojectxyvin/interface/compon/common_color.dart';
+import 'package:dubaiprojectxyvin/interface/compon/dialogs/blockPersonDialog.dart';
+import 'package:dubaiprojectxyvin/interface/compon/dialogs/report_dialog.dart';
 import 'package:flutter/material.dart';
 
 import 'package:flutter_riverpod/flutter_riverpod.dart';
@@ -149,7 +152,7 @@ class _IndividualPageState extends ConsumerState<IndividualPage> {
                           value: 'report',
                           child: Row(
                             children: [
-                              Icon(Icons.report, color: kPrimaryColor),
+                              Icon(Icons.report, color: CommonColor.primaryColor),
                               SizedBox(width: 8),
                               Text('Report'),
                             ],
