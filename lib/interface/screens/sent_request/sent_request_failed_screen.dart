@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-import '../../components/common_color.dart';
+import '../../../Data/common_color.dart';
 
 class SentRequestFailedScreen extends StatelessWidget {
   const SentRequestFailedScreen({super.key});

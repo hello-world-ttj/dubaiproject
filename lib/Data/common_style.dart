@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-const String kFamilyName = 'Helvetica';
+const String kFamilyName = 'Manrope';
 
 const kExtraLight = FontWeight.w300;
 const kUltraLight = FontWeight.w200;

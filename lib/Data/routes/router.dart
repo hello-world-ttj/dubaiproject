@@ -23,9 +23,9 @@ import '../../interface/screens/sent_request/sent_request_approved_screen.dart';
 import '../../interface/screens/sent_request/sent_request_failed_screen.dart';
 import '../../interface/screens/sent_request/sent_request_screen.dart';
 import '../../interface/screens/splash_screen.dart';
-import '../../interface/screens/verify_otp_screen.dart';
-import '../../interface/screens/verify_phone.dart';
-import '../../interface/screens/welcome_screen.dart';
+import '../../interface/screens/onboarding/verify_otp_screen.dart';
+import '../../interface/screens/onboarding/verify_phone.dart';
+import '../../interface/screens/onboarding/welcome_screen.dart';
 
 Route<dynamic> generateRoute(RouteSettings? settings) {
   switch (settings?.name) {
@@ -36,7 +36,11 @@ Route<dynamic> generateRoute(RouteSettings? settings) {
        case 'VerifyPhone':
       return MaterialPageRoute(builder: (context) => VerifyPhone());
        case 'VerifyOtpScreen':
-      return MaterialPageRoute(builder: (context) => VerifyOtpScreen());
+             final args = settings?.arguments as Map<String, dynamic>?;
+      String verificationId = args?['verificationId'];
+      String resendToken = args?['resendToken'];
+      String phone = args?['phone'];
+      return MaterialPageRoute(builder: (context) => VerifyOtpScreen(verificationId: verificationId,resendToken: resendToken,phone: phone,));
        case 'SentRequestScreen':
       return MaterialPageRoute(builder: (context) => SentRequestScreen());
        case 'Payment1Screen':

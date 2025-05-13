@@ -1,6 +1,6 @@
 import 'package:dubaiprojectxyvin/Data/notifiers/user_notifier.dart';
 import 'package:dubaiprojectxyvin/Data/services/api_routes/user_api/user_data/user_data.dart';
-import 'package:dubaiprojectxyvin/interface/components/common_color.dart';
+import 'package:dubaiprojectxyvin/Data/common_color.dart';
 import 'package:dubaiprojectxyvin/interface/components/loading_indicator.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';

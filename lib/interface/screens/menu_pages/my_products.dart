@@ -3,7 +3,7 @@ import 'dart:io';
 
 import 'package:dubaiprojectxyvin/Data/models/product_model.dart';
 import 'package:dubaiprojectxyvin/Data/services/navigation_service.dart';
-import 'package:dubaiprojectxyvin/interface/components/common_color.dart';
+import 'package:dubaiprojectxyvin/Data/common_color.dart';
 import 'package:dubaiprojectxyvin/interface/screens/menu_pages/add_product.dart';
 import 'package:file_picker/file_picker.dart';
 import 'package:flutter/material.dart';

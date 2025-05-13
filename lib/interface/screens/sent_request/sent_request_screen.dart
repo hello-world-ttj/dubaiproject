@@ -3,7 +3,7 @@ import 'dart:math';
 import 'package:flutter/material.dart';
 
 import '../../components/GradientButton.dart';
-import '../../components/common_color.dart';
+import '../../../Data/common_color.dart';
 import '../../components/common_divider.dart';
 import '../../components/custom_back_bar.dart';
 

@@ -1,5 +1,5 @@
-import 'package:dubaiprojectxyvin/interface/components/common_color.dart';
-import 'package:dubaiprojectxyvin/interface/components/common_style.dart';
+import 'package:dubaiprojectxyvin/Data/common_color.dart';
+import 'package:dubaiprojectxyvin/Data/common_style.dart';
 import 'package:flutter/material.dart';
 
 import 'package:shimmer/shimmer.dart';

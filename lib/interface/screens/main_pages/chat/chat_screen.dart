@@ -2,7 +2,7 @@ import 'package:dubaiprojectxyvin/Data/models/chat_model.dart';
 import 'package:dubaiprojectxyvin/Data/models/msg_model.dart';
 import 'package:dubaiprojectxyvin/Data/notifiers/user_notifier.dart';
 import 'package:dubaiprojectxyvin/Data/services/api_routes/chat_api/chat_api.dart';
-import 'package:dubaiprojectxyvin/interface/components/common_color.dart';
+import 'package:dubaiprojectxyvin/Data/common_color.dart';
 import 'package:dubaiprojectxyvin/interface/components/dialogs/blockPersonDialog.dart';
 import 'package:dubaiprojectxyvin/interface/components/dialogs/report_dialog.dart';
 import 'package:dubaiprojectxyvin/interface/components/own_message_card.dart';

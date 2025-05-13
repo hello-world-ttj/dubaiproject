@@ -1,7 +1,7 @@
 import 'package:dubaiprojectxyvin/Data/services/navigation_service.dart';
 import 'package:dubaiprojectxyvin/interface/components/GradientButton.dart';
-import 'package:dubaiprojectxyvin/interface/components/common_color.dart';
-import 'package:dubaiprojectxyvin/interface/components/common_style.dart';
+import 'package:dubaiprojectxyvin/Data/common_color.dart';
+import 'package:dubaiprojectxyvin/Data/common_style.dart';
 import 'package:dubaiprojectxyvin/interface/components/loading_indicator.dart';
 import 'package:flutter/material.dart';
 

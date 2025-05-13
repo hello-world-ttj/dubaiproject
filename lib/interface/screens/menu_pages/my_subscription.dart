@@ -1,7 +1,7 @@
 import 'dart:io';
 import 'package:dubaiprojectxyvin/Data/models/subscription_model.dart';
 import 'package:dubaiprojectxyvin/interface/components/GradientButton.dart';
-import 'package:dubaiprojectxyvin/interface/components/common_color.dart';
+import 'package:dubaiprojectxyvin/Data/common_color.dart';
 import 'package:file_picker/file_picker.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';

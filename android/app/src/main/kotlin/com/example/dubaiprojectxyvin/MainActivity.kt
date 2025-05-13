@@ -1,4 +1,4 @@
-package com.example.dubaiprojectxyvin
+package com.skybertech.connectdubai
 
 import io.flutter.embedding.android.FlutterActivity
 
