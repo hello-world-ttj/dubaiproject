@@ -2,96 +2,20 @@ import 'dart:async';
 import 'dart:developer';
 
 import 'package:dubaiprojectxyvin/Data/models/user_model.dart';
+import 'package:dubaiprojectxyvin/Data/notifiers/user_notifier.dart';
 import 'package:dubaiprojectxyvin/Data/routes/nav_router.dart';
+import 'package:dubaiprojectxyvin/Data/utils/common_color.dart';
+import 'package:dubaiprojectxyvin/interface/components/shimmers/promotion_shimmers.dart';
 import 'package:dubaiprojectxyvin/interface/screens/main_pages/bussiness/Tab_bar.dart';
 import 'package:dubaiprojectxyvin/interface/screens/main_pages/home_page.dart';
 import 'package:dubaiprojectxyvin/interface/screens/main_pages/news_page.dart';
 import 'package:dubaiprojectxyvin/interface/screens/main_pages/people_page.dart';
 import 'package:dubaiprojectxyvin/interface/screens/main_pages/profile_page.dart';
+import 'package:dubaiprojectxyvin/interface/screens/onboarding/welcome_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_svg/flutter_svg.dart';
-
-final dummyUser = UserModel(
-  name: "John Doe",
-  uid: "user123",
-  memberId: "M001",
-  bloodgroup: "O+",
-  isAdmin: true,
-  chapter: UserChapterModel(
-    id: "chapter001",
-    name: "City Chapter",
-    shortCode: "CC01",
-    district: UserDistrictModel(
-      id: "district001",
-      name: "Central District",
-      zone: UserZoneModel(
-        id: "zone001",
-        name: "North Zone",
-        state: UserStateModel(
-          id: "state001",
-          name: "Example State",
-        ),
-      ),
-    ),
-  ),
-  image: "https://example.com/profile.jpg",
-  email: "john.doe@example.com",
-  phone: "+1234567890",
-  secondaryPhone: SecondaryPhone(
-    whatsapp: "+1234567890",
-    business: "+0987654321",
-  ),
-  bio: "Businessman and entrepreneur.",
-  status: "active",
-  address: "123 Main Street, Cityville",
-  company: [
-    Company(
-      name: "Doe Enterprises",
-      designation: "CEO",
-      email: "contact@doeenterprises.com",
-      websites: "https://doeenterprises.com",
-      phone: "+1234567890",
-      logo: "https://example.com/logo.png",
-    ),
-  ],
-  businessCategory: "Retail",
-  businessSubCategory: "Electronics",
-  file: ["https://example.com/file1.pdf", "https://example.com/file2.pdf"],
-  social: [
-    Link(name: "LinkedIn", link: "https://linkedin.com/in/johndoe"),
-    Link(name: "Instagram", link: "https://instagram.com/johndoe"),
-  ],
-  websites: [
-    Link(name: "Portfolio", link: "https://johndoe.com"),
-  ],
-  awards: [
-    Award(
-        image: "https://example.com/award1.png",
-        name: "Best Entrepreneur",
-        authority: "BizOrg"),
-  ],
-  videos: [
-    Link(name: "Promo Video", link: "https://youtube.com/video123"),
-  ],
-  certificates: [
-    Link(name: "Business Certificate", link: "https://example.com/cert.pdf"),
-  ],
-  otp: 123456,
-  blockedUsers: [],
-  feedCount: 10,
-  productCount: 5,
-  subscription: "Premium",
-  fcm: "fcmToken123456",
-  createdAt: DateTime.now(),
-  freeTrialEndDate: DateTime.now().add(Duration(days: 30)),
-  level: "Kerala State Middle Zone Thrissur District IJK Chapter",
-  levelName: "Gold Member",
-  levelId: "L001",
-  adminType: "super",
-  businessTags: ["electronics", "retail", "gadgets"],
-);
 
 class IconResolver extends StatelessWidget {
   final String iconPath;
@@ -198,15 +122,16 @@ class _MainPageState extends ConsumerState<MainPage>
   }
 
   List<String> _icons = [];
-
-  Future<void> _initialize() async {
+  Future<void> _initialize({required UserModel user}) async {
     _widgetOptions = <Widget>[
-      HomePage(),
+      HomePage(
+        user: user,
+      ),
       TabBarPage(),
       NewsPage(),
       PeoplePage(),
       ProfilePage(
-        user: dummyUser,
+        user: user,
       ),
     ];
 
@@ -222,122 +147,137 @@ class _MainPageState extends ConsumerState<MainPage>
   @override
   Widget build(BuildContext context) {
     return Consumer(builder: (context, ref, child) {
+      final asyncUser = ref.watch(userProvider);
       final selectedIndex = ref.watch(selectedIndexProvider);
-      _initialize();
-      return PopScope(
-        canPop: selectedIndex == 0,
-        onPopInvokedWithResult: (didPop, result) {
-          log('im inside mainpage popscope');
-          if (selectedIndex != 0) {
-            ref.read(selectedIndexProvider.notifier).updateIndex(0);
-          }
-        },
-        // Wrap with GestureDetector to detect user interaction
-        child: GestureDetector(
-          // Reset timer on any tap or movement
-          onTap: _resetInactivityTimer,
-          onPanDown: (_) => _resetInactivityTimer(),
-          onPanUpdate: (_) => _resetInactivityTimer(),
-          behavior: HitTestBehavior.translucent,
-          child: Scaffold(
-            body: Stack(
-              children: [
-                Center(
-                  child: _widgetOptions.elementAt(selectedIndex),
-                ),
-                // Animated navbar using SlideTransition
-                Positioned(
-                  left: 0,
-                  right: 0,
-                  bottom: 0,
-                  child: SlideTransition(
-                    position: _slideAnimation,
-                    child: Padding(
-                      padding: const EdgeInsets.only(
-                          left: 16, right: 16, bottom: 24),
-                      child: Container(
-                        decoration: BoxDecoration(
-                          gradient: const LinearGradient(
-                            colors: [Color(0xFF092073), Color(0xFF1835A0)],
-                            begin: Alignment.topLeft,
-                            end: Alignment.bottomRight,
-                          ),
-                          borderRadius: BorderRadius.circular(32),
-                          boxShadow: [
-                            BoxShadow(
-                              color: Colors.black.withOpacity(0.2),
-                              blurRadius: 16,
-                              offset: const Offset(0, 8),
-                            ),
-                          ],
-                        ),
+    return  asyncUser.when(
+        data: (user) {    _initialize(user: user);
+          return PopScope(
+            canPop: selectedIndex == 0,
+            onPopInvokedWithResult: (didPop, result) {
+              log('im inside mainpage popscope');
+              if (selectedIndex != 0) {
+                ref.read(selectedIndexProvider.notifier).updateIndex(0);
+              }
+            },
+            child: GestureDetector(
+              onTap: _resetInactivityTimer,
+              onPanDown: (_) => _resetInactivityTimer(),
+              onPanUpdate: (_) => _resetInactivityTimer(),
+              behavior: HitTestBehavior.translucent,
+              child: Scaffold(
+                body: Stack(
+                  children: [
+                    Center(
+                      child: _widgetOptions.elementAt(selectedIndex),
+                    ),
+                    // Animated navbar using SlideTransition
+                    Positioned(
+                      left: 0,
+                      right: 0,
+                      bottom: 0,
+                      child: SlideTransition(
+                        position: _slideAnimation,
                         child: Padding(
-                          padding: const EdgeInsets.symmetric(
-                              vertical: 12, horizontal: 8),
-                          child: Row(
-                            mainAxisAlignment: MainAxisAlignment.spaceAround,
-                            children: List.generate(5, (index) {
-                              final isSelected = selectedIndex == index;
-                              final labels = [
-                                'Home',
-                                'Business',
-                                'News',
-                                'Members',
-                                'Profile'
-                              ];
-                              return InkWell(
-                                borderRadius: BorderRadius.circular(24),
-                                onTap: () {
-                                  HapticFeedback.selectionClick();
-                                  _onItemTapped(index);
-                                },
-                                child: Column(
-                                  mainAxisSize: MainAxisSize.min,
-                                  children: [
-                                    TweenAnimationBuilder<double>(
-                                      tween: Tween<double>(
-                                          begin: 1.0,
-                                          end: isSelected ? 1.2 : 1.0),
-                                      duration:
-                                          const Duration(milliseconds: 350),
-                                      curve: Curves.elasticOut,
-                                      builder: (context, scale, child) {
-                                        return Transform.scale(
-                                          scale: scale,
-                                          child: child,
-                                        );
-                                      },
-                                      child: IconResolver(
-                                        iconPath: _icons[index],
-                                        color: isSelected
-                                            ? Color(0xFFFFFFFF)
-                                            : Color(0xFFFFFFFF).withOpacity(.5),
-                                      ),
-                                    ),
-                                    SizedBox(height: 4),
-                                    Text(
-                                      labels[index],
-                                      style: TextStyle(
-                                        color: Colors.white.withOpacity(
-                                            isSelected ? 1.0 : 0.6),
-                                        fontSize: isSelected ? 14 : 12,
-                                      ),
-                                    ),
-                                  ],
+                          padding: const EdgeInsets.only(
+                              left: 16, right: 16, bottom: 24),
+                          child: Container(
+                            decoration: BoxDecoration(
+                              gradient: const LinearGradient(
+                                colors: [Color(0xFF092073), Color(0xFF1835A0)],
+                                begin: Alignment.topLeft,
+                                end: Alignment.bottomRight,
+                              ),
+                              borderRadius: BorderRadius.circular(32),
+                              boxShadow: [
+                                BoxShadow(
+                                  color: Colors.black.withOpacity(0.2),
+                                  blurRadius: 16,
+                                  offset: const Offset(0, 8),
                                 ),
-                              );
-                            }),
+                              ],
+                            ),
+                            child: Padding(
+                              padding: const EdgeInsets.symmetric(
+                                  vertical: 12, horizontal: 8),
+                              child: Row(
+                                mainAxisAlignment:
+                                    MainAxisAlignment.spaceAround,
+                                children: List.generate(5, (index) {
+                                  final isSelected = selectedIndex == index;
+                                  final labels = [
+                                    'Home',
+                                    'Business',
+                                    'News',
+                                    'Members',
+                                    'Profile'
+                                  ];
+                                  return InkWell(
+                                    borderRadius: BorderRadius.circular(24),
+                                    onTap: () {
+                                      HapticFeedback.selectionClick();
+                                      _onItemTapped(index);
+                                    },
+                                    child: Column(
+                                      mainAxisSize: MainAxisSize.min,
+                                      children: [
+                                        TweenAnimationBuilder<double>(
+                                          tween: Tween<double>(
+                                              begin: 1.0,
+                                              end: isSelected ? 1.2 : 1.0),
+                                          duration:
+                                              const Duration(milliseconds: 350),
+                                          curve: Curves.elasticOut,
+                                          builder: (context, scale, child) {
+                                            return Transform.scale(
+                                              scale: scale,
+                                              child: child,
+                                            );
+                                          },
+                                          child: IconResolver(
+                                            iconPath: _icons[index],
+                                            color: isSelected
+                                                ? Color(0xFFFFFFFF)
+                                                : Color(0xFFFFFFFF)
+                                                    .withOpacity(.5),
+                                          ),
+                                        ),
+                                        SizedBox(height: 4),
+                                        Text(
+                                          labels[index],
+                                          style: TextStyle(
+                                            color: Colors.white.withOpacity(
+                                                isSelected ? 1.0 : 0.6),
+                                            fontSize: isSelected ? 14 : 12,
+                                          ),
+                                        ),
+                                      ],
+                                    ),
+                                  );
+                                }),
+                              ),
+                            ),
                           ),
                         ),
                       ),
                     ),
-                  ),
+                  ],
                 ),
-              ],
+              ),
             ),
-          ),
-        ),
+          );
+        },
+        loading: () {
+          log('im inside details main page loading');
+          return Scaffold(
+              backgroundColor: kPrimaryLightColor,
+              body: buildShimmerPromotionsColumn(context: context));
+        },
+        error: (error, stackTrace) {
+          log('im inside details main page error $error $stackTrace');
+          return WelcomeScreen();
+        },
       );
+  
     });
   }
 }

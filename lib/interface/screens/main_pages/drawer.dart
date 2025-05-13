@@ -1,3 +1,4 @@
+import 'package:dubaiprojectxyvin/Data/models/user_model.dart';
 import 'package:dubaiprojectxyvin/Data/services/api_routes/user_api/user_data/edit_user.dart';
 import 'package:dubaiprojectxyvin/Data/services/navigation_service.dart';
 import 'package:dubaiprojectxyvin/Data/services/webview.dart';
@@ -6,7 +7,7 @@ import 'package:dubaiprojectxyvin/Data/utils/secure_storage.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 
-Widget customDrawer({required BuildContext context}) {
+Widget customDrawer({required BuildContext context, required UserModel user}) {
   NavigationService navigationService = NavigationService();
   return SafeArea(
     child: SingleChildScrollView(
@@ -38,14 +39,14 @@ Widget customDrawer({required BuildContext context}) {
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
                         Text(
-                          'USER NAME',
+                          user.name ?? '',
                           style: TextStyle(
                             fontSize: 18,
                             fontWeight: FontWeight.bold,
                           ),
                         ),
                         Text(
-                          '1234567890',
+                          user.phone ?? '',
                           style: TextStyle(
                             fontSize: 14,
                             color: Colors.grey,

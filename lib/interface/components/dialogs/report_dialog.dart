@@ -1,7 +1,6 @@
 import 'package:dubaiprojectxyvin/Data/services/api_routes/user_api/user_data/user_data.dart';
 import 'package:flutter/material.dart';
 
-
 class ReportPersonDialog extends StatelessWidget {
   final String? userId;
   final VoidCallback onReportStatusChanged;

@@ -70,6 +70,7 @@ dependencies:
   flutter_upgrade_version: ^1.1.8
   image_picker: ^1.1.2
   custom_image_crop: ^0.1.1
+  image: ^4.3.0
 
 dev_dependencies:
   flutter_test:

@@ -4,7 +4,6 @@ import 'package:dubaiprojectxyvin/Data/utils/common_color.dart';
 import 'package:dubaiprojectxyvin/interface/components/loading_indicator.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-
 class BlockPersonDialog extends ConsumerStatefulWidget {
   final String userId;
   final VoidCallback onBlockStatusChanged;
@@ -39,12 +38,11 @@ class _BlockPersonDialogState extends ConsumerState<BlockPersonDialog> {
   Widget build(BuildContext context) {
     final asyncUser = ref.watch(userProvider);
 
+    // Determine block status dynamically
     return asyncUser.when(
         loading: () => const LoadingAnimation(),
         error: (error, stackTrace) {
-          return const Center(
-            child: LoadingAnimation(),
-          );
+          return SizedBox.shrink();
         },
         data: (user) {
           bool isBlocked = user.blockedUsers

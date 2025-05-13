@@ -11,7 +11,6 @@ const Gradient scaffoldGradient = LinearGradient(
 );
 const Color kTertiary = Color(0xFFE8EAED);
 const Color kInputFieldcolor = Color(0xFF6F7782);
-//Common Colors
 const Color kWhite = Color.fromARGB(255, 255, 255, 255);
 const Color kGrey = Color.fromARGB(255, 200, 200, 200);
 const Color primaryText = Color(0xFF242424);

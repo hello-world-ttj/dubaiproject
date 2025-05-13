@@ -33,28 +33,33 @@ class ModalSheetTextFormField extends StatelessWidget {
       maxLines: maxLines,
       validator: validator,
       decoration: InputDecoration(
-        hintText: label,
-        border: OutlineInputBorder(
-          borderRadius: BorderRadius.circular(10),
-          borderSide: const BorderSide(
-            color: Colors.grey, // Set the border color to light grey
-            width: 1.0, // You can adjust the width as needed
-          ),
-        ),
-        enabledBorder: OutlineInputBorder(
-          borderRadius: BorderRadius.circular(10),
-          borderSide: const BorderSide(
-            color: Color.fromARGB(255, 185, 181, 181),
-            width: 1.0,
-          ),
-        ),
-        focusedBorder: OutlineInputBorder(
-          borderRadius: BorderRadius.circular(10),
-          borderSide: const BorderSide(
-            color: Color.fromARGB(255, 185, 181, 181),
-            width: 1.0,
-          ),
-        ),
+       hintStyle: kSmallTitleUL,
+                filled: true,
+                fillColor: const Color(0xFFF4F7FF),
+                border: OutlineInputBorder(
+                  borderRadius: BorderRadius.circular(8),
+                  borderSide: const BorderSide(color: Color(0xFFE5ECFF)),
+                ),
+                enabledBorder: OutlineInputBorder(
+                  borderRadius: BorderRadius.circular(8),
+                  borderSide: const BorderSide(color: Color(0xFFE5ECFF)),
+                ),
+                focusedBorder: OutlineInputBorder(
+                  borderRadius: BorderRadius.circular(8),
+                  borderSide: const BorderSide(color: Color(0xFF27409A)),
+                ),
+                errorMaxLines: 2,
+                hintText: label,
+                labelStyle: const TextStyle(color: Colors.grey),
+                floatingLabelBehavior: FloatingLabelBehavior.never,
+                errorBorder: OutlineInputBorder(
+                  borderRadius: BorderRadius.circular(8),
+                  borderSide: const BorderSide(color: Color(0xFF27409A)),
+                ),
+                focusedErrorBorder: OutlineInputBorder(
+                  borderRadius: BorderRadius.circular(8),
+                  borderSide: const BorderSide(color: Color(0xFF27409A)),
+                ),
       ),
     );
   }

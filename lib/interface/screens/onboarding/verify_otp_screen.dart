@@ -103,11 +103,11 @@ class _VerifyOtpScreenState extends ConsumerState<VerifyOtpScreen> {
                       children: [
                         SvgPicture.asset(
                           'assets/svg/icons/verify_otp.svg',
-                          height: 300,
+                          height: 280,
                         ),
                         Positioned(
-                          top: 70,
-                          left: 20,
+                          top: 60,
+                          left: 15,
                           child: Image.asset(
                             'assets/gif/otp.gif',
                             width: 110,
@@ -169,7 +169,7 @@ class _VerifyOtpScreenState extends ConsumerState<VerifyOtpScreen> {
                       },
                     ),
                   ),
-                  const SizedBox(height: 24),
+                  const SizedBox(height: 14),
                   Row(
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
@@ -199,7 +199,7 @@ class _VerifyOtpScreenState extends ConsumerState<VerifyOtpScreen> {
                       ),
                     ],
                   ),
-                  const SizedBox(height: 40),
+                  const SizedBox(height: 20),
                   Padding(
                     padding: const EdgeInsets.only(bottom: 20),
                     child: GradientButton(
