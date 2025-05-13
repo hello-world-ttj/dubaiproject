@@ -1,6 +1,6 @@
 import 'package:dubaiprojectxyvin/Data/notifiers/user_notifier.dart';
 import 'package:dubaiprojectxyvin/Data/services/api_routes/user_api/user_data/user_data.dart';
-import 'package:dubaiprojectxyvin/Data/common_color.dart';
+import 'package:dubaiprojectxyvin/Data/utils/common_color.dart';
 import 'package:dubaiprojectxyvin/interface/components/loading_indicator.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
@@ -103,7 +103,7 @@ class _BlockPersonDialogState extends ConsumerState<BlockPersonDialog> {
                                 focusedBorder: OutlineInputBorder(
                                   borderRadius: BorderRadius.circular(10.0),
                                   borderSide: BorderSide(
-                                    color: CommonColor.primaryColor,
+                                    color: kPrimaryColor,
                                     width: 2.0,
                                   ),
                                 ),
@@ -154,7 +154,7 @@ class _BlockPersonDialogState extends ConsumerState<BlockPersonDialog> {
           child: const Text(
             'Cancel',
             style: TextStyle(
-              color: CommonColor.primaryColor,
+              color: kPrimaryColor,
               fontWeight: FontWeight.w600,
             ),
           ),
@@ -183,13 +183,13 @@ class _BlockPersonDialogState extends ConsumerState<BlockPersonDialog> {
             Navigator.of(context).pop();
           },
           style: ElevatedButton.styleFrom(
-            backgroundColor: CommonColor.primaryColor,
+            backgroundColor: kPrimaryColor,
             shape: RoundedRectangleBorder(
               borderRadius: BorderRadius.circular(8.0),
             ),
             padding:
                 const EdgeInsets.symmetric(horizontal: 24.0, vertical: 14.0),
-            shadowColor: CommonColor.primaryColor,
+            shadowColor: kPrimaryColor,
             elevation: 6,
           ),
           child: Text(

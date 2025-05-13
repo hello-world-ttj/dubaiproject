@@ -1,7 +1,7 @@
 import 'dart:convert';
 import 'dart:developer';
 
-import 'package:dubaiprojectxyvin/Data/globals.dart';
+import 'package:dubaiprojectxyvin/Data/utils/globals.dart';
 import 'package:dubaiprojectxyvin/Data/models/district_model.dart';
 import 'package:dubaiprojectxyvin/Data/models/level_models/level_model.dart';
 import 'package:dubaiprojectxyvin/Data/models/user_model.dart';

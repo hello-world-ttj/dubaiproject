@@ -1,5 +1,5 @@
 import 'package:app_links/app_links.dart';
-import 'package:dubaiprojectxyvin/Data/globals.dart';
+import 'package:dubaiprojectxyvin/Data/utils/globals.dart';
 import 'package:dubaiprojectxyvin/Data/models/chat_model.dart';
 import 'package:dubaiprojectxyvin/Data/services/api_routes/events_api/events_api.dart';
 import 'package:dubaiprojectxyvin/Data/services/api_routes/user_api/user_data/user_data.dart';

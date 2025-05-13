@@ -3,10 +3,10 @@ import 'dart:developer';
 import 'dart:io';
 import 'dart:ui';
 
-import 'package:dubaiprojectxyvin/Data/globals.dart';
+import 'package:dubaiprojectxyvin/Data/utils/globals.dart';
 import 'package:dubaiprojectxyvin/Data/models/activity_model.dart';
 import 'package:dubaiprojectxyvin/Data/services/snackbar_service.dart';
-import 'package:dubaiprojectxyvin/Data/common_color.dart';
+import 'package:dubaiprojectxyvin/Data/utils/common_color.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
@@ -212,7 +212,7 @@ part 'activity_api.g.dart';
 //             mainAxisSize: MainAxisSize.min,
 //             children: [
 //               CircularProgressIndicator(
-//                 valueColor: AlwaysStoppedAnimation<Color>(CommonColor.primaryColor),
+//                 valueColor: AlwaysStoppedAnimation<Color>(kPrimaryColor),
 //               ),
 //               SizedBox(height: 16),
 //               Text(
@@ -398,8 +398,7 @@ class ActivityApiService {
               mainAxisSize: MainAxisSize.min,
               children: [
                 CircularProgressIndicator(
-                  valueColor:
-                      AlwaysStoppedAnimation<Color>(CommonColor.primaryColor),
+                  valueColor: AlwaysStoppedAnimation<Color>(kPrimaryColor),
                 ),
                 SizedBox(height: 16),
                 Text(

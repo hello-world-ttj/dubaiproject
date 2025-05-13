@@ -3,9 +3,9 @@ import 'package:dubaiprojectxyvin/Data/models/review_model.dart';
 import 'package:dubaiprojectxyvin/Data/models/user_model.dart';
 import 'package:dubaiprojectxyvin/Data/services/extract_level_details.dart';
 import 'package:dubaiprojectxyvin/Data/services/navigation_service.dart';
-import 'package:dubaiprojectxyvin/interface/components/GradientButton.dart';
-import 'package:dubaiprojectxyvin/Data/common_color.dart';
-import 'package:dubaiprojectxyvin/Data/common_style.dart';
+import 'package:dubaiprojectxyvin/interface/components/buttons/GradientButton.dart';
+import 'package:dubaiprojectxyvin/Data/utils/common_color.dart';
+import 'package:dubaiprojectxyvin/Data/utils/common_style.dart';
 import 'package:dubaiprojectxyvin/interface/components/custom_widgets/glowing_animated_avatar.dart';
 import 'package:dubaiprojectxyvin/interface/components/custom_widgets/icon_container.dart';
 import 'package:flutter/material.dart';
@@ -79,7 +79,7 @@ class ProfilePreview extends ConsumerWidget {
               icon: const Icon(
                 size: 20,
                 Icons.edit,
-                color: CommonColor.primaryColor,
+                color: kPrimaryColor,
               ),
               onPressed: () {
                 NavigationService navigationService = NavigationService();
@@ -93,19 +93,15 @@ class ProfilePreview extends ConsumerWidget {
           bottom: PreferredSize(
             preferredSize: const Size(double.infinity, 0),
             child:
-                Container(width: double.infinity, height: 1, color: CommonColor.greyLight
-                
-                
-                
-                ),
+                Container(width: double.infinity, height: 1, color: kGreyLight),
           ),
-          backgroundColor: CommonColor.white,
+          backgroundColor: kWhite,
           title: const Text(
             'Preview',
             style: kSubHeadingL,
           ),
         ),
-        backgroundColor: CommonColor.white,
+        backgroundColor: kWhite,
         body: Stack(
           children: [
             SingleChildScrollView(
@@ -164,9 +160,10 @@ class ProfilePreview extends ConsumerWidget {
                                           borderWidth: 3.0,
                                         ),
                                         Text(
-                                     user.name ?? '',
-                                          style: kHeadTitleSB.copyWith(color: Colors.white,fontSize: 18),
-                                         
+                                          user.name ?? '',
+                                          style: kHeadTitleSB.copyWith(
+                                              color: Colors.white,
+                                              fontSize: 18),
                                         ),
                                         const SizedBox(height: 5),
                                         Padding(
@@ -216,25 +213,25 @@ class ProfilePreview extends ConsumerWidget {
                                                     Text(
                                                       '${levelData['stateName']} / ',
                                                       style: const TextStyle(
-                                                          color: CommonColor.white,
+                                                          color: kWhite,
                                                           fontSize: 12),
                                                     ),
                                                     Text(
                                                       '${levelData['zoneName']} / ',
                                                       style: const TextStyle(
-                                                          color: CommonColor.white,
+                                                          color: kWhite,
                                                           fontSize: 12),
                                                     ),
                                                     Text(
                                                       '${levelData['districtName']} / ',
                                                       style: const TextStyle(
-                                                          color: CommonColor.white,
+                                                          color: kWhite,
                                                           fontSize: 12),
                                                     ),
                                                     Text(
                                                       '${levelData['chapterName']} ',
                                                       style: const TextStyle(
-                                                          color: CommonColor.white,
+                                                          color: kWhite,
                                                           fontSize: 12),
                                                     ),
                                                   ],
@@ -289,7 +286,7 @@ class ProfilePreview extends ConsumerWidget {
                                                           style: kSmallerTitleB
                                                               .copyWith(
                                                                   color:
-                                                                      CommonColor.white)),
+                                                                      kWhite)),
                                                     ],
                                                   ),
                                                 ),
@@ -322,7 +319,7 @@ class ProfilePreview extends ConsumerWidget {
                             decoration: BoxDecoration(
                                 borderRadius: BorderRadius.circular(10),
                                 border: Border.all(
-                                  color: CommonColor.greyLight,
+                                  color: kGreyLight,
                                 )),
                             child: Padding(
                               padding: const EdgeInsets.all(16.0),
@@ -331,7 +328,8 @@ class ProfilePreview extends ConsumerWidget {
                                 children: [
                                   Text(
                                     'About',
-                                    style: kBodyTitleB.copyWith(color: Colors.black),
+                                    style: kBodyTitleB.copyWith(
+                                        color: Colors.black),
                                   ),
                                   SizedBox(height: 10),
                                   Row(
@@ -357,7 +355,7 @@ class ProfilePreview extends ConsumerWidget {
                           decoration: BoxDecoration(
                               borderRadius: BorderRadius.circular(10),
                               border: Border.all(
-                                color: CommonColor.greyLight,
+                                color: kGreyLight,
                               )),
                           child: Padding(
                             padding: const EdgeInsets.all(16.0),
@@ -366,7 +364,8 @@ class ProfilePreview extends ConsumerWidget {
                               children: [
                                 Text(
                                   'Contact Info',
-                                  style: kBodyTitleB.copyWith(color: Colors.black),
+                                  style:
+                                      kBodyTitleB.copyWith(color: Colors.black),
                                 ),
                                 const SizedBox(height: 15),
                                 Row(
@@ -425,14 +424,14 @@ class ProfilePreview extends ConsumerWidget {
                                     children: [
                                       Container(
                                         decoration: BoxDecoration(
-                                          color: CommonColor.greyLight,
+                                          color: kGreyLight,
                                           borderRadius:
                                               BorderRadius.circular(5),
                                         ),
                                         child: Padding(
                                           padding: const EdgeInsets.all(2.0),
                                           child: SvgPicture.asset(
-                                            color: CommonColor.primaryColor,
+                                            color: kPrimaryColor,
                                             'assets/svg/icons/whatsapp-business.svg',
                                           ),
                                         ),
@@ -487,7 +486,7 @@ class ProfilePreview extends ConsumerWidget {
                       //         child: Row(
                       //           mainAxisAlignment: MainAxisAlignment.start,
                       //           children: [
-                      //             const Icon(Icons.phone, color: CommonColor.primaryColor),
+                      //             const Icon(Icons.phone, color: kPrimaryColor),
                       //             const SizedBox(width: 10),
                       //             Text(user.company?.phone ?? ''),
                       //           ],
@@ -500,7 +499,7 @@ class ProfilePreview extends ConsumerWidget {
                       //     //     child: Row(
                       //     //       children: [
                       //     //         const Icon(Icons.location_on,
-                      //     //             color: CommonColor.primaryColor),
+                      //     //             color: kPrimaryColor),
                       //     //         const SizedBox(width: 10),
                       //     //         if (user.company?.address != null)
                       //     //           Expanded(
@@ -519,7 +518,7 @@ class ProfilePreview extends ConsumerWidget {
                             decoration: BoxDecoration(
                                 borderRadius: BorderRadius.circular(10),
                                 border: Border.all(
-                                  color: CommonColor.greyLight,
+                                  color: kGreyLight,
                                 )),
                             child: Padding(
                               padding: const EdgeInsets.all(15.0),
@@ -551,7 +550,7 @@ class ProfilePreview extends ConsumerWidget {
                             decoration: BoxDecoration(
                                 borderRadius: BorderRadius.circular(10),
                                 border: Border.all(
-                                  color: CommonColor.greyLight,
+                                  color: kGreyLight,
                                 )),
                             child: Padding(
                               padding: const EdgeInsets.all(15.0),
@@ -631,114 +630,120 @@ class ProfilePreview extends ConsumerWidget {
                         padding: const EdgeInsets.all(10.0),
                         child: Consumer(
                           builder: (context, ref, child) {
-                          final List<ReviewModel> reviews = [
-  ReviewModel(
-    id: '1',
-    toUser: 'user123',
-    reviewer: Reviewer(
-      id: 'rev001',
-      name: 'Alice Johnson',
-      image: 'https://example.com/images/alice.jpg',
-    ),
-    rating: 5,
-    comment: 'Excellent work and very professional!',
-    createdAt: DateTime.parse('2025-01-10T14:48:00.000Z'),
-    updatedAt: DateTime.parse('2025-01-12T10:15:00.000Z'),
-    version: 0,
-  ),
-  ReviewModel(
-    id: '2',
-    toUser: 'user456',
-    reviewer: Reviewer(
-      id: 'rev002',
-      name: 'Bob Smith',
-      image: 'https://example.com/images/bob.jpg',
-    ),
-    rating: 4,
-    comment: 'Good experience overall. Will recommend.',
-    createdAt: DateTime.parse('2025-01-15T09:30:00.000Z'),
-    updatedAt: DateTime.parse('2025-01-16T11:00:00.000Z'),
-    version: 0,
-  ),
-  ReviewModel(
-    id: '3',
-    toUser: 'user789',
-    reviewer: Reviewer(
-      id: 'rev003',
-      name: 'Carol Danvers',
-      image: 'https://example.com/images/carol.jpg',
-    ),
-    rating: 3,
-    comment: 'Average service. There’s room for improvement.',
-    createdAt: DateTime.parse('2025-02-01T17:45:00.000Z'),
-    updatedAt: DateTime.parse('2025-02-02T08:10:00.000Z'),
-    version: 0,
-  ),
-];
+                            final List<ReviewModel> reviews = [
+                              ReviewModel(
+                                id: '1',
+                                toUser: 'user123',
+                                reviewer: Reviewer(
+                                  id: 'rev001',
+                                  name: 'Alice Johnson',
+                                  image: 'https://example.com/images/alice.jpg',
+                                ),
+                                rating: 5,
+                                comment:
+                                    'Excellent work and very professional!',
+                                createdAt:
+                                    DateTime.parse('2025-01-10T14:48:00.000Z'),
+                                updatedAt:
+                                    DateTime.parse('2025-01-12T10:15:00.000Z'),
+                                version: 0,
+                              ),
+                              ReviewModel(
+                                id: '2',
+                                toUser: 'user456',
+                                reviewer: Reviewer(
+                                  id: 'rev002',
+                                  name: 'Bob Smith',
+                                  image: 'https://example.com/images/bob.jpg',
+                                ),
+                                rating: 4,
+                                comment:
+                                    'Good experience overall. Will recommend.',
+                                createdAt:
+                                    DateTime.parse('2025-01-15T09:30:00.000Z'),
+                                updatedAt:
+                                    DateTime.parse('2025-01-16T11:00:00.000Z'),
+                                version: 0,
+                              ),
+                              ReviewModel(
+                                id: '3',
+                                toUser: 'user789',
+                                reviewer: Reviewer(
+                                  id: 'rev003',
+                                  name: 'Carol Danvers',
+                                  image: 'https://example.com/images/carol.jpg',
+                                ),
+                                rating: 3,
+                                comment:
+                                    'Average service. There’s room for improvement.',
+                                createdAt:
+                                    DateTime.parse('2025-02-01T17:45:00.000Z'),
+                                updatedAt:
+                                    DateTime.parse('2025-02-02T08:10:00.000Z'),
+                                version: 0,
+                              ),
+                            ];
 
-                  
-                                return Column(
-                                  children: [
-                                    ReviewBarChart(
-                                      reviews: reviews ?? [],
-                                    ),
-                                    if (reviews.isNotEmpty)
-                                      ListView.builder(
-                                        shrinkWrap: true,
-                                        physics: NeverScrollableScrollPhysics(),
-                                        itemCount: reviewsToShow,
-                                        itemBuilder: (context, index) {
-                                          final ratingDistribution =
-                                              getRatingDistribution(reviews);
-                                          final averageRating =
-                                              getAverageRating(reviews);
-                                          final totalReviews = reviews.length;
-                                          return ReviewsCard(
-                                            review: reviews[index],
-                                            ratingDistribution:
-                                                ratingDistribution,
-                                            averageRating: averageRating,
-                                            totalReviews: totalReviews,
-                                          );
-                                        },
-                                      ),
-                                    if (reviewsToShow < reviews.length)
-                                      TextButton(
-                                        onPressed: () {
-                                          ref
-                                              .read(reviewsProvider.notifier)
-                                              .showMoreReviews(reviews.length);
-                                        },
-                                        child: Text('View More'),
-                                      ),
-                                    // Padding(
-                                    //   padding: const EdgeInsets.symmetric(
-                                    //       horizontal: 5, vertical: 16),
-                                    //   child: GradientButton(
-                              
-                                    //       title: 'Write a Review',
-                                    //       onPressed: () {
-                                    //         showModalBottomSheet(
-                                    //           context: context,
-                                    //           isScrollControlled: true,
-                                    //           shape:
-                                    //               const RoundedRectangleBorder(
-                                    //             borderRadius:
-                                    //                 BorderRadius.vertical(
-                                    //                     top: Radius.circular(
-                                    //                         20)),
-                                    //           ),
-                                    //           builder: (context) =>
-                                    //               ShowWriteReviewSheet(
-                                    //             userId: user.uid!,
-                                    //           ),
-                                    //         );
-                                    //       },
-                                    //       fontSize: 15),
-                                    // ),
-                                  ],
-                                );
-                            
+                            return Column(
+                              children: [
+                                ReviewBarChart(
+                                  reviews: reviews ?? [],
+                                ),
+                                if (reviews.isNotEmpty)
+                                  ListView.builder(
+                                    shrinkWrap: true,
+                                    physics: NeverScrollableScrollPhysics(),
+                                    itemCount: reviewsToShow,
+                                    itemBuilder: (context, index) {
+                                      final ratingDistribution =
+                                          getRatingDistribution(reviews);
+                                      final averageRating =
+                                          getAverageRating(reviews);
+                                      final totalReviews = reviews.length;
+                                      return ReviewsCard(
+                                        review: reviews[index],
+                                        ratingDistribution: ratingDistribution,
+                                        averageRating: averageRating,
+                                        totalReviews: totalReviews,
+                                      );
+                                    },
+                                  ),
+                                if (reviewsToShow < reviews.length)
+                                  TextButton(
+                                    onPressed: () {
+                                      ref
+                                          .read(reviewsProvider.notifier)
+                                          .showMoreReviews(reviews.length);
+                                    },
+                                    child: Text('View More'),
+                                  ),
+                                // Padding(
+                                //   padding: const EdgeInsets.symmetric(
+                                //       horizontal: 5, vertical: 16),
+                                //   child: GradientButton(
+
+                                //       title: 'Write a Review',
+                                //       onPressed: () {
+                                //         showModalBottomSheet(
+                                //           context: context,
+                                //           isScrollControlled: true,
+                                //           shape:
+                                //               const RoundedRectangleBorder(
+                                //             borderRadius:
+                                //                 BorderRadius.vertical(
+                                //                     top: Radius.circular(
+                                //                         20)),
+                                //           ),
+                                //           builder: (context) =>
+                                //               ShowWriteReviewSheet(
+                                //             userId: user.uid!,
+                                //           ),
+                                //         );
+                                //       },
+                                //       fontSize: 15),
+                                // ),
+                              ],
+                            );
                           },
                         ),
                       ),
@@ -753,7 +758,8 @@ class ProfilePreview extends ConsumerWidget {
                               padding:
                                   const EdgeInsets.only(left: 10, bottom: 8),
                               child: Text('Certificates',
-                                  style: kBodyTitleB.copyWith(color: Colors.black)),
+                                  style: kBodyTitleB.copyWith(
+                                      color: Colors.black)),
                             ),
                             SizedBox(
                               height: 10,
@@ -785,7 +791,8 @@ class ProfilePreview extends ConsumerWidget {
                               padding: EdgeInsets.only(bottom: 8, left: 10),
                               child: Text(
                                 'Awards',
-                                style: kBodyTitleB.copyWith(color: Colors.black),
+                                style:
+                                    kBodyTitleB.copyWith(color: Colors.black),
                               ),
                             ),
                             SizedBox(
@@ -950,7 +957,7 @@ class ProfilePreview extends ConsumerWidget {
         child: Container(
             width: double.infinity,
             decoration: BoxDecoration(
-              color: CommonColor.white,
+              color: kWhite,
               boxShadow: [
                 BoxShadow(
                   color: Colors.grey.withOpacity(0.3),
@@ -959,7 +966,7 @@ class ProfilePreview extends ConsumerWidget {
                   offset: Offset(1, 1),
                 ),
               ],
-              border: Border.all(color: CommonColor.greyLight),
+              border: Border.all(color: kGreyLight),
               borderRadius: BorderRadius.circular(10),
             ),
             child: Padding(
@@ -973,9 +980,9 @@ class ProfilePreview extends ConsumerWidget {
                         alignment: Alignment.topCenter,
                         widthFactor: 1.0,
                         child: isWebsite
-                            ? Icon(Icons.language, color: CommonColor.primaryColor)
+                            ? Icon(Icons.language, color: kPrimaryColor)
                             : SvgPicture.asset(svgIcons[index],
-                                color: CommonColor.primaryColor)),
+                                color: kPrimaryColor)),
                   ),
                   Padding(
                       padding: const EdgeInsets.symmetric(

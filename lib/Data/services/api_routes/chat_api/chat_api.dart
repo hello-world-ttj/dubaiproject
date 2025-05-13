@@ -2,7 +2,7 @@ import 'dart:async';
 import 'dart:convert';
 import 'dart:developer';
 
-import 'package:dubaiprojectxyvin/Data/globals.dart';
+import 'package:dubaiprojectxyvin/Data/utils/globals.dart';
 import 'package:dubaiprojectxyvin/Data/models/chat_model.dart';
 import 'package:dubaiprojectxyvin/Data/models/msg_model.dart';
 import 'package:flutter/material.dart';

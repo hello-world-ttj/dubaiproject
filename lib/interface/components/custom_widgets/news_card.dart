@@ -1,5 +1,5 @@
-import 'package:dubaiprojectxyvin/Data/common_color.dart';
-import 'package:dubaiprojectxyvin/Data/common_style.dart';
+import 'package:dubaiprojectxyvin/Data/utils/common_color.dart';
+import 'package:dubaiprojectxyvin/Data/utils/common_style.dart';
 import 'package:flutter/material.dart';
 
 import 'package:shimmer/shimmer.dart';
@@ -12,7 +12,7 @@ Widget newsCard({
   return GestureDetector(
     onTap: onTap,
     child: Card(
-      color: CommonColor.white,
+      color: kWhite,
       shape: RoundedRectangleBorder(
         borderRadius: BorderRadius.circular(12),
       ),

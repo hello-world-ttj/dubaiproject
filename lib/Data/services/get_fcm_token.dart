@@ -1,4 +1,4 @@
-import 'package:dubaiprojectxyvin/Data/globals.dart';
+import 'package:dubaiprojectxyvin/Data/utils/globals.dart';
 import 'package:firebase_messaging/firebase_messaging.dart';
 
 Future<void> getToken() async {

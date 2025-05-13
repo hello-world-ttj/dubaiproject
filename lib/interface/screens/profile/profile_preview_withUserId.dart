@@ -56,7 +56,7 @@
 //                   icon: const Icon(
 //                     size: 20,
 //                     Icons.edit,
-//                     color: CommonColor.primaryColor,
+//                     color: kPrimaryColor,
 //                   ),
 //                   onPressed: () {
 //                     NavigationService navigationService = NavigationService();
@@ -70,15 +70,15 @@
 //               bottom: PreferredSize(
 //                 preferredSize: const Size(double.infinity, 0),
 //                 child: Container(
-//                     width: double.infinity, height: 1, color: CommonColor.greyLight),
+//                     width: double.infinity, height: 1, color: kGreyLight),
 //               ),
-//               backgroundColor: CommonColor.white,,
+//               backgroundColor: kWhite,,
 //               title: const Text(
 //                 'Preview',
 //                 style: kSubHeadingL,
 //               ),
 //             ),
-//             backgroundColor: CommonColor.white,,
+//             backgroundColor: kWhite,,
 //             body: asyncUser.when(
 //               data: (user) {
 //                 final designations = user.company!
@@ -233,7 +233,7 @@
 //                                                               style:
 //                                                                   const TextStyle(
 //                                                                       color:
-//                                                                           CommonColor.white,,
+//                                                                           kWhite,,
 //                                                                       fontSize:
 //                                                                           12),
 //                                                             ),
@@ -242,7 +242,7 @@
 //                                                               style:
 //                                                                   const TextStyle(
 //                                                                       color:
-//                                                                           CommonColor.white,,
+//                                                                           kWhite,,
 //                                                                       fontSize:
 //                                                                           12),
 //                                                             ),
@@ -251,7 +251,7 @@
 //                                                               style:
 //                                                                   const TextStyle(
 //                                                                       color:
-//                                                                           CommonColor.white,,
+//                                                                           kWhite,,
 //                                                                       fontSize:
 //                                                                           12),
 //                                                             ),
@@ -260,7 +260,7 @@
 //                                                               style:
 //                                                                   const TextStyle(
 //                                                                       color:
-//                                                                           CommonColor.white,,
+//                                                                           kWhite,,
 //                                                                       fontSize:
 //                                                                           12),
 //                                                             ),
@@ -324,7 +324,7 @@
 //                                                                   style: kSmallerTitleB
 //                                                                       .copyWith(
 //                                                                           color:
-//                                                                               CommonColor.primaryColor)),
+//                                                                               kPrimaryColor)),
 //                                                             ],
 //                                                           ),
 //                                                         ),
@@ -357,7 +357,7 @@
 //                                     decoration: BoxDecoration(
 //                                         borderRadius: BorderRadius.circular(10),
 //                                         border: Border.all(
-//                                           color: CommonColor.greyLight,
+//                                           color: kGreyLight,
 //                                         )),
 //                                     child: Padding(
 //                                       padding: const EdgeInsets.all(16.0),
@@ -394,7 +394,7 @@
 //                                   decoration: BoxDecoration(
 //                                       borderRadius: BorderRadius.circular(10),
 //                                       border: Border.all(
-//                                         color: CommonColor.greyLight,
+//                                         color: kGreyLight,
 //                                       )),
 //                                   child: Padding(
 //                                     padding: const EdgeInsets.all(16.0),
@@ -476,7 +476,7 @@
 //                                             children: [
 //                                               Container(
 //                                                 decoration: BoxDecoration(
-//                                                   color: CommonColor.greyLight,
+//                                                   color: kGreyLight,
 //                                                   borderRadius:
 //                                                       BorderRadius.circular(5),
 //                                                 ),
@@ -484,7 +484,7 @@
 //                                                   padding:
 //                                                       const EdgeInsets.all(2.0),
 //                                                   child: SvgPicture.asset(
-//                                                     color: CommonColor.primaryColor,
+//                                                     color: kPrimaryColor,
 //                                                     'assets/svg/icons/whatsapp-business.svg',
 //                                                   ),
 //                                                 ),
@@ -565,7 +565,7 @@
 //                               //         child: Row(
 //                               //           mainAxisAlignment: MainAxisAlignment.start,
 //                               //           children: [
-//                               //             const Icon(Icons.phone, color: CommonColor.primaryColor),
+//                               //             const Icon(Icons.phone, color: kPrimaryColor),
 //                               //             const SizedBox(width: 10),
 //                               //             Text(user.company?.phone ?? ''),
 //                               //           ],
@@ -578,7 +578,7 @@
 //                               //     //     child: Row(
 //                               //     //       children: [
 //                               //     //         const Icon(Icons.location_on,
-//                               //     //             color: CommonColor.primaryColor),
+//                               //     //             color: kPrimaryColor),
 //                               //     //         const SizedBox(width: 10),
 //                               //     //         if (user.company?.address != null)
 //                               //     //           Expanded(
@@ -597,7 +597,7 @@
 //                                     decoration: BoxDecoration(
 //                                         borderRadius: BorderRadius.circular(10),
 //                                         border: Border.all(
-//                                           color: CommonColor.greyLight,
+//                                           color: kGreyLight,
 //                                         )),
 //                                     child: Padding(
 //                                       padding: const EdgeInsets.all(15.0),
@@ -629,7 +629,7 @@
 //                                     decoration: BoxDecoration(
 //                                         borderRadius: BorderRadius.circular(10),
 //                                         border: Border.all(
-//                                           color: CommonColor.greyLight,
+//                                           color: kGreyLight,
 //                                         )),
 //                                     child: Padding(
 //                                       padding: const EdgeInsets.all(15.0),
@@ -990,7 +990,7 @@
 //         child: Container(
 //             width: double.infinity,
 //             decoration: BoxDecoration(
-//               color: CommonColor.white,,
+//               color: kWhite,,
 //               boxShadow: [
 //                 BoxShadow(
 //                   color: Colors.grey.withOpacity(0.3),
@@ -999,7 +999,7 @@
 //                   offset: Offset(1, 1),
 //                 ),
 //               ],
-//               border: Border.all(color: CommonColor.greyLight),
+//               border: Border.all(color: kGreyLight),
 //               borderRadius: BorderRadius.circular(10),
 //             ),
 //             child: Padding(
@@ -1013,9 +1013,9 @@
 //                         alignment: Alignment.topCenter,
 //                         widthFactor: 1.0,
 //                         child: isWebsite
-//                             ? Icon(Icons.language, color: CommonColor.primaryColor)
+//                             ? Icon(Icons.language, color: kPrimaryColor)
 //                             : SvgPicture.asset(svgIcons[index],
-//                                 color: CommonColor.primaryColor)),
+//                                 color: kPrimaryColor)),
 //                   ),
 //                   Padding(
 //                       padding: const EdgeInsets.symmetric(

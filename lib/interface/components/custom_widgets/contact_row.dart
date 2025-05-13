@@ -1,5 +1,4 @@
-
-import 'package:dubaiprojectxyvin/Data/common_color.dart';
+import 'package:dubaiprojectxyvin/Data/utils/common_color.dart';
 import 'package:dubaiprojectxyvin/interface/components/custom_widgets/icon_container.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
@@ -20,7 +19,7 @@ class ContactRow extends StatelessWidget {
       children: [
         CustomIconContainer(
           icon: icon,
-          backgroundColor: CommonColor.white,
+          backgroundColor: kWhite,
         ),
         const SizedBox(width: 10),
         Expanded(

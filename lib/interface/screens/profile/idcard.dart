@@ -1,8 +1,8 @@
 import 'package:dubaiprojectxyvin/Data/models/user_model.dart';
 import 'package:dubaiprojectxyvin/Data/services/extract_level_details.dart';
-import 'package:dubaiprojectxyvin/interface/components/GradientButton.dart';
-import 'package:dubaiprojectxyvin/Data/common_color.dart';
-import 'package:dubaiprojectxyvin/Data/common_style.dart';
+import 'package:dubaiprojectxyvin/Data/utils/common_style.dart';
+import 'package:dubaiprojectxyvin/interface/components/buttons/GradientButton.dart';
+import 'package:dubaiprojectxyvin/Data/utils/common_color.dart';
 import 'package:dubaiprojectxyvin/interface/components/custom_widgets/glowing_animated_avatar.dart';
 import 'package:dubaiprojectxyvin/interface/components/custom_widgets/icon_container.dart';
 import 'package:flutter/material.dart';
@@ -52,9 +52,9 @@ class IDCardScreen extends ConsumerWidget {
               bottom: PreferredSize(
                 preferredSize: const Size(double.infinity, 0),
                 child: Container(
-                    width: double.infinity, height: 1, color: CommonColor.greyLight),
+                    width: double.infinity, height: 1, color: kGreyLight),
               ),
-              backgroundColor: CommonColor.white,
+              backgroundColor: kWhite,
               title: const Text(
                 'Preview',
                 style: kSmallTitleR,
@@ -131,7 +131,8 @@ class IDCardScreen extends ConsumerWidget {
                                     const SizedBox(height: 12),
                                     Text(user.name ?? '',
                                         style: kLargeTitleB.copyWith(
-                                            color: CommonColor.white,),
+                                          color: kWhite,
+                                        ),
                                         textAlign: TextAlign.center),
                                     // Use AnimatedSize to create smooth transition for content
                                     AnimatedSize(
@@ -188,28 +189,28 @@ class IDCardScreen extends ConsumerWidget {
                                                           '${levelData['stateName']} / ',
                                                           style:
                                                               const TextStyle(
-                                                                  color: CommonColor.white,
+                                                                  color: kWhite,
                                                                   fontSize:
                                                                       12)),
                                                       Text(
                                                           '${levelData['zoneName']} / ',
                                                           style:
                                                               const TextStyle(
-                                                                  color: CommonColor.white,
+                                                                  color: kWhite,
                                                                   fontSize:
                                                                       12)),
                                                       Text(
                                                           '${levelData['districtName']} / ',
                                                           style:
                                                               const TextStyle(
-                                                                  color: CommonColor.white,
+                                                                  color: kWhite,
                                                                   fontSize:
                                                                       12)),
                                                       Text(
                                                           '${levelData['chapterName']}',
                                                           style:
                                                               const TextStyle(
-                                                                  color: CommonColor.white,
+                                                                  color: kWhite,
                                                                   fontSize:
                                                                       12)),
                                                     ],
@@ -256,10 +257,12 @@ class IDCardScreen extends ConsumerWidget {
                                                                 width: 10),
                                                             Text(
                                                                 'Member ID: ${user.memberId}',
-                                                                style: kSmallerTitleB
-                                                                    .copyWith(
-                                                                        color:
-                                                                            CommonColor.primaryColor,)),
+                                                                style:
+                                                                    kSmallerTitleB
+                                                                        .copyWith(
+                                                                  color: 
+                                                                      kPrimaryColor,
+                                                                )),
                                                           ],
                                                         ),
                                                       ),
@@ -383,8 +386,6 @@ class IDCardScreen extends ConsumerWidget {
                     ),
                   ),
                 ),
-
-    
                 Positioned(
                   bottom: 0,
                   left: 0,
@@ -416,7 +417,6 @@ class IDCardScreen extends ConsumerWidget {
                               children: [
                                 Flexible(
                                   child: GradientButton(
-                               
                                       title: 'Share',
                                       onPressed: () async {
                                         // captureAndShareOrDownloadWidgetScreenshot(
@@ -428,7 +428,6 @@ class IDCardScreen extends ConsumerWidget {
                                 ),
                                 Flexible(
                                   child: GradientButton(
-                
                                       title: 'Download QR',
                                       onPressed: () async {
                                         // captureAndShareOrDownloadWidgetScreenshot(
@@ -467,7 +466,7 @@ class ContactRow extends StatelessWidget {
       children: [
         CustomIconContainer(
           icon: icon,
-          backgroundColor: CommonColor.white,
+          backgroundColor: kWhite,
         ),
         const SizedBox(width: 10),
         Expanded(

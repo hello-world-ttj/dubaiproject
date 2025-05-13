@@ -1,5 +1,5 @@
-import 'package:dubaiprojectxyvin/Data/common_color.dart';
-import 'package:dubaiprojectxyvin/interface/components/GradientButton.dart';
+import 'package:dubaiprojectxyvin/Data/utils/common_color.dart';
+import 'package:dubaiprojectxyvin/interface/components/buttons/GradientButton.dart';
 import 'package:flutter/material.dart';
 
 class WelcomeScreen extends StatelessWidget {
@@ -9,7 +9,7 @@ class WelcomeScreen extends StatelessWidget {
     final screenHeight = MediaQuery.of(context).size.height;
 
     return Container(
-      decoration: const BoxDecoration(gradient: CommonColor.scaffoldGradient),
+      decoration: const BoxDecoration(gradient: scaffoldGradient),
       child: Scaffold(
         backgroundColor: Colors.transparent,
         body: Column(
@@ -26,7 +26,7 @@ class WelcomeScreen extends StatelessWidget {
                       const Text(
                         'WELCOME TO',
                         style: TextStyle(
-                          color: CommonColor.greyText,
+                          color: primaryText,
                           fontFamily: 'Manrope',
                           fontWeight: FontWeight.w400,
                           fontSize: 12,

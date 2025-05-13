@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-import '../../components/GradientButton.dart';
+import '../../components/buttons/GradientButton.dart';
 import '../../components/common_divider.dart';
 
 class Payment2Screen extends StatelessWidget {

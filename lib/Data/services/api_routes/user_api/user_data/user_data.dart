@@ -1,6 +1,6 @@
 import 'dart:convert';
 import 'dart:developer';
-import 'package:dubaiprojectxyvin/Data/globals.dart';
+import 'package:dubaiprojectxyvin/Data/utils/globals.dart';
 import 'package:dubaiprojectxyvin/Data/models/dashboard_model.dart';
 import 'package:dubaiprojectxyvin/Data/models/payment_year_model.dart';
 import 'package:dubaiprojectxyvin/Data/models/subscription_model.dart';

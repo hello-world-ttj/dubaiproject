@@ -3,8 +3,8 @@ import 'dart:developer';
 import 'package:dubaiprojectxyvin/Data/models/user_model.dart';
 import 'package:dubaiprojectxyvin/Data/services/extract_level_details.dart';
 import 'package:dubaiprojectxyvin/Data/services/navigation_service.dart';
-import 'package:dubaiprojectxyvin/Data/common_color.dart';
-import 'package:dubaiprojectxyvin/Data/common_style.dart';
+import 'package:dubaiprojectxyvin/Data/utils/common_color.dart';
+import 'package:dubaiprojectxyvin/Data/utils/common_style.dart';
 import 'package:dubaiprojectxyvin/interface/components/custom_widgets/contact_row.dart';
 import 'package:dubaiprojectxyvin/interface/components/custom_widgets/glowing_animated_avatar.dart';
 import 'package:flutter/material.dart';
@@ -39,16 +39,16 @@ class ProfilePage extends ConsumerWidget {
         centerTitle: true,
         bottom: PreferredSize(
           preferredSize: Size(double.infinity, 0),
-          child: Container(
-              width: double.infinity, height: 1, color: CommonColor.greyLight),
+          child:
+              Container(width: double.infinity, height: 1, color: kGreyLight),
         ),
-        backgroundColor: CommonColor.white,
+        backgroundColor: kWhite,
         title: Text(
           'Profile',
           style: kSubHeadingL,
         ),
       ),
-      backgroundColor: CommonColor.lightBlueBackground,
+      backgroundColor: kPrimaryLightColor,
       body: Container(
         decoration: const BoxDecoration(),
         child: SafeArea(
@@ -107,7 +107,7 @@ class ProfilePage extends ConsumerWidget {
                                           child: IconButton(
                                             icon: Icon(
                                               Icons.remove_red_eye,
-                                              color: CommonColor.primaryColor,
+                                              color: kPrimaryColor,
                                             ),
                                             onPressed: () {
                                               navigationService.pushNamed(
@@ -137,7 +137,7 @@ class ProfilePage extends ConsumerWidget {
                                             Text(
                                               user.name ?? '',
                                               style: kHeadTitleSB.copyWith(
-                                                  color: CommonColor.white),
+                                                  color: kWhite),
                                             ),
                                             const SizedBox(height: 5),
                                             Column(
@@ -189,29 +189,25 @@ class ProfilePage extends ConsumerWidget {
                                                       Text(
                                                         '${levelData['stateName']} / ',
                                                         style: const TextStyle(
-                                                            color: CommonColor
-                                                                .white,
+                                                            color: kWhite,
                                                             fontSize: 12),
                                                       ),
                                                       Text(
                                                         '${levelData['zoneName']} / ',
                                                         style: const TextStyle(
-                                                            color: CommonColor
-                                                                .white,
+                                                            color: kWhite,
                                                             fontSize: 12),
                                                       ),
                                                       Text(
                                                         '${levelData['districtName']} / ',
                                                         style: const TextStyle(
-                                                            color: CommonColor
-                                                                .white,
+                                                            color: kWhite,
                                                             fontSize: 12),
                                                       ),
                                                       Text(
                                                         '${levelData['chapterName']} ',
                                                         style: const TextStyle(
-                                                            color: CommonColor
-                                                                .white,
+                                                            color: kWhite,
                                                             fontSize: 12),
                                                       ),
                                                     ],
@@ -265,8 +261,8 @@ class ProfilePage extends ConsumerWidget {
                                                             'Member ID: ${user.memberId}',
                                                             style: kSmallerTitleB
                                                                 .copyWith(
-                                                                    color: CommonColor
-                                                                        .primaryColor)),
+                                                                    color: kPrimaryColor
+                                                                        )),
                                                       ],
                                                     ),
                                                   ),
@@ -361,13 +357,13 @@ class ProfilePage extends ConsumerWidget {
                           // captureAndShareOrDownloadWidgetScreenshot(context);
                         },
                         child: SvgPicture.asset(
-                            color: CommonColor.primaryColor,
+                            color: kPrimaryColor,
                             'assets/svg/icons/shareButton.svg'),
                         // child: Container(
                         //   width: 90,
                         //   height: 90,
                         //   decoration: BoxDecoration(
-                        //     color: CommonColor.primaryColor,
+                        //     color: kPrimaryColor,
                         //     borderRadius: BorderRadius.circular(
                         //         50), // Apply circular border to the outer container
                         //   ),
@@ -376,7 +372,7 @@ class ProfilePage extends ConsumerWidget {
                         //     child: Container(
                         //       decoration: BoxDecoration(
                         //         borderRadius: BorderRadius.circular(50),
-                        //         color: CommonColor.primaryColor,
+                        //         color: kPrimaryColor,
                         //       ),
                         //       child: Icon(
                         //         Icons.share,
@@ -394,7 +390,7 @@ class ProfilePage extends ConsumerWidget {
                           },
                           child: SvgPicture.asset(
                             'assets/svg/icons/qrButton.svg',
-                            color: CommonColor.primaryColor,
+                            color: kPrimaryColor,
                           )
                           // Container(
                           //   width: 90,

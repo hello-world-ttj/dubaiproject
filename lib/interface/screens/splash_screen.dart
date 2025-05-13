@@ -1,7 +1,7 @@
 import 'dart:async';
 import 'dart:convert';
 import 'dart:developer';
-import 'package:dubaiprojectxyvin/Data/globals.dart';
+import 'package:dubaiprojectxyvin/Data/utils/globals.dart';
 import 'package:dubaiprojectxyvin/Data/models/app_version_model.dart';
 import 'package:dubaiprojectxyvin/Data/models/user_model.dart';
 import 'package:dubaiprojectxyvin/Data/notifiers/user_notifier.dart';
@@ -10,7 +10,7 @@ import 'package:dubaiprojectxyvin/Data/services/get_fcm_token.dart';
 import 'package:dubaiprojectxyvin/Data/services/launch_url.dart';
 import 'package:dubaiprojectxyvin/Data/services/navigation_service.dart';
 import 'package:dubaiprojectxyvin/Data/utils/secure_storage.dart';
-import 'package:dubaiprojectxyvin/Data/common_color.dart';
+import 'package:dubaiprojectxyvin/Data/utils/common_color.dart';
 import 'package:http/http.dart' as http;
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
@@ -178,7 +178,7 @@ class _SplashScreenState extends ConsumerState<SplashScreen> {
   @override
   Widget build(BuildContext context) {
     return Container(
-      decoration: const BoxDecoration(gradient: CommonColor.scaffoldGradient),
+      decoration: const BoxDecoration(gradient: scaffoldGradient),
       child: Scaffold(
         backgroundColor: Colors.transparent,
         body: Stack(

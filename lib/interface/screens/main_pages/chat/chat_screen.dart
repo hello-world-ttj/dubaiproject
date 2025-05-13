@@ -2,7 +2,7 @@ import 'package:dubaiprojectxyvin/Data/models/chat_model.dart';
 import 'package:dubaiprojectxyvin/Data/models/msg_model.dart';
 import 'package:dubaiprojectxyvin/Data/notifiers/user_notifier.dart';
 import 'package:dubaiprojectxyvin/Data/services/api_routes/chat_api/chat_api.dart';
-import 'package:dubaiprojectxyvin/Data/common_color.dart';
+import 'package:dubaiprojectxyvin/Data/utils/common_color.dart';
 import 'package:dubaiprojectxyvin/interface/components/dialogs/blockPersonDialog.dart';
 import 'package:dubaiprojectxyvin/interface/components/dialogs/report_dialog.dart';
 import 'package:dubaiprojectxyvin/interface/components/own_message_card.dart';
@@ -40,7 +40,8 @@ class _IndividualPageState extends ConsumerState<IndividualPage> {
   }
 
   void getMessageHistory() async {
-    final messagesette = await ChatApiService. getChatBetweenUsers(widget.receiver.id!);
+    final messagesette =
+        await ChatApiService.getChatBetweenUsers(widget.receiver.id!);
     if (mounted) {
       setState(() {
         messages.addAll(messagesette);
@@ -79,7 +80,7 @@ class _IndividualPageState extends ConsumerState<IndividualPage> {
 
   void sendMessage() {
     if (_controller.text.isNotEmpty && mounted) {
- ChatApiService.     sendChatMessage(
+      ChatApiService.sendChatMessage(
         Id: widget.receiver.id!,
         content: _controller.text,
       );
@@ -157,8 +158,7 @@ class _IndividualPageState extends ConsumerState<IndividualPage> {
                           value: 'report',
                           child: Row(
                             children: [
-                              Icon(Icons.report,
-                                  color: CommonColor.primaryColor),
+                              Icon(Icons.report, color: kPrimaryColor),
                               SizedBox(width: 8),
                               Text('Report'),
                             ],
@@ -337,7 +337,7 @@ class _IndividualPageState extends ConsumerState<IndividualPage> {
                               vertical: 20,
                             ),
                             decoration: const BoxDecoration(
-                              color: CommonColor.primaryColor,
+                              color: kPrimaryColor,
                               boxShadow: [
                                 BoxShadow(
                                   color: Colors.black26,
@@ -370,7 +370,7 @@ class _IndividualPageState extends ConsumerState<IndividualPage> {
                             child: Container(
                               padding: const EdgeInsets.symmetric(
                                   horizontal: 8.0, vertical: 12.0),
-                              color: CommonColor.lightBlueBackground,
+                              color: kPrimaryLightColor,
                               child: Row(
                                 children: [
                                   Expanded(
@@ -430,7 +430,7 @@ class _IndividualPageState extends ConsumerState<IndividualPage> {
                                     ),
                                     child: Container(
                                       decoration: BoxDecoration(
-                                          color: CommonColor.primaryColor,
+                                          color: kPrimaryColor,
                                           borderRadius:
                                               BorderRadius.circular(5)),
                                       child: IconButton(

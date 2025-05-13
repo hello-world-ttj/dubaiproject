@@ -1,6 +1,6 @@
 import 'dart:convert';
 
-import 'package:dubaiprojectxyvin/Data/globals.dart';
+import 'package:dubaiprojectxyvin/Data/utils/globals.dart';
 import 'package:http/http.dart' as http;
 
 Future<void> likeFeed(String feedId) async {

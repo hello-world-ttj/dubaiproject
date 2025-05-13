@@ -5,7 +5,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:http/http.dart' as http;
 import 'package:riverpod_annotation/riverpod_annotation.dart';
 
-import '../../../globals.dart';
+import '../../../utils/globals.dart';
 
 part 'people_api.g.dart';
 

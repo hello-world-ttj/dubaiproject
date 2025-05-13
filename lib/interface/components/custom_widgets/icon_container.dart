@@ -1,4 +1,4 @@
-import 'package:dubaiprojectxyvin/Data/common_color.dart';
+import 'package:dubaiprojectxyvin/Data/utils/common_color.dart';
 import 'package:flutter/material.dart';
 
 class CustomIconContainer extends StatelessWidget {
@@ -11,8 +11,8 @@ class CustomIconContainer extends StatelessWidget {
   const CustomIconContainer({
     Key? key,
     required this.icon,
-    this.iconColor = CommonColor.primaryColor,
-    this.backgroundColor = CommonColor.greyLight,
+    this.iconColor = kPrimaryColor,
+    this.backgroundColor = kGreyLight,
     this.padding = 2.0,
     this.borderRadius = 5.0,
   }) : super(key: key);

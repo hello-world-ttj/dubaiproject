@@ -1,11 +1,11 @@
-import 'package:dubaiprojectxyvin/Data/globals.dart';
+import 'package:dubaiprojectxyvin/Data/utils/common_style.dart';
+import 'package:dubaiprojectxyvin/Data/utils/globals.dart';
 import 'package:dubaiprojectxyvin/Data/models/chat_model.dart';
 import 'package:dubaiprojectxyvin/Data/notifiers/people_notifier.dart';
 import 'package:dubaiprojectxyvin/Data/services/api_routes/chat_api/chat_api.dart';
 import 'package:dubaiprojectxyvin/Data/services/api_routes/user_api/user_data/user_data.dart';
-import 'package:dubaiprojectxyvin/interface/components/GradientButton.dart';
-import 'package:dubaiprojectxyvin/Data/common_color.dart';
-import 'package:dubaiprojectxyvin/Data/common_style.dart';
+import 'package:dubaiprojectxyvin/interface/components/buttons/GradientButton.dart';
+import 'package:dubaiprojectxyvin/Data/utils/common_color.dart';
 import 'package:dubaiprojectxyvin/interface/components/loading_indicator.dart';
 import 'package:dubaiprojectxyvin/interface/screens/main_pages/chat/chat_screen.dart';
 import 'package:dubaiprojectxyvin/interface/screens/profile/profile_preview.dart';
@@ -691,7 +691,7 @@ class _MembersPageState extends ConsumerState<MembersPage> {
                             ),
                             subtitle: Text('${user.chapter?.name ?? ''}',
                                 style:
-                                    kSmallerTitleB.copyWith(color: CommonColor.GreyDark)),
+                                    kSmallerTitleB.copyWith(color: kGreyDark)),
                             trailing: SizedBox(
                               width: 40,
                               height: 40,

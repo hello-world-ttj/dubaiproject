@@ -3,7 +3,7 @@ import 'dart:developer';
 import 'package:dubaiprojectxyvin/Data/models/user_model.dart';
 import 'package:dubaiprojectxyvin/Data/services/api_routes/user_api/user_data/user_data.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import '../globals.dart';
+import '../utils/globals.dart';
 
 class UserNotifier extends StateNotifier<AsyncValue<UserModel>> {
   final StateNotifierProviderRef<UserNotifier, AsyncValue<UserModel>> ref;

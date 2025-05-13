@@ -1,7 +1,7 @@
 import 'package:dubaiprojectxyvin/Data/services/navigation_service.dart';
-import 'package:dubaiprojectxyvin/interface/components/GradientButton.dart';
-import 'package:dubaiprojectxyvin/Data/common_color.dart';
-import 'package:dubaiprojectxyvin/Data/common_style.dart';
+import 'package:dubaiprojectxyvin/Data/utils/common_style.dart';
+import 'package:dubaiprojectxyvin/interface/components/buttons/GradientButton.dart';
+import 'package:dubaiprojectxyvin/Data/utils/common_color.dart';
 import 'package:dubaiprojectxyvin/interface/components/loading_indicator.dart';
 import 'package:flutter/material.dart';
 
@@ -23,13 +23,13 @@ class _ChangeNumberPageState extends State<ChangeNumberPage> {
       appBar: AppBar(
         title: Text('Change Number', style: kSmallerTitleB),
         centerTitle: true,
-        backgroundColor: CommonColor.white,
+        backgroundColor: kWhite,
       ),
       body: Center(
         child: Padding(
           padding: const EdgeInsets.all(20.0),
           child: Card(
-            color: CommonColor.white,
+            color: kWhite,
             elevation: 5,
             shape: RoundedRectangleBorder(
               borderRadius: BorderRadius.circular(15),
@@ -91,7 +91,7 @@ class _ChangeNumberPageState extends State<ChangeNumberPage> {
             children: [
               Icon(
                 Icons.phone_android,
-                color: CommonColor.primaryColor,
+                color: kPrimaryColor,
                 size: 48,
               ),
               SizedBox(height: 16),
@@ -136,8 +136,8 @@ class _ChangeNumberPageState extends State<ChangeNumberPage> {
             ),
             ElevatedButton(
               style: ElevatedButton.styleFrom(
-                backgroundColor:CommonColor.primaryColor,
-                foregroundColor:  CommonColor.white,
+                backgroundColor: kPrimaryColor,
+                foregroundColor: kWhite,
                 shape: RoundedRectangleBorder(
                   borderRadius: BorderRadius.circular(10),
                 ),
@@ -276,8 +276,8 @@ class _ChangeNumberPageState extends State<ChangeNumberPage> {
           actions: [
             ElevatedButton(
               style: ElevatedButton.styleFrom(
-                backgroundColor: CommonColor.primaryColor,
-                foregroundColor: CommonColor.white,
+                backgroundColor: kPrimaryColor,
+                foregroundColor: kWhite,
                 shape: RoundedRectangleBorder(
                   borderRadius: BorderRadius.circular(10),
                 ),

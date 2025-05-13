@@ -5,7 +5,7 @@ import 'package:dubaiprojectxyvin/Data/models/product_model.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
 import 'package:http/http.dart' as http;
 
-import '../../../globals.dart';
+import '../../../utils/globals.dart';
 
 part 'products_api.g.dart';
 

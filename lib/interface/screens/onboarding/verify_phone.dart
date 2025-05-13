@@ -1,19 +1,19 @@
 import 'dart:developer';
 
-import 'package:dubaiprojectxyvin/Data/common_color.dart';
-import 'package:dubaiprojectxyvin/Data/common_style.dart';
+import 'package:dubaiprojectxyvin/Data/utils/common_color.dart';
+import 'package:dubaiprojectxyvin/Data/utils/common_style.dart';
 import 'package:dubaiprojectxyvin/Data/notifiers/loading_notifier.dart';
 import 'package:dubaiprojectxyvin/Data/services/api_routes/user_api/login/user_login_api.dart';
 import 'package:dubaiprojectxyvin/Data/services/navigation_service.dart';
 import 'package:dubaiprojectxyvin/Data/services/snackbar_service.dart';
-import 'package:dubaiprojectxyvin/interface/components/custom_back_bar.dart';
+import 'package:dubaiprojectxyvin/interface/components/buttons/custom_back_button.dart';
 import 'package:dubaiprojectxyvin/interface/screens/onboarding/verify_otp_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:intl_phone_field/intl_phone_field.dart';
 import 'package:intl_phone_field/phone_number.dart';
-import '../../components/GradientButton.dart';
+import '../../components/buttons/GradientButton.dart';
 
 final countryCodeProvider = StateProvider<String?>((ref) => '91');
 
@@ -38,7 +38,7 @@ class _VerifyPhoneState extends ConsumerState<VerifyPhone> {
   Widget build(BuildContext context) {
     final isLoading = ref.watch(loadingProvider);
     return Container(
-      decoration: const BoxDecoration(gradient: CommonColor.scaffoldGradient),
+      decoration: const BoxDecoration(gradient: scaffoldGradient),
       child: Scaffold(
         backgroundColor: Colors.transparent,
         body: SingleChildScrollView(

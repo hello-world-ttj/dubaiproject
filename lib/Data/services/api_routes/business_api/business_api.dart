@@ -1,6 +1,6 @@
 import 'dart:convert';
 import 'dart:developer';
-import 'package:dubaiprojectxyvin/Data/globals.dart';
+import 'package:dubaiprojectxyvin/Data/utils/globals.dart';
 import 'package:dubaiprojectxyvin/Data/models/business_model.dart';
 import 'package:dubaiprojectxyvin/Data/services/snackbar_service.dart';
 import 'package:flutter/material.dart';

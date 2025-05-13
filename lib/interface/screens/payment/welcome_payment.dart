@@ -1,5 +1,5 @@
-import 'package:dubaiprojectxyvin/interface/components/GradientButton.dart';
-import 'package:dubaiprojectxyvin/Data/common_color.dart';
+import 'package:dubaiprojectxyvin/interface/components/buttons/GradientButton.dart';
+import 'package:dubaiprojectxyvin/Data/utils/common_color.dart';
 import 'package:dubaiprojectxyvin/interface/components/common_divider.dart';
 import 'package:flutter/material.dart';
 
@@ -9,7 +9,7 @@ class WelcomePayment extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: CommonColor.backgroundColor,
+      backgroundColor: kPrimaryLightColor,
       body: Padding(
         padding: const EdgeInsets.all(8.0),
         child: Column(
@@ -80,10 +80,9 @@ class WelcomePayment extends StatelessWidget {
                     color: Color(0xFF1B2C5F),
                   ),
                 ),
-                
               ),
             ),
-          CommonDivider()
+            CommonDivider()
           ],
         ),
       ),

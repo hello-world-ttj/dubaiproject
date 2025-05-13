@@ -1,6 +1,7 @@
-import 'package:dubaiprojectxyvin/Data/common_style.dart';
+
 import 'package:dubaiprojectxyvin/Data/models/user_model.dart';
 import 'package:dubaiprojectxyvin/Data/notifiers/user_notifier.dart';
+import 'package:dubaiprojectxyvin/Data/utils/common_style.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 

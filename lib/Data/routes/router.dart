@@ -10,6 +10,7 @@ import 'package:dubaiprojectxyvin/interface/screens/menu_pages/privacy_policy.da
 import 'package:dubaiprojectxyvin/interface/screens/menu_pages/request_nfc.dart';
 import 'package:dubaiprojectxyvin/interface/screens/menu_pages/terms.dart';
 import 'package:dubaiprojectxyvin/interface/screens/navbar.dart';
+import 'package:dubaiprojectxyvin/interface/screens/onboarding/create_account_screen.dart';
 import 'package:dubaiprojectxyvin/interface/screens/payment/payment_success.dart';
 import 'package:dubaiprojectxyvin/interface/screens/edit_profile/Edit_Profile_Page.dart';
 import 'package:dubaiprojectxyvin/interface/screens/sent_request/sent_req_2_screen.dart';
@@ -82,6 +83,8 @@ Route<dynamic> generateRoute(RouteSettings? settings) {
 
     case 'PrivacyPolicy':
       return MaterialPageRoute(builder: (context) => PrivacyPolicyPage());
+    case 'CreateAccountScreen':
+      return MaterialPageRoute(builder: (context) => CreateAccountScreen());
 
        case 'MainPage':
       return MaterialPageRoute(builder: (context) =>  MainPage());

@@ -1,8 +1,8 @@
 import 'dart:async';
 import 'dart:developer';
-import 'package:dubaiprojectxyvin/Data/common_color.dart';
-import 'package:dubaiprojectxyvin/Data/common_style.dart';
-import 'package:dubaiprojectxyvin/Data/globals.dart';
+import 'package:dubaiprojectxyvin/Data/utils/common_color.dart';
+import 'package:dubaiprojectxyvin/Data/utils/common_style.dart';
+import 'package:dubaiprojectxyvin/Data/utils/globals.dart';
 import 'package:dubaiprojectxyvin/Data/notifiers/loading_notifier.dart';
 import 'package:dubaiprojectxyvin/Data/services/api_routes/user_api/login/user_login_api.dart';
 import 'package:dubaiprojectxyvin/Data/utils/secure_storage.dart';
@@ -12,8 +12,8 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:pin_code_fields/pin_code_fields.dart';
 
-import '../../components/GradientButton.dart';
-import '../../components/custom_back_bar.dart';
+import '../../components/buttons/GradientButton.dart';
+import '../../components/buttons/custom_back_button.dart';
 
 class VerifyOtpScreen extends ConsumerStatefulWidget {
   final String verificationId;
@@ -79,7 +79,7 @@ class _VerifyOtpScreenState extends ConsumerState<VerifyOtpScreen> {
     final isLoading = ref.watch(loadingProvider);
     return Container(
       decoration: const BoxDecoration(
-        gradient: CommonColor.scaffoldGradient,
+        gradient: scaffoldGradient,
       ),
       child: Scaffold(
         backgroundColor: Colors.transparent,
@@ -243,7 +243,7 @@ class _VerifyOtpScreenState extends ConsumerState<VerifyOtpScreen> {
 
       String savedToken = responseMap['token'];
       String savedId = responseMap['userId'];
-      Navigator.of(context).pushNamed('SentRequestScreen');
+      Navigator.of(context).pushNamed('CreateAccountScreen');
       if (savedToken.isNotEmpty && savedId.isNotEmpty) {
         await SecureStorage.write('token', savedToken);
         await SecureStorage.write('id', savedId);

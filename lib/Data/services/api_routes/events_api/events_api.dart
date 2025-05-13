@@ -1,7 +1,7 @@
 import 'dart:convert';
 import 'dart:developer';
 
-import 'package:dubaiprojectxyvin/Data/globals.dart';
+import 'package:dubaiprojectxyvin/Data/utils/globals.dart';
 import 'package:dubaiprojectxyvin/Data/models/attendance_user_model.dart';
 import 'package:dubaiprojectxyvin/Data/models/event_model.dart';
 import 'package:dubaiprojectxyvin/Data/services/snackbar_service.dart';

@@ -7,8 +7,8 @@ import 'package:dubaiprojectxyvin/Data/models/promotion_model.dart';
 import 'package:dubaiprojectxyvin/Data/routes/nav_router.dart';
 import 'package:dubaiprojectxyvin/Data/services/navigation_service.dart';
 import 'package:dubaiprojectxyvin/Data/services/webview.dart';
-import 'package:dubaiprojectxyvin/Data/common_color.dart';
-import 'package:dubaiprojectxyvin/Data/common_style.dart';
+import 'package:dubaiprojectxyvin/Data/utils/common_color.dart';
+import 'package:dubaiprojectxyvin/Data/utils/common_style.dart';
 import 'package:dubaiprojectxyvin/interface/components/custom_widgets/custom_video.dart';
 import 'package:dubaiprojectxyvin/interface/components/custom_widgets/event_widget.dart';
 import 'package:dubaiprojectxyvin/interface/components/custom_widgets/news_card.dart';
@@ -257,7 +257,7 @@ class _HomePageState extends ConsumerState<HomePage> {
             backdrop: Container(
               width: double.infinity,
               height: double.infinity,
-              decoration: const BoxDecoration(color: CommonColor.white),
+              decoration: const BoxDecoration(color: kWhite),
             ),
             controller: _advancedDrawerController,
             animationCurve: Curves.easeInOut,
@@ -270,7 +270,7 @@ class _HomePageState extends ConsumerState<HomePage> {
               borderRadius: const BorderRadius.all(Radius.circular(16)),
             ),
             child: Scaffold(
-              backgroundColor: CommonColor.white,
+              backgroundColor: kWhite,
               body: Stack(
                 children: [
                   SingleChildScrollView(
@@ -298,7 +298,6 @@ class _HomePageState extends ConsumerState<HomePage> {
                               alignment: Alignment.center,
                               children: [
                                 Row(
-                     
                                   children: [
                                     Padding(
                                       padding: const EdgeInsets.only(left: 10),
@@ -369,7 +368,7 @@ class _HomePageState extends ConsumerState<HomePage> {
                           padding: const EdgeInsets.only(left: 15, top: 10),
                           child: Text('Welcome, ${'USER NAME'}',
                               style: kLargeTitleB.copyWith(
-                                color: CommonColor.primaryText,
+                                color: primaryText,
                               )),
                         ),
 
@@ -382,7 +381,7 @@ class _HomePageState extends ConsumerState<HomePage> {
                                 child: Text(
                                   'Connect with the Heart of Dubai’s Business World.',
                                   style: kSmallTitleUL.copyWith(
-                                    color: CommonColor.primaryText,
+                                    color: primaryText,
                                   ),
                                 ),
                               ),
@@ -763,7 +762,7 @@ class _HomePageState extends ConsumerState<HomePage> {
                   //         padding: const EdgeInsets.all(13),
                   //         decoration: BoxDecoration(
                   //           borderRadius: BorderRadius.circular(10),
-                  //           color: CommonColor.primaryColor,
+                  //           color: kPrimaryColor,
                   //         ),
                   //         child: InkWell(
                   //           onTap: () {
@@ -772,7 +771,7 @@ class _HomePageState extends ConsumerState<HomePage> {
                   //           },
                   //           child: const Icon(
                   //             Icons.person_add_alt_1_outlined,
-                  //             color: CommonColor.white,
+                  //             color: kWhite,
                   //             size: 27,
                   //           ),
                   //         ),

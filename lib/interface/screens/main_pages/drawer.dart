@@ -1,7 +1,7 @@
 import 'package:dubaiprojectxyvin/Data/services/api_routes/user_api/user_data/edit_user.dart';
 import 'package:dubaiprojectxyvin/Data/services/navigation_service.dart';
 import 'package:dubaiprojectxyvin/Data/services/webview.dart';
-import 'package:dubaiprojectxyvin/Data/common_color.dart';
+import 'package:dubaiprojectxyvin/Data/utils/common_color.dart';
 import 'package:dubaiprojectxyvin/Data/utils/secure_storage.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
@@ -158,11 +158,13 @@ Widget customDrawer({required BuildContext context}) {
             icon: 'assets/svg/icons/logout.svg',
             label: 'Logout',
             onTap: () async {
-                await SecureStorage.delete('token');
+              await SecureStorage.delete('token');
               await SecureStorage.delete('id');
 
-              navigationService.pushNamedAndRemoveUntil('PhoneNumber');
-              await editUser({"fcm": "",});
+              navigationService.pushNamedAndRemoveUntil('WelcomeScreen');
+              await editUser({
+                "fcm": "",
+              });
             },
           ),
           _buildDrawerItem(
@@ -293,7 +295,7 @@ Widget _buildDrawerItem({
     leading: SvgPicture.asset(
       icon,
       height: 24,
-      color: CommonColor.primaryColor,
+      color: kPrimaryColor,
     ),
     title: Text(
       label,

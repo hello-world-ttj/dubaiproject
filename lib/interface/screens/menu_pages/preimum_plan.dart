@@ -120,8 +120,8 @@
 //                     begin: Alignment.topLeft,
 //                     end: Alignment.bottomRight,
 //                     colors: [
-//                       CommonColor.primaryColor,
-//                       CommonColor.primaryColor.withOpacity(.8),
+//                       kPrimaryColor,
+//                       kPrimaryColor.withOpacity(.8),
 //                       kPrimaryLightColor,
 //                     ],
 //                     stops: [0.0, 0.7, 1.0],

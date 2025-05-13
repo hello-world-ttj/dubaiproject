@@ -1,6 +1,6 @@
 import 'dart:developer';
 
-import 'package:dubaiprojectxyvin/Data/common_color.dart';
+import 'package:dubaiprojectxyvin/Data/utils/common_color.dart';
 import 'package:flutter/material.dart';
 
 class SnackbarService {
@@ -17,7 +17,7 @@ class SnackbarService {
           Expanded(child: Text(message)),
         ],
       ),
-      backgroundColor: CommonColor.primaryColor,
+      backgroundColor: kPrimaryColor,
       behavior:
           SnackBarBehavior.floating, // Makes the Snackbar float above the UI
       shape: RoundedRectangleBorder(

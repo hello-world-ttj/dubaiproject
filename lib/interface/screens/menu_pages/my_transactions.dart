@@ -222,7 +222,7 @@
 //               //       Center(
 //               //         child: ElevatedButton(
 //               //           style: ElevatedButton.styleFrom(
-//               //             backgroundColor: const CommonColor.primaryColor,
+//               //             backgroundColor: const kPrimaryColor,
 //               //             foregroundColor: Colors.white,
 //               //             shape: RoundedRectangleBorder(
 //               //               borderRadius: BorderRadius.circular(5),

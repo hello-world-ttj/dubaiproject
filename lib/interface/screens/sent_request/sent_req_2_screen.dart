@@ -1,7 +1,7 @@
-import 'package:dubaiprojectxyvin/Data/common_color.dart';
+import 'package:dubaiprojectxyvin/Data/utils/common_color.dart';
 import 'package:flutter/material.dart';
 
-import '../../components/GradientButton.dart';
+import '../../components/buttons/GradientButton.dart';
 import '../../components/common_divider.dart';
 
 class SentReq2Screen extends StatelessWidget {

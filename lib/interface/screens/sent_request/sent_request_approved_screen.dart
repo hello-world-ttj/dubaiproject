@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-import '../../../Data/common_color.dart';
+import '../../../Data/utils/common_color.dart';
 
 class SentRequestApprovedScreen extends StatelessWidget {
   const SentRequestApprovedScreen({super.key});
@@ -8,7 +8,7 @@ class SentRequestApprovedScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: CommonColor.backgroundColor,
+      backgroundColor: kPrimaryLightColor,
       body: Padding(
         padding: const EdgeInsets.all(8.0),
         child: Center(

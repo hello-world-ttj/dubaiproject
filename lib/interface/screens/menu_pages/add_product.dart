@@ -1,7 +1,7 @@
 import 'dart:developer';
 import 'dart:io';
 import 'package:dubaiprojectxyvin/Data/models/product_model.dart';
-import 'package:dubaiprojectxyvin/interface/components/GradientButton.dart';
+import 'package:dubaiprojectxyvin/interface/components/buttons/GradientButton.dart';
 import 'package:dubaiprojectxyvin/interface/components/TextFields/modal_textField.dart';
 import 'package:dubaiprojectxyvin/interface/components/loading_indicator.dart';
 import 'package:flutter_svg/svg.dart';

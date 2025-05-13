@@ -2,10 +2,10 @@ import 'dart:math';
 
 import 'package:flutter/material.dart';
 
-import '../../components/GradientButton.dart';
-import '../../../Data/common_color.dart';
+import '../../components/buttons/GradientButton.dart';
+import '../../../Data/utils/common_color.dart';
 import '../../components/common_divider.dart';
-import '../../components/custom_back_bar.dart';
+import '../../components/buttons/custom_back_button.dart';
 
 class SentRequestScreen extends StatelessWidget {
   const SentRequestScreen({super.key});
@@ -13,7 +13,7 @@ class SentRequestScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: CommonColor.backgroundColor,
+      backgroundColor: kPrimaryLightColor,
       body: Padding(
         padding: const EdgeInsets.all(8.0),
         child: SingleChildScrollView(
@@ -41,7 +41,7 @@ class SentRequestScreen extends StatelessWidget {
                         const Text(
                           'Create your Account',
                           style: TextStyle(
-                            color: CommonColor.greyText,
+                            color: kGreyText,
                             fontFamily: 'Manrope',
                             fontWeight: FontWeight.w400,
                             fontSize: 12,

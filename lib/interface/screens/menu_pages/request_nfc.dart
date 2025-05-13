@@ -1,5 +1,5 @@
-import 'package:dubaiprojectxyvin/interface/components/GradientButton.dart';
-import 'package:dubaiprojectxyvin/Data/common_color.dart';
+import 'package:dubaiprojectxyvin/interface/components/buttons/GradientButton.dart';
+import 'package:dubaiprojectxyvin/Data/utils/common_color.dart';
 import 'package:flutter/material.dart';
 
 import 'package:url_launcher/url_launcher.dart';
@@ -58,7 +58,7 @@ class RequestNFCPage extends StatelessWidget {
               style: TextStyle(
                 fontSize: 35,
                 fontWeight: FontWeight.bold,
-                color: CommonColor.primaryColor,
+                color: kPrimaryColor,
               ),
             ),
             Flexible(
@@ -74,10 +74,9 @@ class RequestNFCPage extends StatelessWidget {
               ),
             ),
             GradientButton(
-       
-                title: 'REQUEST NFC',
-                onPressed: _launchWhatsApp,
-                ),
+              title: 'REQUEST NFC',
+              onPressed: _launchWhatsApp,
+            ),
           ],
         ),
       ),

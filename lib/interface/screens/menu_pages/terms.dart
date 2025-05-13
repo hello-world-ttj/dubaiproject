@@ -1,4 +1,4 @@
-import 'package:dubaiprojectxyvin/Data/common_color.dart';
+import 'package:dubaiprojectxyvin/Data/utils/common_color.dart';
 import 'package:flutter/material.dart';
 
 import 'package:google_fonts/google_fonts.dart';
@@ -9,7 +9,7 @@ class TermsAndConditionsPage extends StatelessWidget {
   TextStyle get _headingStyle => GoogleFonts.poppins(
         fontSize: 20,
         fontWeight: FontWeight.w600,
-        color: CommonColor.primaryColor,
+        color: kPrimaryColor,
         height: 2.0,
       );
 
@@ -33,11 +33,14 @@ class TermsAndConditionsPage extends StatelessWidget {
           style: GoogleFonts.poppins(
             fontSize: 18,
             fontWeight: FontWeight.w600,
-            color: CommonColor.primaryColor,
+            color: kPrimaryColor,
           ),
         ),
         leading: IconButton(
-          icon: const Icon(Icons.arrow_back, color: CommonColor.primaryColor,),
+          icon: const Icon(
+            Icons.arrow_back,
+            color: kPrimaryColor,
+          ),
           onPressed: () => Navigator.of(context).pop(),
         ),
       ),

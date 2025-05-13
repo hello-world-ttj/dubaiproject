@@ -1,4 +1,4 @@
-import 'package:dubaiprojectxyvin/Data/common_color.dart';
+import 'package:dubaiprojectxyvin/Data/utils/common_color.dart';
 import 'package:dubaiprojectxyvin/Data/services/navigation_service.dart';
 import 'package:dubaiprojectxyvin/Data/utils/secure_storage.dart';
 import 'package:dubaiprojectxyvin/interface/screens/menu_pages/terms.dart';
@@ -11,7 +11,7 @@ class EulaAgreementScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     NavigationService navigationService = NavigationService();
     return Scaffold(
-      backgroundColor: CommonColor.white,
+      backgroundColor: kWhite,
       body: Column(
         children: [
           Expanded(
@@ -30,7 +30,7 @@ class EulaAgreementScreen extends StatelessWidget {
                           .pushNamedReplacement('ProfileCompletion');
                     },
                     style: ElevatedButton.styleFrom(
-                      backgroundColor: CommonColor.backgroundColor,
+                      backgroundColor: kPrimaryLightColor,
                       minimumSize: const Size(double.infinity, 50),
                       shape: RoundedRectangleBorder(
                         borderRadius: BorderRadius.circular(8),
