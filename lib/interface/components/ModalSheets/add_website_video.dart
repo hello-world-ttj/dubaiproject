@@ -1,10 +1,7 @@
+import 'package:dubaiprojectxyvin/interface/components/TextFields/modal_textField.dart';
+import 'package:dubaiprojectxyvin/interface/components/buttons/GradientButton.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:itcc/src/data/services/navgitor_service.dart';
-import 'package:itcc/src/data/services/snackbar_service.dart';
-import 'package:itcc/src/data/services/validate_url.dart';
-import 'package:itcc/src/interface/components/Buttons/primary_button.dart';
-import 'package:itcc/src/interface/components/custom_widgets/custom_textFormField.dart';
 
 void showWebsiteSheet({
   required VoidCallback addWebsite,
@@ -72,8 +69,8 @@ void showWebsiteSheet({
                   const SizedBox(height: 10),
                   Consumer(
                     builder: (context, ref, child) {
-                      return customButton(
-                        label: 'SAVE',
+                      return GradientButton(  labelFontSize: 16,
+                        title: 'SAVE',
                         onPressed: () {
                           if (_formKey.currentState!.validate()) {
                             addWebsite();
@@ -83,7 +80,7 @@ void showWebsiteSheet({
                             Navigator.pop(context);
                           }
                         },
-                        fontSize: 16,
+                      
                       );
                     },
                   ),
@@ -181,8 +178,8 @@ void showVideoLinkSheet({
                   const SizedBox(height: 10),
                   Consumer(
                     builder: (context, ref, child) {
-                      return customButton(
-                        label: 'SAVE',
+                      return GradientButton(
+                        title: 'SAVE',
                         onPressed: () {
                           if (_formKey.currentState!.validate()) {
                             addVideo();
@@ -192,7 +189,7 @@ void showVideoLinkSheet({
                             Navigator.pop(context);
                           }
                         },
-                        fontSize: 16,
+                        labelFontSize: 16,
                       );
                     },
                   ),

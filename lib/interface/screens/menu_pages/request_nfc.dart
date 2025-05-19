@@ -70,7 +70,7 @@ class RequestNFCPage extends StatelessWidget {
             Center(
               child: Image.asset(
                 scale: 2.5,
-                'assets/pngs/NFC.png', // Replace with your image URL
+                'assets/png/NFC.png', // Replace with your image URL
               ),
             ),
             GradientButton(

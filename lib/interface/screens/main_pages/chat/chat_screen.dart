@@ -327,7 +327,7 @@ class _IndividualPageState extends ConsumerState<IndividualPage> {
                               padding: const EdgeInsets.all(8.0),
                               child: Center(
                                   child: Image.asset(
-                                      'assets/pngs/startConversation.png')),
+                                      'assets/png/startConversation.png')),
                             ),
                     ),
                     isBlocked

@@ -144,7 +144,7 @@
 //                                             Positioned.fill(
 //                                               child: Image.asset(
 //                                                 fit: BoxFit.cover,
-//                                                 'assets/pngs/squares.png',
+//                                                 'assets/png/squares.png',
 //                                               ),
 //                                             ),
 //                                             Column(
@@ -314,7 +314,7 @@
 //                                                                             10),
 //                                                                 child: Image.asset(
 //                                                                     scale: 20,
-//                                                                     'assets/pngs/itcc_logo.png'),
+//                                                                     'assets/png/itcc_logo.png'),
 //                                                               ),
 //                                                               const SizedBox(
 //                                                                   width:

@@ -1,8 +1,8 @@
+import 'package:dubaiprojectxyvin/Data/models/product_model.dart';
+import 'package:dubaiprojectxyvin/interface/components/DropDown/block_repor_dropDown.dart';
+import 'package:dubaiprojectxyvin/interface/components/DropDown/dropdown_menu.dart';
 import 'package:flutter/material.dart';
-import 'package:itcc/src/data/constants/color_constants.dart';
-import 'package:itcc/src/data/models/product_model.dart';
-import 'package:itcc/src/interface/components/DropDown/block_repor_dropDown.dart';
-import 'package:itcc/src/interface/components/DropDown/dropdown_menu.dart';
+
 
 class ProductCard extends StatelessWidget {
   final VoidCallback? onRemove;

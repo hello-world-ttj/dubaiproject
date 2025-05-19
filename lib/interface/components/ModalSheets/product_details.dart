@@ -1,23 +1,24 @@
 import 'dart:developer';
 
+import 'package:dubaiprojectxyvin/Data/models/chat_model.dart';
+import 'package:dubaiprojectxyvin/Data/models/product_model.dart';
+import 'package:dubaiprojectxyvin/Data/services/api_routes/chat_api/chat_api.dart';
+import 'package:dubaiprojectxyvin/Data/services/api_routes/review_api/review_api.dart';
+import 'package:dubaiprojectxyvin/Data/services/api_routes/user_api/user_data/user_data.dart';
+import 'package:dubaiprojectxyvin/Data/utils/common_color.dart';
+import 'package:dubaiprojectxyvin/Data/utils/common_style.dart';
+import 'package:dubaiprojectxyvin/interface/components/buttons/GradientButton.dart';
+import 'package:dubaiprojectxyvin/interface/components/custom_widgets/review_widgets.dart';
+import 'package:dubaiprojectxyvin/interface/components/dialogs/upgrade_dialog.dart';
+import 'package:dubaiprojectxyvin/interface/components/loading_indicator.dart';
+import 'package:dubaiprojectxyvin/interface/screens/main_pages/chat/chat_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_svg/svg.dart';
-import 'package:itcc/src/data/api_routes/chat_api/chat_api.dart';
-import 'package:itcc/src/data/api_routes/review_api/review_api.dart';
-import 'package:itcc/src/data/api_routes/user_api/user_data/user_data.dart';
-import 'package:itcc/src/data/constants/color_constants.dart';
-import 'package:itcc/src/data/constants/style_constants.dart';
-import 'package:itcc/src/data/globals.dart';
-import 'package:itcc/src/data/models/chat_model.dart';
-import 'package:itcc/src/data/models/product_model.dart';
-import 'package:itcc/src/interface/components/Buttons/primary_button.dart';
-import 'package:itcc/src/interface/components/Dialogs/upgrade_dialog.dart';
-import 'package:itcc/src/interface/components/common/review_barchart.dart';
-import 'package:itcc/src/interface/components/custom_widgets/blue_tick_names.dart';
-import 'package:itcc/src/interface/components/loading_indicator/loading_indicator.dart';
-import 'package:itcc/src/interface/screens/main_pages/chat/chat_screen.dart';
+
 import 'package:shimmer/shimmer.dart';
+
+import '../../../Data/utils/globals.dart';
 
 class ProductDetailsModal extends ConsumerStatefulWidget {
   final Product product;
@@ -224,11 +225,10 @@ class _ProductDetailsModalState extends ConsumerState<ProductDetailsModal> {
                             child: Column(
                               crossAxisAlignment: CrossAxisAlignment.start,
                               children: [
-                                VerifiedName(
-                                  label: user.name ?? '',
-                                  textStyle: kSmallerTitleM,
-                                  iconSize: 18,
-                                showBlueTick: user.blueTick??false,
+                                Text(
+                                 user.name ?? '',
+                                  style: kSmallerTitleM,
+                              
                                 ),
                                 if (user.company != null)
                                   if (user.company!.isNotEmpty)
@@ -301,7 +301,7 @@ class _ProductDetailsModalState extends ConsumerState<ProductDetailsModal> {
                         SizedBox(
                             height: 40,
                             width:
-                                210, // Increase this value to expand the horizontal width
+                                210, 
                             child: TextField(
                               style: const TextStyle(
                                   color: kPrimaryColor,
@@ -350,23 +350,19 @@ class _ProductDetailsModalState extends ConsumerState<ProductDetailsModal> {
                                     width: 1.0,
                                   ),
                                 ),
-
-                                // Border when the field is both focused and has an error
                                 focusedErrorBorder: OutlineInputBorder(
                                   borderRadius: BorderRadius.circular(8.0),
                                   borderSide: const BorderSide(
                                     color: Colors
-                                        .red, // Red border when focused and has an error
+                                        .red, 
                                     width: 2.0,
                                   ),
                                 ),
-
-                                // Padding inside the TextField
                                 contentPadding: const EdgeInsets.symmetric(
                                     vertical: 8.0, horizontal: 12.0),
                               ),
                               onChanged: (value) {
-                                // Ensure only valid numbers are allowed
+                        
                                 if (int.tryParse(value) == null) {
                                   _quantityController.text = '0';
                                 }
@@ -390,11 +386,11 @@ class _ProductDetailsModalState extends ConsumerState<ProductDetailsModal> {
                 if (id != widget.product.seller)
                   Padding(
                     padding: const EdgeInsets.all(8.0),
-                    child: customButton(
-                        label: 'Get Quote',
+                    child: GradientButton(
+                        title: 'Get Quote',
                         onPressed: () async {
                           if (subscriptionType != 'free') {
-                            await sendChatMessage(
+                            await ChatApiService. sendChatMessage(
                                 productId: widget.product.id,
                                 Id: widget.product.seller!,
                                 content:
@@ -412,7 +408,7 @@ class _ProductDetailsModalState extends ConsumerState<ProductDetailsModal> {
                             );
                           }
                         },
-                        fontSize: 16),
+                        labelFontSize: 16),
                   ),
                 const SizedBox(
                   height: 20,

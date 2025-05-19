@@ -1,15 +1,11 @@
 import 'dart:io';
-
-import 'package:itcc/src/data/api_routes/business_api/business_api.dart';
-
-import 'package:itcc/src/data/constants/color_constants.dart';
-import 'package:itcc/src/data/services/navgitor_service.dart';
-import 'package:itcc/src/data/services/snackbar_service.dart';
+import 'package:dubaiprojectxyvin/Data/services/api_routes/business_api/business_api.dart';
+import 'package:dubaiprojectxyvin/Data/services/navigation_service.dart';
+import 'package:dubaiprojectxyvin/Data/services/snackbar_service.dart';
+import 'package:dubaiprojectxyvin/Data/utils/common_color.dart';
+import 'package:dubaiprojectxyvin/interface/components/loading_indicator.dart';
 import 'package:path/path.dart';
 import 'package:flutter/material.dart';
-import 'package:itcc/src/data/services/image_upload.dart';
-import 'package:itcc/src/interface/components/DropDown/addBusiness_type.dart';
-import 'package:itcc/src/interface/components/loading_indicator/loading_indicator.dart';
 import 'package:custom_image_crop/custom_image_crop.dart';
 import 'package:dubaiprojectxyvin/Data/services/image_service.dart';
 import 'package:image_picker/image_picker.dart';
@@ -35,9 +31,9 @@ class _ShowAdddBusinessSheetState extends State<ShowAdddBusinessSheet> {
   String? mediaUrl;
   final cropController = CustomImageCropController();
 
-  Future<void> _handleImagePick() async {
+  Future<void> _handleImagePick(BuildContext context) async {
     final File? pickedImage = await ImageService.pickAndCropImage(
-      context: context,
+  context: context,
       cropController: cropController,
       source: ImageSource.gallery,
       ratio: Ratio(width: 4, height: 5),
@@ -107,7 +103,7 @@ class _ShowAdddBusinessSheetState extends State<ShowAdddBusinessSheet> {
                     return Column(
                       children: [
                         GestureDetector(
-                          onTap: _handleImagePick,
+                          onTap:() =>  _handleImagePick(context),
                           child: Container(
                             width: double.infinity,
                             height: 110,
@@ -191,12 +187,12 @@ class _ShowAdddBusinessSheetState extends State<ShowAdddBusinessSheet> {
                         print(selectedType);
 
                         if (selectedImage != null) {
-                          mediaUrl = await imageUpload(
+                          mediaUrl = await ImageService.imageUpload(
                             selectedImage!.path,
                           );
                         }
 
-                        await uploadBusiness(
+                        await BusinessApiService. uploadBusiness(
                           media: mediaUrl,
                           content: widget.textController.text,
                         );

@@ -1,8 +1,6 @@
+import 'package:dubaiprojectxyvin/Data/models/user_model.dart';
+import 'package:dubaiprojectxyvin/interface/components/DropDown/remove_edit_dropdown.dart';
 import 'package:flutter/material.dart';
-import 'package:itcc/src/data/models/user_model.dart';
-
-import 'package:itcc/src/interface/components/DropDown/remove_edit_dropdown.dart';
-
 class CertificateCard extends StatelessWidget {
   final VoidCallback? onRemove;
   final VoidCallback? onEdit;

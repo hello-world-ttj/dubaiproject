@@ -6,7 +6,8 @@ import 'package:dubaiprojectxyvin/Data/notifiers/user_notifier.dart';
 import 'package:dubaiprojectxyvin/Data/routes/nav_router.dart';
 import 'package:dubaiprojectxyvin/Data/utils/common_color.dart';
 import 'package:dubaiprojectxyvin/interface/components/shimmers/promotion_shimmers.dart';
-import 'package:dubaiprojectxyvin/interface/screens/main_pages/bussiness/Tab_bar.dart';
+import 'package:dubaiprojectxyvin/interface/screens/main_pages/business_page.dart';
+
 import 'package:dubaiprojectxyvin/interface/screens/main_pages/home_page.dart';
 import 'package:dubaiprojectxyvin/interface/screens/main_pages/news_page.dart';
 import 'package:dubaiprojectxyvin/interface/screens/main_pages/people_page.dart';
@@ -127,7 +128,7 @@ class _MainPageState extends ConsumerState<MainPage>
       HomePage(
         user: user,
       ),
-      TabBarPage(),
+      BusinessPage(),
       NewsPage(),
       PeoplePage(),
       ProfilePage(

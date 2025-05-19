@@ -1,9 +1,10 @@
 import 'dart:io';
 
 import 'package:dubaiprojectxyvin/Data/utils/common_color.dart';
+import 'package:dubaiprojectxyvin/interface/components/buttons/GradientButton.dart';
 import 'package:dubaiprojectxyvin/interface/components/textFormFields/customTextFormField.dart';
 import 'package:flutter/material.dart';
-import 'package:itcc/src/data/constants/color_constants.dart';
+import '../loading_indicator.dart';
 
 class ShowEnterAwardSheet extends StatefulWidget {
   final TextEditingController textController1;
@@ -178,8 +179,9 @@ class _ShowEnterAwardSheetState extends State<ShowEnterAwardSheet> {
                 },
               ),
               const SizedBox(height: 10),
-              customButton(
-                label: isEditMode ? 'UPDATE' : 'SAVE',
+              GradientButton(
+                labelFontSize: 16,
+                title: isEditMode ? 'UPDATE' : 'SAVE',
                 onPressed: () async {
                   if (_formKey.currentState!.validate()) {
                     showDialog(
@@ -188,16 +190,12 @@ class _ShowEnterAwardSheetState extends State<ShowEnterAwardSheet> {
                       builder: (context) =>
                           const Center(child: LoadingAnimation()),
                     );
-
                     try {
                       if (isEditMode) {
-                        // Edit mode - handle both text-only and image updates
                         await widget.editAwardCard!();
                       } else {
-                        // Add mode - always needs image
                         await widget.addAwardCard!();
                       }
-
                       widget.textController1.clear();
                       widget.textController2.clear();
 
@@ -217,7 +215,6 @@ class _ShowEnterAwardSheetState extends State<ShowEnterAwardSheet> {
                     }
                   }
                 },
-                fontSize: 16,
               ),
               const SizedBox(height: 10),
             ],

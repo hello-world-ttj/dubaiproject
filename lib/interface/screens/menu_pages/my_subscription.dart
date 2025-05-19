@@ -130,7 +130,7 @@ class _MySubscriptionPageState extends State<MySubscriptionPage> {
                           mainAxisSize: MainAxisSize.min,
                           children: [
                             // Icon Image Section
-                            Image.asset('assets/pngs/basic.png'),
+                            Image.asset('assets/png/basic.png'),
                             const SizedBox(height: 10),
 
                             // Plan Title
@@ -346,7 +346,7 @@ class _MySubscriptionPageState extends State<MySubscriptionPage> {
                   //         children: [
                   //           // Icon Image Section
                   //           Image.asset(
-                  //             'assets/pngs/premium.png',
+                  //             'assets/png/premium.png',
                   //             height: 80,
                   //           ),
                   //           const SizedBox(height: 10),

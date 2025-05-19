@@ -1,7 +1,8 @@
+
+import 'package:dubaiprojectxyvin/Data/utils/common_color.dart';
+import 'package:dubaiprojectxyvin/Data/utils/common_style.dart';
+import 'package:dubaiprojectxyvin/interface/components/buttons/GradientButton.dart';
 import 'package:flutter/material.dart';
-import 'package:itcc/src/data/constants/color_constants.dart';
-import 'package:itcc/src/data/constants/style_constants.dart';
-import 'package:itcc/src/interface/components/Buttons/primary_button.dart';
 import 'package:intl/intl.dart';
 
 class DateFilterSheet extends StatefulWidget {
@@ -75,8 +76,8 @@ class _DateFilterSheetState extends State<DateFilterSheet> {
           const SizedBox(height: 24),
           Padding(
             padding: const EdgeInsets.symmetric(horizontal: 10),
-            child: customButton(
-              label: 'APPLY',
+            child: GradientButton(
+              title: 'APPLY',
               onPressed: () {
                 String? formattedStartDate = startDate != null
                     ? DateFormat('yyyy-MM-dd').format(startDate!)

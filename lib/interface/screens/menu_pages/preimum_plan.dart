@@ -298,7 +298,7 @@
 //                             16.0), // Same radius as the border
 //                         child: Screenshot(
 //                             controller: screenshotController,
-//                             child: Image.asset('assets/pngs/bank_details.png')),
+//                             child: Image.asset('assets/png/bank_details.png')),
 //                       ),
 //                     ),
 //                     const SizedBox(height: 16.0),

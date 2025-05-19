@@ -1,11 +1,10 @@
 import 'dart:io';
-
+import 'package:dubaiprojectxyvin/Data/utils/common_color.dart';
+import 'package:dubaiprojectxyvin/interface/components/buttons/GradientButton.dart';
 import 'package:flutter/material.dart';
-import 'package:itcc/src/data/constants/color_constants.dart';
-import 'package:itcc/src/data/services/navgitor_service.dart';
-import 'package:itcc/src/interface/components/Buttons/primary_button.dart';
-import 'package:itcc/src/interface/components/custom_widgets/custom_textFormField.dart';
-import 'package:itcc/src/interface/components/loading_indicator/loading_indicator.dart';
+
+import '../TextFields/modal_textField.dart';
+import '../loading_indicator.dart';
 
 class ShowAddCertificateSheet extends StatefulWidget {
   final TextEditingController textController;
@@ -165,8 +164,8 @@ class _ShowAddCertificateSheetState extends State<ShowAddCertificateSheet> {
                 },
               ),
               const SizedBox(height: 10),
-              customButton(
-                label: isEditMode ? 'UPDATE' : 'SAVE',
+              GradientButton(                labelFontSize: 16,
+                title: isEditMode ? 'UPDATE' : 'SAVE',
                 onPressed: () async {
                   if (_formKey.currentState!.validate()) {
                     showDialog(
@@ -178,10 +177,8 @@ class _ShowAddCertificateSheetState extends State<ShowAddCertificateSheet> {
 
                     try {
                       if (isEditMode) {
-                        // Edit mode - handle both text-only and image updates
-                        await widget.addCertificateCard();
+                          await widget.addCertificateCard();
                       } else {
-                        // Add mode - always needs image
                         await widget.addCertificateCard();
                       }
 
@@ -190,7 +187,7 @@ class _ShowAddCertificateSheetState extends State<ShowAddCertificateSheet> {
                       if (certificateImage != null) {
                         setState(() {
                           certificateImage =
-                              null; // Clear the image after saving
+                              null; 
                         });
                       }
                     } catch (e) {
@@ -205,7 +202,7 @@ class _ShowAddCertificateSheetState extends State<ShowAddCertificateSheet> {
                     }
                   }
                 },
-                fontSize: 16,
+
               ),
               const SizedBox(height: 10),
             ],

@@ -1,16 +1,17 @@
+import 'package:dubaiprojectxyvin/Data/models/business_model.dart';
+import 'package:dubaiprojectxyvin/Data/models/chat_model.dart';
+import 'package:dubaiprojectxyvin/Data/services/api_routes/chat_api/chat_api.dart';
+import 'package:dubaiprojectxyvin/Data/services/api_routes/review_api/review_api.dart';
+import 'package:dubaiprojectxyvin/Data/services/api_routes/user_api/user_data/user_data.dart';
+import 'package:dubaiprojectxyvin/Data/utils/globals.dart';
+import 'package:dubaiprojectxyvin/interface/components/buttons/GradientButton.dart';
+import 'package:dubaiprojectxyvin/interface/components/custom_widgets/review_widgets.dart';
+import 'package:dubaiprojectxyvin/interface/components/loading_indicator.dart';
+import 'package:dubaiprojectxyvin/interface/screens/main_pages/chat/chat_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_svg/svg.dart';
-import 'package:itcc/src/data/api_routes/chat_api/chat_api.dart';
-import 'package:itcc/src/data/api_routes/review_api/review_api.dart';
-import 'package:itcc/src/data/api_routes/user_api/user_data/user_data.dart';
-import 'package:itcc/src/data/globals.dart';
-import 'package:itcc/src/data/models/business_model.dart';
-import 'package:itcc/src/data/models/chat_model.dart';
-import 'package:itcc/src/interface/components/Buttons/primary_button.dart';
-import 'package:itcc/src/interface/components/common/review_barchart.dart';
-import 'package:itcc/src/interface/components/loading_indicator/loading_indicator.dart';
-import 'package:itcc/src/interface/screens/main_pages/chat/chat_screen.dart';
+
 
 class BusinessDetailsModalSheet extends StatelessWidget {
   final VoidCallback onButtonPressed;
@@ -88,7 +89,7 @@ class BusinessDetailsModalSheet extends StatelessWidget {
                           Column(
                             crossAxisAlignment: CrossAxisAlignment.start,
                             children: [
-                              Text('${user?.name ?? ''}'),
+                              Text('${user.name ?? ''}'),
                               Text('${user.company?[0].name ?? ''}'),
                             ],
                           ),
@@ -154,10 +155,10 @@ class BusinessDetailsModalSheet extends StatelessWidget {
                     padding: const EdgeInsets.symmetric(horizontal: 16),
                     child: Consumer(
                       builder: (context, ref, child) {
-                        return customButton(
-                          label: buttonText,
+                        return GradientButton(
+                          title: buttonText,
                           onPressed: () async {
-                            await sendChatMessage(
+                            await ChatApiService. sendChatMessage(
                                 Id: business.author ?? '',
                                 content: business.content ?? '',
                                 businessId: business.id);
@@ -167,7 +168,7 @@ class BusinessDetailsModalSheet extends StatelessWidget {
                                       sender: sender,
                                     )));
                           },
-                          fontSize: 16,
+                          labelFontSize: 16,
                         );
                       },
                     ),

@@ -251,7 +251,7 @@ class IDCardScreen extends ConsumerWidget {
                                                                       left: 10),
                                                               child: Image.asset(
                                                                   scale: 20,
-                                                                  'assets/pngs/itcc_logo.png'),
+                                                                  'assets/png/itcc_logo.png'),
                                                             ),
                                                             const SizedBox(
                                                                 width: 10),
@@ -260,7 +260,7 @@ class IDCardScreen extends ConsumerWidget {
                                                                 style:
                                                                     kSmallerTitleB
                                                                         .copyWith(
-                                                                  color: 
+                                                                  color:
                                                                       kPrimaryColor,
                                                                 )),
                                                           ],

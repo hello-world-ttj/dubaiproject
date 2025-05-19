@@ -12,8 +12,6 @@ import 'package:dubaiprojectxyvin/interface/components/ModalSheets/product_detai
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
-
-
 class ProductView extends ConsumerStatefulWidget {
   const ProductView({super.key});
 
@@ -186,12 +184,14 @@ class _ProductViewState extends ConsumerState<ProductView> {
                   children: [
                     const SizedBox(height: 100),
                     Image.asset(
-                      'assets/pngs/searchproduct.png',
+                      scale: 1.1,
+                      'assets/png/searchproduct.png',
                       color: kPrimaryColor,
                     ),
                     const SizedBox(height: 20),
                     Text('Search required Products',
-                        style: kHeadTitleB.copyWith(color: kGreyDark)),
+                        style: kHeadTitleB.copyWith(
+                            color: kGreyDark, fontSize: 14)),
                   ],
                 )
               else

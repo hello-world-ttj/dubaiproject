@@ -25,7 +25,7 @@ class AboutPage extends StatelessWidget {
           children: [
             Image.asset(
               scale: 8,
-              'assets/pngs/itcc_logo_group.png',
+              'assets/png/itcc_logo_group.png',
             ),
             SizedBox(height: 16),
             SizedBox(height: 8),

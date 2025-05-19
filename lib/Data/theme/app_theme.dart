@@ -2,7 +2,8 @@ import 'package:flutter/material.dart';
 
 class AppTheme {
   static ThemeData get lightTheme {
-    return ThemeData(
+    return ThemeData(        colorScheme: ColorScheme.fromSeed(seedColor: Colors.blue),
+        useMaterial3: true,
       fontFamily: 'Manrope',
       textTheme: const TextTheme(
         displayLarge: TextStyle(fontFamily: 'Manrope'),

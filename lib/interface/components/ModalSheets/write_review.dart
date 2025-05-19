@@ -1,10 +1,10 @@
+import 'package:dubaiprojectxyvin/Data/services/api_routes/review_api/review_api.dart';
+import 'package:dubaiprojectxyvin/Data/services/api_routes/user_api/user_data/edit_user.dart';
+import 'package:dubaiprojectxyvin/Data/utils/common_color.dart';
+import 'package:dubaiprojectxyvin/interface/components/buttons/GradientButton.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:itcc/src/data/api_routes/review_api/review_api.dart';
-import 'package:itcc/src/data/api_routes/user_api/user_data/edit_user.dart';
-import 'package:itcc/src/data/constants/color_constants.dart';
-import 'package:itcc/src/data/notifiers/people_notifier.dart';
-import 'package:itcc/src/interface/components/Buttons/primary_button.dart';
+
 
 class ShowWriteReviewSheet extends StatefulWidget {
   final String userId;
@@ -79,18 +79,18 @@ class _ShowWriteReviewSheetState extends State<ShowWriteReviewSheet> {
           Row(
             children: [
               Expanded(
-                  child: customButton(
+                  child: GradientButton(
                       labelColor: kPrimaryColor,
-                      sideColor: kPrimaryColor,
-                      buttonColor: kWhite,
-                      label: 'Cancel',
+                      buttonSideColor: kPrimaryColor,
+                      solidColor: kWhite,
+                      title: 'Cancel',
                       onPressed: () {})),
               const SizedBox(width: 10),
               Expanded(
                 child: Consumer(
                   builder: (context, ref, child) {
-                    return customButton(
-                        label: 'Submit',
+                    return GradientButton(
+                        title: 'Submit',
                         onPressed: () async {
                           await postReview(
                                   widget.userId,

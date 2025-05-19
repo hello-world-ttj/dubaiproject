@@ -29,7 +29,7 @@ class UpgradeDialog extends StatelessWidget {
                     mainAxisSize: MainAxisSize.min,
                     children: [
                       Image.asset(
-                        'assets/pngs/upgrade.png',
+                        'assets/png/upgrade.png',
                         height: 80,
                       ),
                       const SizedBox(height: 20),
@@ -96,7 +96,6 @@ class UpgradeDialog extends StatelessWidget {
                             child: GradientButton(
                                 labelColor: Colors.black,
                                 buttonSideColor: const Color(0xFFF2F2F7),
-                          
                                 title: 'Cancel',
                                 onPressed: () {
                                   Navigator.pop(context);

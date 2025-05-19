@@ -1,14 +1,14 @@
+import 'package:dubaiprojectxyvin/Data/models/business_model.dart';
+import 'package:dubaiprojectxyvin/Data/models/chat_model.dart';
+import 'package:dubaiprojectxyvin/Data/models/user_model.dart';
+import 'package:dubaiprojectxyvin/Data/services/api_routes/chat_api/chat_api.dart';
+import 'package:dubaiprojectxyvin/Data/utils/globals.dart';
+import 'package:dubaiprojectxyvin/interface/components/buttons/GradientButton.dart';
+import 'package:dubaiprojectxyvin/interface/components/user_tile.dart';
+import 'package:dubaiprojectxyvin/interface/screens/main_pages/chat/chat_screen.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:itcc/src/data/api_routes/chat_api/chat_api.dart';
-import 'package:itcc/src/data/globals.dart';
-import 'package:itcc/src/data/models/business_model.dart';
-import 'package:itcc/src/data/models/chat_model.dart';
-import 'package:itcc/src/data/models/user_model.dart';
-import 'package:itcc/src/interface/components/Buttons/primary_button.dart';
-import 'package:itcc/src/interface/components/custom_widgets/user_tile.dart';
-import 'package:itcc/src/interface/screens/main_pages/chat/chat_screen.dart';
 
 void businessEnquiry({
   required BuildContext context,
@@ -52,7 +52,7 @@ void businessEnquiry({
                       padding:
                           const EdgeInsets.only(left: 10, right: 10, top: 10),
                       child: buildUserInfo(businessAuthor, businesss,
-                          context), // Reuse widget here
+                          context), 
                     );
                   },
                 ),
@@ -68,8 +68,8 @@ void businessEnquiry({
                     padding: const EdgeInsets.symmetric(horizontal: 16),
                     child: Consumer(
                       builder: (context, ref, child) {
-                        return customButton(
-                          label: buttonText,
+                        return GradientButton(
+                          title: buttonText,
                           onPressed: () async {
                             messageSheet(
                                 businessAuthor: businessAuthor,
@@ -80,7 +80,7 @@ void businessEnquiry({
                                 receiver: receiver,
                                 sender: sender);
                           },
-                          fontSize: 16,
+                          labelFontSize: 16,
                         );
                       },
                     ),
@@ -244,10 +244,10 @@ void messageSheet({
                       padding: const EdgeInsets.symmetric(horizontal: 16),
                       child: Consumer(
                         builder: (context, ref, child) {
-                          return customButton(
-                            label: buttonText,
+                          return GradientButton(
+                            title: buttonText,
                             onPressed: () async {
-                              await sendChatMessage(
+                              await ChatApiService. sendChatMessage(
                                   Id: feed.author ?? '',
                                   content: feed.content!,
                                   businessId: feed.id);
@@ -256,11 +256,11 @@ void messageSheet({
                                         receiver: receiver,
                                         sender: sender,
                                       )));
-                              await sendChatMessage(
+                              await ChatApiService. sendChatMessage(
                                   Id: feed.author ?? '',
                                   content: messageController.text);
                             },
-                            fontSize: 16,
+                            labelFontSize: 16,
                           );
                         },
                       ),
