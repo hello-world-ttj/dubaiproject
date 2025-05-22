@@ -1,11 +1,13 @@
 import 'package:dubaiprojectxyvin/Data/models/event_model.dart';
+
+import 'package:dubaiprojectxyvin/Data/services/api_routes/events_api/events_api.dart';
+import 'package:dubaiprojectxyvin/Data/services/launch_url.dart';
 import 'package:dubaiprojectxyvin/Data/utils/common_color.dart';
+import 'package:dubaiprojectxyvin/interface/components/loading_indicator.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-
 import 'package:intl/intl.dart';
 import 'package:shimmer/shimmer.dart';
-import 'package:url_launcher/url_launcher.dart';
 
 class MyEventsPage extends StatelessWidget {
   const MyEventsPage({Key? key}) : super(key: key);
@@ -14,127 +16,46 @@ class MyEventsPage extends StatelessWidget {
   Widget build(BuildContext context) {
     return Consumer(
       builder: (context, ref, child) {
-        final List<Event> registeredEvents = [
-          Event(
-            id: "event_001",
-            eventName: "Flutter Workshop",
-            description: "A hands-on workshop to build apps with Flutter.",
-            type: "Workshop",
-            image: "https://example.com/images/flutter_event.jpg",
-            startDate: DateTime.now().add(Duration(days: 2)),
-            startTime: DateTime.now().add(Duration(days: 2, hours: 10)),
-            endDate: DateTime.now().add(Duration(days: 2)),
-            endTime: DateTime.now().add(Duration(days: 2, hours: 12)),
-            eventDate: DateTime.now().add(Duration(days: 2)),
-            platform: "Zoom",
-            link: "https://zoom.us/j/123456789",
-            venue: null,
-            organiserName: "Tech Club",
-            coordinator: ["John Doe", "Jane Smith"],
-            speakers: [
-              Speaker(
-                name: "Alice Johnson",
-                designation: "Flutter Developer",
-                role: "Keynote Speaker",
-                image: "https://example.com/images/speaker1.jpg",
-              ),
-              Speaker(
-                name: "Bob Smith",
-                designation: "Google Developer Expert",
-                role: "Trainer",
-                image: "https://example.com/images/speaker2.jpg",
-              ),
-            ],
-            status: "upcoming",
-            rsvp: ["user_101", "user_102"],
-            attended: [],
-            createdAt: DateTime.now().subtract(Duration(days: 1)),
-            updatedAt: DateTime.now(),
-            limit: 100,
-          ),
-          Event(
-            id: "event_002",
-            eventName: "AI Conference",
-            description: "Exploring the future of artificial intelligence.",
-            type: "Conference",
-            image: "https://example.com/images/ai_event.jpg",
-            startDate: DateTime.now().add(Duration(days: 10)),
-            startTime: DateTime.now().add(Duration(days: 10, hours: 9)),
-            endDate: DateTime.now().add(Duration(days: 10)),
-            endTime: DateTime.now().add(Duration(days: 10, hours: 17)),
-            eventDate: DateTime.now().add(Duration(days: 10)),
-            platform: "Offline",
-            link: null,
-            venue: "Tech Auditorium, Downtown",
-            organiserName: "AI Society",
-            coordinator: ["Emily Watson"],
-            speakers: [
-              Speaker(
-                name: "Dr. Mark Lee",
-                designation: "AI Researcher",
-                role: "Speaker",
-                image: "https://example.com/images/speaker3.jpg",
-              ),
-            ],
-            status: "upcoming",
-            rsvp: ["user_105"],
-            attended: [],
-            createdAt: DateTime.now().subtract(Duration(days: 2)),
-            updatedAt: DateTime.now(),
-            limit: 300,
-          ),
-          Event(
-            id: "event_003",
-            eventName: "Past Design Meetup",
-            description: "A meetup for creative designers.",
-            type: "Meetup",
-            image: "https://example.com/images/design_event.jpg",
-            startDate: DateTime.now().subtract(Duration(days: 5)),
-            startTime: DateTime.now().subtract(Duration(days: 5, hours: 10)),
-            endDate: DateTime.now().subtract(Duration(days: 5)),
-            endTime: DateTime.now().subtract(Duration(days: 5, hours: 12)),
-            eventDate: DateTime.now().subtract(Duration(days: 5)),
-            platform: "Google Meet",
-            link: "https://meet.google.com/xyz-abc-pqr",
-            venue: null,
-            organiserName: "Design Hub",
-            coordinator: ["Sam Lee"],
-            speakers: [],
-            status: "completed",
-            rsvp: ["user_110", "user_111"],
-            attended: ["user_110"],
-            createdAt: DateTime.now().subtract(Duration(days: 10)),
-            updatedAt: DateTime.now().subtract(Duration(days: 5)),
-            limit: 50,
-          ),
-        ];
-
+        final asyncEvents = ref.watch(fetchMyEventsProvider);
         return Scaffold(
-            backgroundColor: Colors.white,
-            appBar: AppBar(
-              title: Text(
-                "My Events",
-                style: TextStyle(fontSize: 17),
-              ),
-              backgroundColor: Colors.white,
-              scrolledUnderElevation: 0,
-              leading: IconButton(
-                icon: const Icon(Icons.arrow_back),
-                onPressed: () {
-                  Navigator.of(context).pop();
-                },
-              ),
+          backgroundColor: Colors.white,
+          appBar: AppBar(
+            title: Text(
+              "My Events",
+              style: TextStyle(fontSize: 17),
             ),
-            body: ListView.builder(
-              itemCount: registeredEvents.length,
-              itemBuilder: (context, index) {
-                return Padding(
-                  padding: const EdgeInsets.all(16.0),
-                  child: eventCard(
-                      context: context, event: registeredEvents[index]),
-                );
+            backgroundColor: Colors.white,
+            scrolledUnderElevation: 0,
+            leading: IconButton(
+              icon: const Icon(Icons.arrow_back),
+              onPressed: () {
+                Navigator.of(context).pop();
               },
-            ));
+            ),
+          ),
+          body: asyncEvents.when(
+            data: (registeredEvents) {
+              print(registeredEvents);
+              return ListView.builder(
+                itemCount: registeredEvents.length,
+                itemBuilder: (context, index) {
+                  return Padding(
+                    padding: const EdgeInsets.all(16.0),
+                    child: eventCard(
+                        context: context, event: registeredEvents[index]),
+                  );
+                },
+              );
+            },
+            loading: () => Center(child: LoadingAnimation()),
+            error: (error, stackTrace) {
+              // Handle error state
+              return Center(
+                child: Text('NO EVENTS REGISTERED'),
+              );
+            },
+          ),
+        );
       },
     );
   }
@@ -267,7 +188,7 @@ class MyEventsPage extends StatelessWidget {
                     padding: const EdgeInsets.only(left: 8.0),
                     child: ElevatedButton(
                       onPressed: () {
-                        launchUrl(Uri.parse(event.link ?? ''));
+                        launchURL(event.link ?? '');
                       },
                       style: ElevatedButton.styleFrom(
                         backgroundColor: kPrimaryColor,

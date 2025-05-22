@@ -115,35 +115,27 @@ class CustomTextFormField extends StatelessWidget {
               validator: validator,
               decoration: InputDecoration(
                 hintStyle:
-                    TextStyle(color: kGreyText.withOpacity(0.5)),
+                    TextStyle(color: kGreyText.withOpacity(0.5), fontSize: 14),
                 hintText: labelText,
                 labelStyle: const TextStyle(color: Colors.grey),
                 floatingLabelBehavior: FloatingLabelBehavior.never,
-                fillColor: kWhite,
+                fillColor: kFillColor,
                 filled: true,
                 enabledBorder: OutlineInputBorder(
                   borderRadius: BorderRadius.circular(8.0),
-                  borderSide: const BorderSide(
-                      color: Color.fromARGB(
-                          255, 212, 209, 209)), // Unfocused border color
+                  borderSide: const BorderSide(color: kBorderColor),
                 ),
                 focusedBorder: OutlineInputBorder(
                   borderRadius: BorderRadius.circular(8.0),
-                  borderSide: const BorderSide(
-                      color: Color.fromARGB(
-                          255, 223, 220, 220)), // Focused border color
+                  borderSide: const BorderSide(color: kBorderColor),
                 ),
                 errorBorder: OutlineInputBorder(
                   borderRadius: BorderRadius.circular(8.0),
-                  borderSide: const BorderSide(
-                      color: Color.fromARGB(
-                          255, 212, 209, 209)), // Same as enabled border
+                  borderSide: const BorderSide(color: kBorderColor),
                 ),
                 focusedErrorBorder: OutlineInputBorder(
                   borderRadius: BorderRadius.circular(8.0),
-                  borderSide: const BorderSide(
-                      color: Color.fromARGB(
-                          255, 223, 220, 220)), // Same as focused border
+                  borderSide: const BorderSide(color: kBorderColor),
                 ),
               ),
             ),

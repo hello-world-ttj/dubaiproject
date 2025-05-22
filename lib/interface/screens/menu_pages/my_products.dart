@@ -2,13 +2,18 @@ import 'dart:developer';
 import 'dart:io';
 
 import 'package:dubaiprojectxyvin/Data/models/product_model.dart';
+import 'package:dubaiprojectxyvin/Data/notifiers/user_notifier.dart';
+import 'package:dubaiprojectxyvin/Data/services/api_routes/products_api/products_api.dart';
 import 'package:dubaiprojectxyvin/Data/services/navigation_service.dart';
 import 'package:dubaiprojectxyvin/Data/utils/common_color.dart';
+import 'package:dubaiprojectxyvin/interface/components/Cards/product_card.dart';
+import 'package:dubaiprojectxyvin/interface/components/dialogs/premium_dialog.dart';
+import 'package:dubaiprojectxyvin/interface/components/loading_indicator.dart';
 import 'package:dubaiprojectxyvin/interface/screens/menu_pages/add_product.dart';
 import 'package:file_picker/file_picker.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-
+import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:path/path.dart';
 
 class MyProductPage extends ConsumerStatefulWidget {
@@ -66,14 +71,15 @@ class _MyProductPageState extends ConsumerState<MyProductPage> {
                   isEditing: true,
                   product: oldProduct,
                   onEdit: (Product updatedProduct) async {
-                    // await updateProduct(updatedProduct);
+                    // Call API to update product
+                    await ProductApiService. updateProduct(updatedProduct);
                   },
                 )));
   }
 
   void _removeProduct(String productId) async {
-    // deleteProduct(productId);
-    // ref.invalidate(fetchMyProductsProvider);
+  ProductApiService.  deleteProduct(productId);
+    ref.invalidate(fetchMyProductsProvider);
   }
 
   void _openModalSheet({required String sheet}) {
@@ -87,54 +93,7 @@ class _MyProductPageState extends ConsumerState<MyProductPage> {
   Widget build(BuildContext context) {
     return Consumer(
       builder: (context, ref, child) {
-        final List<Product> products = [
-          Product(
-            id: "prod_001",
-            seller: "seller_101",
-            name: "Eco-Friendly Water Bottle",
-            image: "https://example.com/images/water_bottle.jpg",
-            price: 15.99,
-            offerPrice: 12.49,
-            description: "Reusable and eco-friendly bottle, 1L capacity.",
-            moq: 10,
-            productPriceType: "piece",
-            status: "active",
-            createdAt: DateTime.now().subtract(Duration(days: 10)),
-            updatedAt: DateTime.now().subtract(Duration(days: 2)),
-          ),
-          Product(
-            id: "prod_002",
-            seller: "seller_102",
-            name: "Wireless Bluetooth Speaker",
-            image: "https://example.com/images/speaker.jpg",
-            price: 49.99,
-            offerPrice: 39.99,
-            description:
-                "Compact speaker with deep bass and long battery life.",
-            moq: 5,
-            productPriceType: "unit",
-            status: "active",
-            createdAt: DateTime.now().subtract(Duration(days: 20)),
-            updatedAt: DateTime.now().subtract(Duration(days: 5)),
-          ),
-          Product(
-            id: "prod_003",
-            seller: "seller_103",
-            name: "Organic Cotton T-Shirt",
-            image: "https://example.com/images/tshirt.jpg",
-            price: 19.99,
-            offerPrice: 14.99,
-            description:
-                "Soft and breathable t-shirt made from 100% organic cotton.",
-            moq: 20,
-            productPriceType: "piece",
-            status: "inactive",
-            createdAt: DateTime.now().subtract(Duration(days: 30)),
-            updatedAt: DateTime.now().subtract(Duration(days: 10)),
-          ),
-        ];
-
-        // final asyncProducts = ref.watch(fetchMyProductsProvider);
+        final asyncProducts = ref.watch(fetchMyProductsProvider);
         return Scaffold(
             backgroundColor: Colors.white,
             appBar: AppBar(
@@ -160,45 +119,56 @@ class _MyProductPageState extends ConsumerState<MyProductPage> {
                   ),
                   child: Consumer(
                     builder: (context, ref, child) {
-                      return Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: [
-                          Row(
-                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      return asyncProducts.when(
+                        data: (products) {
+                          return Column(
+                            crossAxisAlignment: CrossAxisAlignment.start,
                             children: [
-                              _InfoCard(
-                                title: 'Products',
-                                count: products.length.toString(),
+                              Row(
+                                mainAxisAlignment:
+                                    MainAxisAlignment.spaceBetween,
+                                children: [
+                                  _InfoCard(
+                                    title: 'Products',
+                                    count: products.length.toString(),
+                                  ),
+                                  // const _InfoCard(title: 'Messages', count: '30'),
+                                ],
                               ),
-                              // const _InfoCard(title: 'Messages', count: '30'),
+                              const SizedBox(height: 16),
+                              const SizedBox(height: 16),
+                              Expanded(
+                                child: GridView.builder(
+                                  shrinkWrap:
+                                      true, // Let GridView take up only as much space as it needs
+                                  // Disable GridView's internal scrolling
+                                  gridDelegate:
+                                      const SliverGridDelegateWithFixedCrossAxisCount(
+                                    mainAxisExtent: 212,
+                                    crossAxisCount: 2,
+                                    crossAxisSpacing: 0.0,
+                                    mainAxisSpacing: 20.0,
+                                  ),
+                                  itemCount: products.length,
+                                  itemBuilder: (context, index) {
+                                    return ProductCard(
+                                        onEdit: () => _editProduct(
+                                            index, products[index], context),
+                                        product: products[index],
+                                        onRemove: () => _removeProduct(
+                                            products[index].id ?? ''));
+                                  },
+                                ),
+                              ),
                             ],
-                          ),
-                          const SizedBox(height: 16),
-                          const SizedBox(height: 16),
-                          Expanded(
-                            child: GridView.builder(
-                              shrinkWrap:
-                                  true, // Let GridView take up only as much space as it needs
-                              // Disable GridView's internal scrolling
-                              gridDelegate:
-                                  const SliverGridDelegateWithFixedCrossAxisCount(
-                                mainAxisExtent: 212,
-                                crossAxisCount: 2,
-                                crossAxisSpacing: 0.0,
-                                mainAxisSpacing: 20.0,
-                              ),
-                              itemCount: products.length,
-                              itemBuilder: (context, index) {
-                                // return ProductCard(
-                                //     onEdit: () => _editProduct(
-                                //         index, products[index], context),
-                                //     product: products[index],
-                                //     onRemove: () => _removeProduct(
-                                //         products[index].id ?? ''));
-                              },
-                            ),
-                          ),
-                        ],
+                          );
+                        },
+                        loading: () => const Center(child: LoadingAnimation()),
+                        error: (error, stackTrace) {
+                          return Center(
+                            child: Text('No Products'),
+                          );
+                        },
                       );
                     },
                   ),
@@ -208,7 +178,19 @@ class _MyProductPageState extends ConsumerState<MyProductPage> {
                   right: 16,
                   child: FloatingActionButton.extended(
                     onPressed: () {
-                      _openModalSheet(sheet: 'product');
+                      final userAsync = ref.watch(userProvider);
+                      WidgetsBinding.instance.addPostFrameCallback((_) {
+                        userAsync.whenOrNull(data: (user) {
+                          if (user.status == 'trial') {
+                            showDialog(
+                              context: context,
+                              builder: (_) => const PremiumDialog(),
+                            );
+                          } else {
+                            _openModalSheet(sheet: 'product');
+                          }
+                        });
+                      });
                     },
                     label: Padding(
                       padding: const EdgeInsets.all(8.0),

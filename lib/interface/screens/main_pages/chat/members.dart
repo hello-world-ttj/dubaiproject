@@ -532,12 +532,35 @@ class _MembersPageState extends ConsumerState<MembersPage> {
                           decoration: InputDecoration(
                             filled: true,
                             fillColor: Colors.white,
-                            prefixIcon: const Icon(Icons.search),
+                            prefixIcon: const Icon(
+                              Icons.search,
+                              color: kGreyDark,
+                            ),
                             hintText: 'Search Members',
                             border: OutlineInputBorder(
                               borderRadius: BorderRadius.circular(8.0),
                               borderSide: const BorderSide(
-                                color: Color.fromARGB(255, 216, 211, 211),
+                                color: Color(0xFFCBD6FF),
+                              ),
+                            ),
+                            enabledBorder: OutlineInputBorder(
+                              borderRadius: BorderRadius.circular(8.0),
+                              borderSide: const BorderSide(
+                                color: Color(0xFFCBD6FF),
+                              ),
+                            ),
+                            focusedBorder: OutlineInputBorder(
+                              borderRadius: BorderRadius.circular(8.0),
+                              borderSide: const BorderSide(
+                                color: Color(0xFFCBD6FF),
+                                width:
+                                    2.0, // Optional: make it slightly thicker on focus
+                              ),
+                            ),
+                            disabledBorder: OutlineInputBorder(
+                              borderRadius: BorderRadius.circular(8.0),
+                              borderSide: const BorderSide(
+                                color: Color(0xFFCBD6FF),
                               ),
                             ),
                           ),
@@ -686,8 +709,7 @@ class _MembersPageState extends ConsumerState<MembersPage> {
                               ),
                             ),
                             title: Text(
-                           user.name ?? '',
-                  
+                              user.name ?? '',
                             ),
                             subtitle: Text('${user.chapter?.name ?? ''}',
                                 style:

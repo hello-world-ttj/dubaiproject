@@ -214,6 +214,30 @@ class UserService {
       return false;
     }
   }
+  static Future<void> deletePost( String postId, context) async {
+  SnackbarService snackbarService = SnackbarService();
+  final url = Uri.parse('$baseUrl/feeds/single/$postId');
+  print('requesting url:$url');
+  final response = await http.delete(
+    url,
+    headers: {
+      'Content-type': 'application/json',
+      'Authorization': 'Bearer $token',
+    },
+  );
+
+  if (response.statusCode == 200) {
+        snackbarService.showSnackBar('Post Deleted Successfully');
+    // ScaffoldMessenger.of(context)
+    //     .showSnackBar(SnackBar(content: Text('Post Deleted Successfully')));
+  } else {
+    final jsonResponse = json.decode(response.body);
+    snackbarService.showSnackBar(jsonResponse['message']);
+    print(jsonResponse['message']);
+    print('Failed to delete image: ${response.statusCode}');
+  }
+}
+
 }
 
 @riverpod

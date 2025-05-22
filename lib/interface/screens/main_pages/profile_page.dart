@@ -12,6 +12,8 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:intl/intl.dart';
 
+import '../../../Data/services/share_qr.dart';
+
 class ProfilePage extends ConsumerWidget {
   final UserModel user;
   const ProfilePage({super.key, required this.user});
@@ -37,11 +39,6 @@ class ProfilePage extends ConsumerWidget {
         elevation: 0,
         scrolledUnderElevation: 0,
         centerTitle: true,
-        bottom: PreferredSize(
-          preferredSize: Size(double.infinity, 0),
-          child:
-              Container(width: double.infinity, height: 1, color: kGreyLight),
-        ),
         backgroundColor: kWhite,
         title: Text(
           'Profile',
@@ -50,7 +47,6 @@ class ProfilePage extends ConsumerWidget {
       ),
       backgroundColor: kPrimaryLightColor,
       body: Container(
-        decoration: const BoxDecoration(),
         child: SafeArea(
           child: Center(
             child: SingleChildScrollView(
@@ -251,7 +247,7 @@ class ProfilePage extends ConsumerWidget {
                                                                   .only(
                                                                   left: 10),
                                                           child: Image.asset(
-                                                              scale: 20,
+                                                              scale: 10,
                                                               'assets/png/Logo.png'),
                                                         ),
                                                         const SizedBox(
@@ -261,8 +257,8 @@ class ProfilePage extends ConsumerWidget {
                                                             'Member ID: ${user.memberId}',
                                                             style: kSmallerTitleB
                                                                 .copyWith(
-                                                                    color: kPrimaryColor
-                                                                        )),
+                                                                    color:
+                                                                        kPrimaryColor)),
                                                       ],
                                                     ),
                                                   ),
@@ -354,7 +350,7 @@ class ProfilePage extends ConsumerWidget {
                     children: [
                       GestureDetector(
                         onTap: () {
-                          // captureAndShareOrDownloadWidgetScreenshot(context);
+                          captureAndShareOrDownloadWidgetScreenshot(context);
                         },
                         child: SvgPicture.asset(
                             color: kPrimaryColor,

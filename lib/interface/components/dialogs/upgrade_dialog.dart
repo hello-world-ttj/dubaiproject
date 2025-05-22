@@ -1,6 +1,7 @@
 import 'package:dubaiprojectxyvin/Data/models/level_models/chapter_model.dart';
 import 'package:dubaiprojectxyvin/Data/notifiers/user_notifier.dart';
 import 'package:dubaiprojectxyvin/Data/services/api_routes/chapter_api/chapter_details.dart';
+import 'package:dubaiprojectxyvin/Data/utils/common_color.dart';
 import 'package:dubaiprojectxyvin/interface/components/buttons/GradientButton.dart';
 import 'package:dubaiprojectxyvin/interface/components/loading_indicator.dart';
 import 'package:dubaiprojectxyvin/interface/screens/menu_pages/my_subscription.dart';
@@ -94,6 +95,7 @@ class UpgradeDialog extends StatelessWidget {
                               child: Padding(
                             padding: const EdgeInsets.all(8.0),
                             child: GradientButton(
+                                solidColor: kWhite,
                                 labelColor: Colors.black,
                                 buttonSideColor: const Color(0xFFF2F2F7),
                                 title: 'Cancel',

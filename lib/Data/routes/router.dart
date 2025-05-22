@@ -1,6 +1,8 @@
 // TODO Implement this library.
+import 'package:dubaiprojectxyvin/Data/models/user_model.dart';
 import 'package:dubaiprojectxyvin/interface/screens/menu_pages/about_us.dart';
 import 'package:dubaiprojectxyvin/interface/screens/menu_pages/add_product.dart';
+import 'package:dubaiprojectxyvin/interface/screens/menu_pages/change_number.dart';
 import 'package:dubaiprojectxyvin/interface/screens/menu_pages/my_businesses.dart';
 import 'package:dubaiprojectxyvin/interface/screens/menu_pages/my_events.dart';
 import 'package:dubaiprojectxyvin/interface/screens/menu_pages/my_products.dart';
@@ -13,6 +15,9 @@ import 'package:dubaiprojectxyvin/interface/screens/navbar.dart';
 import 'package:dubaiprojectxyvin/interface/screens/onboarding/create_account_screen.dart';
 import 'package:dubaiprojectxyvin/interface/screens/payment/payment_success.dart';
 import 'package:dubaiprojectxyvin/interface/screens/edit_profile/Edit_Profile_Page.dart';
+import 'package:dubaiprojectxyvin/interface/screens/profile/editUser.dart';
+import 'package:dubaiprojectxyvin/interface/screens/profile/idcard.dart';
+import 'package:dubaiprojectxyvin/interface/screens/profile/profile_preview_withUserId.dart';
 import 'package:dubaiprojectxyvin/interface/screens/sent_request/sent_req_2_screen.dart';
 import 'package:flutter/material.dart';
 
@@ -64,6 +69,12 @@ Route<dynamic> generateRoute(RouteSettings? settings) {
       return MaterialPageRoute(builder: (context) =>  WelcomePayment());
   case 'MyEvents':
       return MaterialPageRoute(builder: (context) => MyEventsPage());
+  case 'ProfilePreviewUsingID':
+    final userId = settings?.arguments as String?;
+      return MaterialPageRoute(builder: (context) => ProfilePreviewUsingId(userId: userId??'',));
+  case 'Card':
+      final  user = settings?.arguments as UserModel?;
+      return MaterialPageRoute(builder: (context) => IDCardScreen(user: user!,));
     case 'MyProducts':
       return MaterialPageRoute(builder: (context) => MyProductPage());
     case 'EnterProductsPage':
@@ -83,6 +94,12 @@ Route<dynamic> generateRoute(RouteSettings? settings) {
 
     case 'PrivacyPolicy':
       return MaterialPageRoute(builder: (context) => PrivacyPolicyPage());
+
+    case 'EditUser':
+      return MaterialPageRoute(builder: (context) => EditUser());
+
+    case 'ChangeNumber':
+      return MaterialPageRoute(builder: (context) => ChangeNumberPage());
     case 'CreateAccountScreen':
       return MaterialPageRoute(builder: (context) => CreateAccountScreen());
 

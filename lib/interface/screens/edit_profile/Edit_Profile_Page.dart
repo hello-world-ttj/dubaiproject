@@ -1,3 +1,4 @@
+import 'package:dubaiprojectxyvin/Data/utils/common_color.dart';
 import 'package:flutter/material.dart';
 
 import '../../components/buttons/GradientButton.dart';
@@ -242,7 +243,7 @@ class _EditProfilePageState extends State<EditProfilePage> {
               decoration: InputDecoration(
                 hintText: 'Description',
                 filled: true,
-                fillColor: Color(0xFFF5F7FF),
+                fillColor: kFillColor,
                 contentPadding: EdgeInsets.all(16.0),
                 border: OutlineInputBorder(
                   borderRadius: BorderRadius.circular(20.0),
@@ -391,7 +392,7 @@ class _EditProfilePageState extends State<EditProfilePage> {
               decoration: InputDecoration(
                 hintText: 'Enter Your Adress',
                 filled: true,
-                fillColor: Color(0xFFF5F7FF),
+                fillColor: kFillColor,
                 contentPadding: EdgeInsets.all(16.0),
                 border: OutlineInputBorder(
                   borderRadius: BorderRadius.circular(20.0),

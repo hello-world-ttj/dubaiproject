@@ -1,12 +1,12 @@
 import 'dart:developer';
 
-import 'package:dubaiprojectxyvin/Data/models/business_model.dart';
+import 'package:dubaiprojectxyvin/Data/services/api_routes/business_api/business_api.dart';
+import 'package:dubaiprojectxyvin/Data/services/api_routes/user_api/user_data/create_user.dart';
+import 'package:dubaiprojectxyvin/Data/services/api_routes/user_api/user_data/user_data.dart';
 import 'package:dubaiprojectxyvin/interface/components/loading_indicator.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-
 import 'package:intl/intl.dart';
-
 import 'package:shimmer/shimmer.dart';
 
 class MyBusinessesPage extends StatelessWidget {
@@ -14,66 +14,7 @@ class MyBusinessesPage extends StatelessWidget {
   Widget build(BuildContext context) {
     return Consumer(
       builder: (context, ref, child) {
-final List<Business> myPosts = [
-  Business(
-    id: "business_001",
-    type: "post",
-    media: "https://example.com/media1.jpg",
-    link: "https://example.com/business1",
-    content: "Launching our new product today!",
-    author: "author_001",
-    likes: ["user_001", "user_002"],
-    status: "active",
-    createdAt: DateTime.now().subtract(Duration(days: 2)),
-    updatedAt: DateTime.now(),
-    comments: [
-      Comment(
-        user: FeedUser(
-          id: "user_001",
-          name: "Alice Johnson",
-          image: "https://example.com/images/user1.jpg",
-        ),
-        comment: "Exciting news!",
-      ),
-    ],
-  ),
-  Business(
-    id: "business_002",
-    type: "video",
-    media: "https://example.com/media2.mp4",
-    link: "https://example.com/business2",
-    content: "Watch our latest behind-the-scenes video.",
-    author: "author_002",
-    likes: ["user_003"],
-    status: "active",
-    createdAt: DateTime.now().subtract(Duration(days: 4)),
-    updatedAt: DateTime.now(),
-    comments: [
-      Comment(
-        user: FeedUser(
-          id: "user_002",
-          name: "Bob Smith",
-          image: "https://example.com/images/user2.jpg",
-        ),
-        comment: "Great content!",
-      ),
-    ],
-  ),
-  Business(
-    id: "business_003",
-    type: "article",
-    media: null,
-    link: null,
-    content: "Read about how we started our journey.",
-    author: "author_003",
-    likes: [],
-    status: "archived",
-    createdAt: DateTime.now().subtract(Duration(days: 10)),
-    updatedAt: DateTime.now().subtract(Duration(days: 1)),
-    comments: [],
-  ),
-];
-
+        final asyncMyPosts = ref.watch(fetchMyBusinessesProvider);
         return Scaffold(
             backgroundColor: Colors.white,
             appBar: AppBar(
@@ -90,9 +31,17 @@ final List<Business> myPosts = [
                 },
               ),
             ),
-            body:
-
-                   Padding(
+            body: asyncMyPosts.when(
+              loading: () => Center(child: LoadingAnimation()),
+              error: (error, stackTrace) {
+                log(error.toString());
+                return Center(
+                  child: Text('USER HASN\'T POSTED ANYTHING'),
+                );
+              },
+              data: (myPosts) {
+                if (myPosts.isNotEmpty) {
+                  return Padding(
                     padding: const EdgeInsets.all(16.0),
                     child: Column(
                       children: [
@@ -114,9 +63,14 @@ final List<Business> myPosts = [
                         SizedBox(height: 16),
                       ],
                     ),
-                  )
-               
-           );
+                  );
+                } else {
+                  return Center(
+                    child: Text('No Business Posts Added'),
+                  );
+                }
+              },
+            ));
       },
     );
   }
@@ -142,7 +96,7 @@ final List<Business> myPosts = [
             if (imageUrl != "")
               Column(
                 children: [
-                  Image.network(imageUrl??'',
+                  Image.network(imageUrl!,
                       loadingBuilder: (context, child, loadingProgress) {
                     if (loadingProgress == null) {
                       // If the image is fully loaded, show the image
@@ -251,9 +205,9 @@ final List<Business> myPosts = [
                         style: TextButton.styleFrom(
                             backgroundColor: Color(0xFFEB5757)),
                         onPressed: () async {
-                          // await deletePost(requirementId, context);
-                          // ref.invalidate(fetchMyBusinessesProvider);
-                          // Navigator.of(context).pop();
+                          await UserService. deletePost(requirementId, context);
+                          ref.invalidate(fetchMyBusinessesProvider);
+                          Navigator.of(context).pop();
                         },
                         child: Text('Yes, Delete',
                             style: TextStyle(color: Colors.white)),

@@ -1,15 +1,15 @@
 import 'package:dubaiprojectxyvin/Data/models/user_model.dart';
 import 'package:dubaiprojectxyvin/Data/services/extract_level_details.dart';
+import 'package:dubaiprojectxyvin/Data/services/share_qr.dart';
+import 'package:dubaiprojectxyvin/Data/utils/common_color.dart';
 import 'package:dubaiprojectxyvin/Data/utils/common_style.dart';
 import 'package:dubaiprojectxyvin/interface/components/buttons/GradientButton.dart';
-import 'package:dubaiprojectxyvin/Data/utils/common_color.dart';
 import 'package:dubaiprojectxyvin/interface/components/custom_widgets/glowing_animated_avatar.dart';
 import 'package:dubaiprojectxyvin/interface/components/custom_widgets/icon_container.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:intl/intl.dart';
-
 import 'package:qr_flutter/qr_flutter.dart';
 import 'package:screenshot/screenshot.dart';
 
@@ -52,7 +52,7 @@ class IDCardScreen extends ConsumerWidget {
               bottom: PreferredSize(
                 preferredSize: const Size(double.infinity, 0),
                 child: Container(
-                    width: double.infinity, height: 1, color: kGreyLight),
+                    width: double.infinity, height: 1, color: kTertiary),
               ),
               backgroundColor: kWhite,
               title: const Text(
@@ -131,8 +131,7 @@ class IDCardScreen extends ConsumerWidget {
                                     const SizedBox(height: 12),
                                     Text(user.name ?? '',
                                         style: kLargeTitleB.copyWith(
-                                          color: kWhite,
-                                        ),
+                                            color: kWhite),
                                         textAlign: TextAlign.center),
                                     // Use AnimatedSize to create smooth transition for content
                                     AnimatedSize(
@@ -250,19 +249,17 @@ class IDCardScreen extends ConsumerWidget {
                                                                       .only(
                                                                       left: 10),
                                                               child: Image.asset(
-                                                                  scale: 20,
-                                                                  'assets/png/itcc_logo.png'),
+                                                                  scale:    10,
+                                                                  'assets/png/Logo.png'),
                                                             ),
                                                             const SizedBox(
                                                                 width: 10),
                                                             Text(
                                                                 'Member ID: ${user.memberId}',
-                                                                style:
-                                                                    kSmallerTitleB
-                                                                        .copyWith(
-                                                                  color:
-                                                                      kPrimaryColor,
-                                                                )),
+                                                                style: kSmallerTitleB
+                                                                    .copyWith(
+                                                                        color:
+                                                                            kPrimaryColor)),
                                                           ],
                                                         ),
                                                       ),
@@ -417,10 +414,13 @@ class IDCardScreen extends ConsumerWidget {
                               children: [
                                 Flexible(
                                   child: GradientButton(
+                                      solidColor: kWhite,
+                                      height: 60,
+                                      labelFontSize: 16,
                                       title: 'Share',
                                       onPressed: () async {
-                                        // captureAndShareOrDownloadWidgetScreenshot(
-                                        //     context);
+                                        captureAndShareOrDownloadWidgetScreenshot(
+                                            context);
                                       }),
                                 ),
                                 const SizedBox(
@@ -428,11 +428,16 @@ class IDCardScreen extends ConsumerWidget {
                                 ),
                                 Flexible(
                                   child: GradientButton(
+                                      buttonSideColor: kPrimaryColor,
+                                      labelColor: kWhite,
+                                      solidColor: kWhite,
+                                      height: 60,
+                                      labelFontSize: 15,
                                       title: 'Download QR',
                                       onPressed: () async {
-                                        // captureAndShareOrDownloadWidgetScreenshot(
-                                        //     context,
-                                        //     download: true);
+                                        captureAndShareOrDownloadWidgetScreenshot(
+                                            context,
+                                            download: true);
                                       }),
                                 ),
                               ],

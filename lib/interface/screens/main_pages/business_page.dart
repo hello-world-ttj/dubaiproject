@@ -80,7 +80,7 @@ class _BusinessPageState extends ConsumerState<BusinessPage> {
                     _selectedIndex = index;
                   });
                 },
-                children:  [
+                children: [
                   BusinessView(),
                   ProductView(),
                 ],
@@ -94,7 +94,7 @@ class _BusinessPageState extends ConsumerState<BusinessPage> {
 
   Widget _buildTabItem(int index, String title) {
     final bool isSelected = _selectedIndex == index;
-    
+
     return Expanded(
       child: GestureDetector(
         onTap: () {
@@ -114,7 +114,7 @@ class _BusinessPageState extends ConsumerState<BusinessPage> {
           child: Text(
             title,
             style: TextStyle(
-              fontSize: 15,
+              fontSize: 14,
               fontWeight: FontWeight.bold,
               color: isSelected ? kPrimaryColor : Colors.grey,
             ),
@@ -127,7 +127,7 @@ class _BusinessPageState extends ConsumerState<BusinessPage> {
 
 class CustomTabIndicator extends StatelessWidget {
   final int selectedIndex;
-  
+
   const CustomTabIndicator({
     super.key,
     required this.selectedIndex,
@@ -141,14 +141,16 @@ class CustomTabIndicator extends StatelessWidget {
         builder: (context, constraints) {
           final totalWidth = constraints.maxWidth;
           final tabWidth = totalWidth / 2;
-          final indicatorWidth = tabWidth - 20; // Slightly smaller than tab width
-          
+          final indicatorWidth =
+              tabWidth - 20; // Slightly smaller than tab width
+
           return Stack(
             children: [
               AnimatedPositioned(
                 duration: const Duration(milliseconds: 300),
                 curve: Curves.easeInOut,
-                left: selectedIndex * tabWidth + (tabWidth - indicatorWidth) / 2,
+                left:
+                    selectedIndex * tabWidth + (tabWidth - indicatorWidth) / 2,
                 child: Container(
                   width: indicatorWidth,
                   height: 3,

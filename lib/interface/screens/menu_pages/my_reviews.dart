@@ -1,7 +1,9 @@
-import 'package:dubaiprojectxyvin/Data/models/review_model.dart';
-import 'package:dubaiprojectxyvin/interface/components/custom_widgets/review_widgets.dart';
+import 'package:dubaiprojectxyvin/Data/services/api_routes/review_api/review_api.dart';
+import 'package:dubaiprojectxyvin/Data/utils/globals.dart';
+import 'package:dubaiprojectxyvin/interface/components/loading_indicator.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import '../../components/custom_widgets/review_widgets.dart';
 
 class ReviewsState extends StateNotifier<int> {
   ReviewsState() : super(1);
@@ -26,9 +28,8 @@ class _MyReviewsPageState extends ConsumerState<MyReviewsPage> {
   @override
   void initState() {
     super.initState();
-    // Move invalidate call to initState
     WidgetsBinding.instance.addPostFrameCallback((_) {
-      // ref.invalidate(fetchReviewsProvider);
+      ref.invalidate(fetchReviewsProvider);
     });
   }
 
@@ -37,56 +38,7 @@ class _MyReviewsPageState extends ConsumerState<MyReviewsPage> {
     return Consumer(
       builder: (context, ref, child) {
         final reviewsToShow = ref.watch(reviewsProvider);
-        final List<ReviewModel> reviews = [
-  ReviewModel(
-    id: "review_001",
-    toUser: "user_123",
-    reviewer: Reviewer(
-      id: "rev_001",
-      name: "Alice Johnson",
-      image: "https://example.com/images/alice.jpg",
-    ),
-    rating: 5,
-    comment: "Excellent service and communication!",
-    createdAt: DateTime.now().subtract(Duration(days: 3)),
-    updatedAt: DateTime.now().subtract(Duration(days: 1)),
-    version: 1,
-  ),
-  ReviewModel(
-    id: "review_002",
-    toUser: "user_123",
-    reviewer: Reviewer(
-      id: "rev_002",
-      name: "Bob Smith",
-      image: "https://example.com/images/bob.jpg",
-    ),
-    rating: 4,
-    comment: "Very good experience, would recommend.",
-    createdAt: DateTime.now().subtract(Duration(days: 10)),
-    updatedAt: DateTime.now().subtract(Duration(days: 2)),
-    version: 1,
-  ),
-  ReviewModel(
-    id: "review_003",
-    toUser: "user_456",
-    reviewer: Reviewer(
-      id: "rev_003",
-      name: "Catherine Green",
-      image: "https://example.com/images/catherine.jpg",
-    ),
-    rating: 3,
-    comment: "Satisfactory, but could be better.",
-    createdAt: DateTime.now().subtract(Duration(days: 15)),
-    updatedAt: DateTime.now().subtract(Duration(days: 5)),
-    version: 1,
-  ),
-];
-
-        // final asyncReviews = ref.watch(fetchReviewsProvider(userId: id));
-               final ratingDistribution = getRatingDistribution(reviews);
-                final averageRating = getAverageRating(reviews);
-                final totalReviews = reviews.length;
-
+        final asyncReviews = ref.watch(fetchReviewsProvider(userId: id));
         if (reviewsToShow == 0) {
           return const Center(
             child: Text('No Reviews'),
@@ -107,14 +59,22 @@ class _MyReviewsPageState extends ConsumerState<MyReviewsPage> {
               iconTheme: const IconThemeData(color: Colors.black),
               elevation: 0,
             ),
-            body: 
-         
-                 SingleChildScrollView(
+            body: asyncReviews.when(
+              loading: () => Center(child: LoadingAnimation()),
+              error: (error, stackTrace) {
+                return Center(child: Text('No Reviews'));
+              },
+              data: (reviews) {
+                final ratingDistribution = getRatingDistribution(reviews);
+                final averageRating = getAverageRating(reviews);
+                final totalReviews = reviews.length;
+
+                return SingleChildScrollView(
                   child: Column(
                     children: [
                       Container(
                         height: 1.0,
-                        color: Colors.grey[300], // Divider color
+                        color: Colors.grey[300], 
                       ),
                       if (totalReviews != 0)
                         Padding(
@@ -154,8 +114,9 @@ class _MyReviewsPageState extends ConsumerState<MyReviewsPage> {
                         ),
                     ],
                   ),
-                )
-             
+                );
+              },
+            ),
           );
         }
       },

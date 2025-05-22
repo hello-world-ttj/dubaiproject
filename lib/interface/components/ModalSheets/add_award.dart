@@ -5,6 +5,7 @@ import 'package:dubaiprojectxyvin/interface/components/buttons/GradientButton.da
 import 'package:dubaiprojectxyvin/interface/components/textFormFields/customTextFormField.dart';
 import 'package:flutter/material.dart';
 import '../loading_indicator.dart';
+import 'package:dotted_border/dotted_border.dart';
 
 class ShowEnterAwardSheet extends StatefulWidget {
   final TextEditingController textController1;
@@ -87,58 +88,63 @@ class _ShowEnterAwardSheetState extends State<ShowEnterAwardSheet> {
                 builder: (FormFieldState<File> state) {
                   return Column(
                     children: [
-                      GestureDetector(
-                        onTap: () async {
-                          final pickedFile = await widget.pickImage(
-                              imageType: widget.imageType);
-                          if (pickedFile == null) {
-                            return; // Don't pop if no image selected
-                          }
-                          setState(() {
-                            awardImage = pickedFile;
-                            state.didChange(
-                                pickedFile); // Update form field state
-                          });
-                        },
+                      DottedBorder(
+                        borderType: BorderType.RRect,
+                        radius: const Radius.circular(10),
+                        dashPattern: const [8, 4],
+                        color: state.hasError ? Colors.red : const Color.fromARGB(255, 158, 158, 158),
                         child: Container(
+                          width: double.infinity,
                           height: 110,
-                          decoration: BoxDecoration(
-                            color: Colors.grey[200],
-                            borderRadius: BorderRadius.circular(10),
-                            border: state.hasError
-                                ? Border.all(color: Colors.red)
-                                : null,
-                          ),
-                          child: awardImage == null
-                              ? widget.imageUrl != null
-                                  ? Center(
-                                      child:
-                                          Image.network(widget.imageUrl ?? ''),
-                                    )
-                                  : const Center(
-                                      child: Column(
-                                        mainAxisAlignment:
-                                            MainAxisAlignment.center,
-                                        children: [
-                                          Icon(Icons.add,
-                                              size: 27, color: kPrimaryColor),
-                                          SizedBox(height: 10),
-                                          Text(
-                                            'Upload Image',
-                                            style: TextStyle(
-                                                color: Color.fromARGB(
-                                                    255, 102, 101, 101)),
-                                          ),
-                                        ],
+                          color: Colors.grey[200],
+                          child: awardImage == null && !(isEditMode && widget.imageUrl != null)
+                              ? const Center(
+                                  child: Column(
+                                    mainAxisAlignment:
+                                        MainAxisAlignment.center,
+                                    children: [
+                                      Icon(Icons.add,
+                                          size: 27, color: kPrimaryColor),
+                                      SizedBox(height: 10),
+                                      Text(
+                                        'Upload Image',
+                                        style: TextStyle(
+                                            color: Color.fromARGB(
+                                                255, 102, 101, 101)),
                                       ),
-                                    )
-                              : Center(
-                                  child: Image.file(
-                                  awardImage!,
-                                  fit: BoxFit.cover,
-                                  width: 120,
-                                  height: 120,
-                                )),
+                                    ],
+                                  ),
+                                )
+                              : Padding(
+                                  padding: const EdgeInsets.all(
+                                      8.0),
+                                  child: Row(
+                                    mainAxisAlignment: MainAxisAlignment
+                                        .spaceBetween,
+                                    children: [
+                                      Expanded(
+                                        child: awardImage != null
+                                            ? Image.file(
+                                                awardImage!,
+                                                fit: BoxFit.contain,
+                                              )
+                                            : Image.network(
+                                                widget.imageUrl!,
+                                                fit: BoxFit.contain,
+                                              ),
+                                      ),
+                                      IconButton(
+                                        icon: const Icon(Icons.delete,
+                                            color: Colors.red),
+                                        onPressed: () {
+                                          setState(() {
+                                            awardImage = null;
+                                          });
+                                        },
+                                      ),
+                                    ],
+                                  ),
+                                ),
                         ),
                       ),
                       if (state.hasError)

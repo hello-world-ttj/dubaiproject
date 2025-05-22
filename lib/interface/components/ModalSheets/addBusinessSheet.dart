@@ -3,12 +3,14 @@ import 'package:dubaiprojectxyvin/Data/services/api_routes/business_api/business
 import 'package:dubaiprojectxyvin/Data/services/navigation_service.dart';
 import 'package:dubaiprojectxyvin/Data/services/snackbar_service.dart';
 import 'package:dubaiprojectxyvin/Data/utils/common_color.dart';
+import 'package:dubaiprojectxyvin/interface/components/buttons/GradientButton.dart';
 import 'package:dubaiprojectxyvin/interface/components/loading_indicator.dart';
 import 'package:path/path.dart';
 import 'package:flutter/material.dart';
 import 'package:custom_image_crop/custom_image_crop.dart';
 import 'package:dubaiprojectxyvin/Data/services/image_service.dart';
 import 'package:image_picker/image_picker.dart';
+import 'package:dotted_border/dotted_border.dart';
 
 class ShowAdddBusinessSheet extends StatefulWidget {
   final Future<File?> Function() pickImage;
@@ -33,13 +35,13 @@ class _ShowAdddBusinessSheetState extends State<ShowAdddBusinessSheet> {
 
   Future<void> _handleImagePick(BuildContext context) async {
     final File? pickedImage = await ImageService.pickAndCropImage(
-  context: context,
+      context: context,
       cropController: cropController,
       source: ImageSource.gallery,
       ratio: Ratio(width: 4, height: 5),
       shape: CustomCropShape.Ratio,
     );
-    
+
     if (pickedImage != null) {
       setState(() {
         selectedImage = pickedImage;
@@ -60,7 +62,6 @@ class _ShowAdddBusinessSheetState extends State<ShowAdddBusinessSheet> {
           bottom: MediaQuery.of(context).viewInsets.bottom,
         ),
         child: SingleChildScrollView(
-          // Added this widget
           child: Form(
             key: _formKey,
             child: Column(
@@ -83,19 +84,6 @@ class _ShowAdddBusinessSheetState extends State<ShowAdddBusinessSheet> {
                     ),
                   ],
                 ),
-                // AddbusinessTypeDropDown(
-                //   onValueChanged: (value) {
-                //     setState(() {
-                //       selectedType = value;
-                //     });
-                //   },
-                //   validator: (value) {
-                //     if (value == null || value.isEmpty) {
-                //       return 'Please select a type';
-                //     }
-                //     return null;
-                //   },
-                // ),
                 const SizedBox(height: 20),
                 FormField<File>(
                   initialValue: selectedImage,
@@ -103,41 +91,60 @@ class _ShowAdddBusinessSheetState extends State<ShowAdddBusinessSheet> {
                     return Column(
                       children: [
                         GestureDetector(
-                          onTap:() =>  _handleImagePick(context),
-                          child: Container(
-                            width: double.infinity,
-                            height: 110,
-                            decoration: BoxDecoration(
+                          onTap: () => _handleImagePick(context),
+                          child: DottedBorder(
+                            borderType: BorderType.RRect,
+                            radius: const Radius.circular(10),
+                            dashPattern: const [8, 4],
+                            color: state.hasError
+                                ? Colors.red
+                                : const Color.fromARGB(255, 158, 158, 158),
+                            child: Container(
+                              width: double.infinity,
+                              height: 110,
                               color: Colors.grey[200],
-                              borderRadius: BorderRadius.circular(10),
-                              border: state.hasError
-                                  ? Border.all(color: Colors.red)
-                                  : null,
-                            ),
-                            child: selectedImage == null
-                                ? const Center(
-                                    child: Column(
-                                      mainAxisAlignment:
-                                          MainAxisAlignment.center,
-                                      children: [
-                                        Icon(Icons.add,
-                                            size: 27, color: kPrimaryColor),
-                                        SizedBox(height: 10),
-                                        Text(
-                                          'Upload Image',
-                                          style: TextStyle(
-                                              color: Color.fromARGB(
-                                                  255, 102, 101, 101)),
-                                        ),
-                                      ],
+                              child: selectedImage == null
+                                  ? const Center(
+                                      child: Column(
+                                        mainAxisAlignment:
+                                            MainAxisAlignment.center,
+                                        children: [
+                                          Icon(Icons.add,
+                                              size: 27, color: kPrimaryColor),
+                                          SizedBox(height: 10),
+                                          Text(
+                                            'Upload Image',
+                                            style: TextStyle(
+                                                color: Color.fromARGB(
+                                                    255, 102, 101, 101)),
+                                          ),
+                                        ],
+                                      ),
+                                    )
+                                  : Padding(
+                                      padding: const EdgeInsets.all(8.0),
+                                      child: Row(
+                                        children: [
+                                          Expanded(
+                                            child: Image.file(
+                                              selectedImage!,
+                                              fit: BoxFit.contain,
+                                            ),
+                                          ),
+                                          Spacer(),
+                                          IconButton(
+                                            icon: const Icon(Icons.delete,
+                                                color: Colors.red),
+                                            onPressed: () {
+                                              setState(() {
+                                                selectedImage = null;
+                                              });
+                                            },
+                                          ),
+                                        ],
+                                      ),
                                     ),
-                                  )
-                                : Image.file(
-                                    selectedImage!,
-                                    fit: BoxFit.contain,
-                                    width: 120,
-                                    height: 120,
-                                  ),
+                            ),
                           ),
                         ),
                         if (state.hasError)
@@ -173,7 +180,8 @@ class _ShowAdddBusinessSheetState extends State<ShowAdddBusinessSheet> {
                   ),
                 ),
                 const SizedBox(height: 10),
-                ElevatedButton(
+                GradientButton(
+                  title: 'POST',
                   onPressed: () async {
                     if (_formKey.currentState!.validate()) {
                       showDialog(
@@ -192,39 +200,21 @@ class _ShowAdddBusinessSheetState extends State<ShowAdddBusinessSheet> {
                           );
                         }
 
-                        await BusinessApiService. uploadBusiness(
+                        await BusinessApiService.uploadBusiness(
                           media: mediaUrl,
                           content: widget.textController.text,
                         );
                         widget.textController.clear();
                         selectedImage = null;
 
-                        navigationService
-                            .pop(); // Close the dialog after completion
+                        navigationService.pop();
                         snackbarService.showSnackBar(
                             'Your Post Will Be Reviewed By Admin');
                       } finally {
-                        Navigator.of(context, rootNavigator: true)
-                            .pop(); // Ensure dialog is dismissed
+                        Navigator.of(context, rootNavigator: true).pop();
                       }
                     }
                   },
-                  style: ButtonStyle(
-                    foregroundColor:
-                        WidgetStateProperty.all<Color>(kPrimaryColor),
-                    backgroundColor:
-                        WidgetStateProperty.all<Color>(kPrimaryColor),
-                    shape: WidgetStateProperty.all<RoundedRectangleBorder>(
-                      RoundedRectangleBorder(
-                        borderRadius: BorderRadius.circular(5),
-                        side: const BorderSide(color: kPrimaryColor),
-                      ),
-                    ),
-                  ),
-                  child: const Text(
-                    'ADD POST',
-                    style: TextStyle(color: Colors.white),
-                  ),
                 ),
                 const SizedBox(height: 10),
               ],

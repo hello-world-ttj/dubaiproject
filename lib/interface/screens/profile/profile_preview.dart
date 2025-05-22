@@ -1,13 +1,19 @@
 import 'dart:developer';
-import 'package:dubaiprojectxyvin/Data/models/review_model.dart';
 import 'package:dubaiprojectxyvin/Data/models/user_model.dart';
+import 'package:dubaiprojectxyvin/Data/services/api_routes/review_api/review_api.dart';
 import 'package:dubaiprojectxyvin/Data/services/extract_level_details.dart';
 import 'package:dubaiprojectxyvin/Data/services/navigation_service.dart';
-import 'package:dubaiprojectxyvin/interface/components/buttons/GradientButton.dart';
+import 'package:dubaiprojectxyvin/Data/services/save_contact.dart';
 import 'package:dubaiprojectxyvin/Data/utils/common_color.dart';
 import 'package:dubaiprojectxyvin/Data/utils/common_style.dart';
+import 'package:dubaiprojectxyvin/interface/components/Cards/award_card.dart';
+import 'package:dubaiprojectxyvin/interface/components/Cards/certificate_card.dart';
+import 'package:dubaiprojectxyvin/interface/components/ModalSheets/write_review.dart';
+import 'package:dubaiprojectxyvin/interface/components/buttons/GradientButton.dart';
 import 'package:dubaiprojectxyvin/interface/components/custom_widgets/glowing_animated_avatar.dart';
 import 'package:dubaiprojectxyvin/interface/components/custom_widgets/icon_container.dart';
+import 'package:dubaiprojectxyvin/interface/components/custom_widgets/review_widgets.dart';
+import 'package:dubaiprojectxyvin/interface/components/loading_indicator.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_svg/flutter_svg.dart';
@@ -17,7 +23,9 @@ import 'package:smooth_page_indicator/smooth_page_indicator.dart';
 import 'package:url_launcher/url_launcher.dart';
 import 'package:youtube_player_iframe/youtube_player_iframe.dart';
 
-import '../../components/custom_widgets/review_widgets.dart';
+import '../../../Data/models/chat_model.dart';
+import '../../../Data/utils/globals.dart';
+import '../main_pages/chat/chat_screen.dart';
 
 class ReviewsState extends StateNotifier<int> {
   ReviewsState() : super(1);
@@ -93,7 +101,7 @@ class ProfilePreview extends ConsumerWidget {
           bottom: PreferredSize(
             preferredSize: const Size(double.infinity, 0),
             child:
-                Container(width: double.infinity, height: 1, color: kGreyLight),
+                Container(width: double.infinity, height: 1, color: kTertiary),
           ),
           backgroundColor: kWhite,
           title: const Text(
@@ -162,8 +170,7 @@ class ProfilePreview extends ConsumerWidget {
                                         Text(
                                           user.name ?? '',
                                           style: kHeadTitleSB.copyWith(
-                                              color: Colors.white,
-                                              fontSize: 18),
+                                              color: kWhite),
                                         ),
                                         const SizedBox(height: 5),
                                         Padding(
@@ -275,18 +282,18 @@ class ProfilePreview extends ConsumerWidget {
                                                             const EdgeInsets
                                                                 .only(left: 10),
                                                         child: Image.asset(
-                                                            scale: 20,
-                                                            'assets/png/itcc_logo.png'),
+                                                            scale:    10,
+                                                            'assets/png/Logo.png'),
                                                       ),
                                                       const SizedBox(
                                                           width:
-                                                              10), // Add spacing between elements
+                                                              10), 
                                                       Text(
                                                           'Member ID: ${user.memberId}',
                                                           style: kSmallerTitleB
                                                               .copyWith(
                                                                   color:
-                                                                      kWhite)),
+                                                                      kPrimaryColor)),
                                                     ],
                                                   ),
                                                 ),
@@ -319,7 +326,7 @@ class ProfilePreview extends ConsumerWidget {
                             decoration: BoxDecoration(
                                 borderRadius: BorderRadius.circular(10),
                                 border: Border.all(
-                                  color: kGreyLight,
+                                  color: kTertiary,
                                 )),
                             child: Padding(
                               padding: const EdgeInsets.all(16.0),
@@ -328,8 +335,7 @@ class ProfilePreview extends ConsumerWidget {
                                 children: [
                                   Text(
                                     'About',
-                                    style: kBodyTitleB.copyWith(
-                                        color: Colors.black),
+                                    style: kBodyTitleB.copyWith(color: kBlack),
                                   ),
                                   SizedBox(height: 10),
                                   Row(
@@ -355,7 +361,7 @@ class ProfilePreview extends ConsumerWidget {
                           decoration: BoxDecoration(
                               borderRadius: BorderRadius.circular(10),
                               border: Border.all(
-                                color: kGreyLight,
+                                color: kTertiary,
                               )),
                           child: Padding(
                             padding: const EdgeInsets.all(16.0),
@@ -364,8 +370,7 @@ class ProfilePreview extends ConsumerWidget {
                               children: [
                                 Text(
                                   'Contact Info',
-                                  style:
-                                      kBodyTitleB.copyWith(color: Colors.black),
+                                  style: kBodyTitleB.copyWith(color: kBlack),
                                 ),
                                 const SizedBox(height: 15),
                                 Row(
@@ -518,7 +523,7 @@ class ProfilePreview extends ConsumerWidget {
                             decoration: BoxDecoration(
                                 borderRadius: BorderRadius.circular(10),
                                 border: Border.all(
-                                  color: kGreyLight,
+                                  color: kTertiary,
                                 )),
                             child: Padding(
                               padding: const EdgeInsets.all(15.0),
@@ -528,7 +533,7 @@ class ProfilePreview extends ConsumerWidget {
                                     children: [
                                       Text('Social Media',
                                           style: kBodyTitleB.copyWith(
-                                              color: Colors.black)),
+                                              color: kBlack)),
                                     ],
                                   ),
                                   if (user.social?.isNotEmpty == true)
@@ -550,7 +555,7 @@ class ProfilePreview extends ConsumerWidget {
                             decoration: BoxDecoration(
                                 borderRadius: BorderRadius.circular(10),
                                 border: Border.all(
-                                  color: kGreyLight,
+                                  color: kTertiary,
                                 )),
                             child: Padding(
                               padding: const EdgeInsets.all(15.0),
@@ -560,7 +565,7 @@ class ProfilePreview extends ConsumerWidget {
                                     children: [
                                       Text('Websites & Links',
                                           style: kBodyTitleB.copyWith(
-                                              color: Colors.black)),
+                                              color: kBlack)),
                                     ],
                                   ),
                                   if (user.websites?.isNotEmpty == true)
@@ -623,126 +628,84 @@ class ProfilePreview extends ConsumerWidget {
                             width: 10,
                           ),
                           Text('Reviews',
-                              style: kBodyTitleB.copyWith(color: Colors.black)),
+                              style: kBodyTitleB.copyWith(color: kBlack)),
                         ],
                       ),
                       Padding(
                         padding: const EdgeInsets.all(10.0),
                         child: Consumer(
                           builder: (context, ref, child) {
-                            final List<ReviewModel> reviews = [
-                              ReviewModel(
-                                id: '1',
-                                toUser: 'user123',
-                                reviewer: Reviewer(
-                                  id: 'rev001',
-                                  name: 'Alice Johnson',
-                                  image: 'https://example.com/images/alice.jpg',
-                                ),
-                                rating: 5,
-                                comment:
-                                    'Excellent work and very professional!',
-                                createdAt:
-                                    DateTime.parse('2025-01-10T14:48:00.000Z'),
-                                updatedAt:
-                                    DateTime.parse('2025-01-12T10:15:00.000Z'),
-                                version: 0,
-                              ),
-                              ReviewModel(
-                                id: '2',
-                                toUser: 'user456',
-                                reviewer: Reviewer(
-                                  id: 'rev002',
-                                  name: 'Bob Smith',
-                                  image: 'https://example.com/images/bob.jpg',
-                                ),
-                                rating: 4,
-                                comment:
-                                    'Good experience overall. Will recommend.',
-                                createdAt:
-                                    DateTime.parse('2025-01-15T09:30:00.000Z'),
-                                updatedAt:
-                                    DateTime.parse('2025-01-16T11:00:00.000Z'),
-                                version: 0,
-                              ),
-                              ReviewModel(
-                                id: '3',
-                                toUser: 'user789',
-                                reviewer: Reviewer(
-                                  id: 'rev003',
-                                  name: 'Carol Danvers',
-                                  image: 'https://example.com/images/carol.jpg',
-                                ),
-                                rating: 3,
-                                comment:
-                                    'Average service. There’s room for improvement.',
-                                createdAt:
-                                    DateTime.parse('2025-02-01T17:45:00.000Z'),
-                                updatedAt:
-                                    DateTime.parse('2025-02-02T08:10:00.000Z'),
-                                version: 0,
-                              ),
-                            ];
-
-                            return Column(
-                              children: [
-                                ReviewBarChart(
-                                  reviews: reviews ?? [],
-                                ),
-                                if (reviews.isNotEmpty)
-                                  ListView.builder(
-                                    shrinkWrap: true,
-                                    physics: NeverScrollableScrollPhysics(),
-                                    itemCount: reviewsToShow,
-                                    itemBuilder: (context, index) {
-                                      final ratingDistribution =
-                                          getRatingDistribution(reviews);
-                                      final averageRating =
-                                          getAverageRating(reviews);
-                                      final totalReviews = reviews.length;
-                                      return ReviewsCard(
-                                        review: reviews[index],
-                                        ratingDistribution: ratingDistribution,
-                                        averageRating: averageRating,
-                                        totalReviews: totalReviews,
-                                      );
-                                    },
-                                  ),
-                                if (reviewsToShow < reviews.length)
-                                  TextButton(
-                                    onPressed: () {
-                                      ref
-                                          .read(reviewsProvider.notifier)
-                                          .showMoreReviews(reviews.length);
-                                    },
-                                    child: Text('View More'),
-                                  ),
-                                // Padding(
-                                //   padding: const EdgeInsets.symmetric(
-                                //       horizontal: 5, vertical: 16),
-                                //   child: GradientButton(
-
-                                //       title: 'Write a Review',
-                                //       onPressed: () {
-                                //         showModalBottomSheet(
-                                //           context: context,
-                                //           isScrollControlled: true,
-                                //           shape:
-                                //               const RoundedRectangleBorder(
-                                //             borderRadius:
-                                //                 BorderRadius.vertical(
-                                //                     top: Radius.circular(
-                                //                         20)),
-                                //           ),
-                                //           builder: (context) =>
-                                //               ShowWriteReviewSheet(
-                                //             userId: user.uid!,
-                                //           ),
-                                //         );
-                                //       },
-                                //       fontSize: 15),
-                                // ),
-                              ],
+                            final asyncReviews = ref.watch(
+                                fetchReviewsProvider(userId: user.uid ?? ''));
+                            return asyncReviews.when(
+                              data: (reviews) {
+                                return Column(
+                                  children: [
+                                    ReviewBarChart(
+                                      reviews: reviews ?? [],
+                                    ),
+                                    if (reviews.isNotEmpty)
+                                      ListView.builder(
+                                        shrinkWrap: true,
+                                        physics: NeverScrollableScrollPhysics(),
+                                        itemCount: reviewsToShow,
+                                        itemBuilder: (context, index) {
+                                          final ratingDistribution =
+                                              getRatingDistribution(reviews);
+                                          final averageRating =
+                                              getAverageRating(reviews);
+                                          final totalReviews = reviews.length;
+                                          return ReviewsCard(
+                                            review: reviews[index],
+                                            ratingDistribution:
+                                                ratingDistribution,
+                                            averageRating: averageRating,
+                                            totalReviews: totalReviews,
+                                          );
+                                        },
+                                      ),
+                                    if (reviewsToShow < reviews.length)
+                                      TextButton(
+                                        onPressed: () {
+                                          ref
+                                              .read(reviewsProvider.notifier)
+                                              .showMoreReviews(reviews.length);
+                                        },
+                                        child: Text('View More'),
+                                      ),
+                                    Padding(
+                                      padding: const EdgeInsets.symmetric(
+                                          horizontal: 5, vertical: 16),
+                                      child: GradientButton(
+                                          buttonSideColor: kPrimaryColor,
+                                          solidColor: kWhite,
+                                          labelColor: kPrimaryColor,
+                                          title: 'Write a Review',
+                                          onPressed: () {
+                                            showModalBottomSheet(
+                                              context: context,
+                                              isScrollControlled: true,
+                                              shape:
+                                                  const RoundedRectangleBorder(
+                                                borderRadius:
+                                                    BorderRadius.vertical(
+                                                        top: Radius.circular(
+                                                            20)),
+                                              ),
+                                              builder: (context) =>
+                                                  ShowWriteReviewSheet(
+                                                userId: user.uid!,
+                                              ),
+                                            );
+                                          },
+                                          labelFontSize: 15),
+                                    ),
+                                  ],
+                                );
+                              },
+                              loading: () =>
+                                  const Center(child: LoadingAnimation()),
+                              error: (error, stackTrace) => const SizedBox(),
                             );
                           },
                         ),
@@ -758,8 +721,7 @@ class ProfilePreview extends ConsumerWidget {
                               padding:
                                   const EdgeInsets.only(left: 10, bottom: 8),
                               child: Text('Certificates',
-                                  style: kBodyTitleB.copyWith(
-                                      color: Colors.black)),
+                                  style: kBodyTitleB.copyWith(color: kBlack)),
                             ),
                             SizedBox(
                               height: 10,
@@ -771,11 +733,11 @@ class ProfilePreview extends ConsumerWidget {
                                   .zero, // Remove default ListView padding
                               itemCount: user.certificates!.length,
                               itemBuilder: (context, index) {
-                                // return CertificateCard(
-                                //   onEdit: null,
-                                //   certificate: user.certificates![index],
-                                //   onRemove: null,
-                                // );
+                                return CertificateCard(
+                                  onEdit: null,
+                                  certificate: user.certificates![index],
+                                  onRemove: null,
+                                );
                               },
                             ),
                           ],
@@ -791,8 +753,7 @@ class ProfilePreview extends ConsumerWidget {
                               padding: EdgeInsets.only(bottom: 8, left: 10),
                               child: Text(
                                 'Awards',
-                                style:
-                                    kBodyTitleB.copyWith(color: Colors.black),
+                                style: kBodyTitleB.copyWith(color: kBlack),
                               ),
                             ),
                             SizedBox(
@@ -814,75 +775,78 @@ class ProfilePreview extends ConsumerWidget {
                               ),
                               itemCount: user.awards!.length,
                               itemBuilder: (context, index) {
-                                // return AwardCard(
-                                //   onEdit: null,
-                                //   award: user.awards![index],
-                                //   onRemove: null,
-                                // );
+                                return AwardCard(
+                                  onEdit: null,
+                                  award: user.awards![index],
+                                  onRemove: null,
+                                );
                               },
                             ),
                           ],
                         ),
                     ]),
                   ),
+                  SizedBox(
+                    height: 100,
+                  )
                 ],
               ),
             ),
-            // if (user.uid != id)
-            //   Positioned(
-            //       bottom: 40,
-            //       left: 15,
-            //       right: 15,
-            //       child: SizedBox(
-            //           height: 50,
-            //           child: Row(
-            //             mainAxisSize: MainAxisSize.max,
-            //             children: [
-            //               Flexible(
-            //                 child: GradientButton(
-            //                     buttonHeight: 60,
-            //                     fontSize: 16,
-            //                     title: 'SAY HI',
-            //                     onPressed: () {
-            //                       final Participant receiver = Participant(
-            //                         id: user.uid,
-            //                         image: user.image ?? '',
-            //                         name: user.name,
-            //                       );
-            //                       final Participant sender =
-            //                           Participant(id: id);
-            //                       Navigator.of(context).push(MaterialPageRoute(
-            //                           builder: (context) => IndividualPage(
-            //                                 receiver: receiver,
-            //                                 sender: sender,
-            //                               )));
-            //                     }),
-            //               ),
-            //               const SizedBox(
-            //                 width: 10,
-            //               ),
-            //               Flexible(
-            //                 child: customButton(
-            //                     sideColor:
-            //                         const Color.fromARGB(255, 219, 217, 217),
-            //                     labelColor: const Color(0xFF2C2829),
-            //                     buttonColor:
-            //                         const Color.fromARGB(255, 222, 218, 218),
-            //                     buttonHeight: 60,
-            //                     fontSize: 13,
-            //                     label: 'SAVE CONTACT',
-            //                     onPressed: () {
-            //                       if (user.phone != null) {
-            //                         saveContact(
-            //                             firstName: '${user.name ?? ''}',
-            //                             number: user.phone ?? '',
-            //                             email: user.email ?? '',
-            //                             context: context);
-            //                       }
-            //                     }),
-            //               ),
-            //             ],
-            //           ))),
+            if (user.uid != id)
+              Positioned(
+                  bottom: 40,
+                  left: 15,
+                  right: 15,
+                  child: SizedBox(
+                      height: 50,
+                      child: Row(
+                        mainAxisSize: MainAxisSize.max,
+                        children: [
+                          Flexible(
+                            child: GradientButton(
+                                height: 60,
+                                labelFontSize: 16,
+                                title: 'SAY HI',
+                                onPressed: () {
+                                  final Participant receiver = Participant(
+                                    id: user.uid,
+                                    image: user.image ?? '',
+                                    name: user.name,
+                                  );
+                                  final Participant sender =
+                                      Participant(id: id);
+                                  Navigator.of(context).push(MaterialPageRoute(
+                                      builder: (context) => IndividualPage(
+                                            receiver: receiver,
+                                            sender: sender,
+                                          )));
+                                }),
+                          ),
+                          const SizedBox(
+                            width: 10,
+                          ),
+                          Flexible(
+                            child: GradientButton(
+                                buttonSideColor:
+                                    const Color.fromARGB(255, 219, 217, 217),
+                                labelColor: const Color(0xFF2C2829),
+                                solidColor:
+                                    const Color.fromARGB(255, 222, 218, 218),
+                                height: 60,
+                                labelFontSize: 13,
+                                title: 'SAVE CONTACT',
+                                onPressed: () {
+                                  if (user.phone != null) {
+                                    saveContact(
+                                        firstName: '${user.name ?? ''}',
+                                        number: user.phone ?? '',
+                                        email: user.email ?? '',
+                                        context: context);
+                                  }
+                                }),
+                          ),
+                        ],
+                      ))),
           ],
         ));
   }
@@ -966,7 +930,7 @@ class ProfilePreview extends ConsumerWidget {
                   offset: Offset(1, 1),
                 ),
               ],
-              border: Border.all(color: kGreyLight),
+              border: Border.all(color: kTertiary),
               borderRadius: BorderRadius.circular(10),
             ),
             child: Padding(

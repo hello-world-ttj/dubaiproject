@@ -89,8 +89,6 @@ class _BusinessViewState extends ConsumerState<BusinessView> {
   }
 
   void _openModalSheet({required String sheet}) {
-
-
     feedContentController.clear();
     _feedImage = null;
     showModalBottomSheet(
@@ -104,7 +102,7 @@ class _BusinessViewState extends ConsumerState<BusinessView> {
         });
   }
 
-  String selectedFilter = 'All'; 
+  String selectedFilter = 'All';
 
   List<Business> filterFeeds(List<Business> feeds) {
     if (selectedFilter == 'All') {
@@ -187,19 +185,11 @@ class _BusinessViewState extends ConsumerState<BusinessView> {
             ),
             Positioned(
               right: 30,
-              bottom: 30,
+              bottom: 100,
               child: GestureDetector(
                 onTap: () {
-        
-
-                  if (subscriptionType != 'free') {
-                    _openModalSheet(sheet: 'post');
-                  } else {
-                    showDialog(
-                      context: context,
-                      builder: (context) => const UpgradeDialog(),
-                    );
-                  }
+                  log(subscriptionType, name: 'Subscription Type');
+                  _openModalSheet(sheet: 'post');
                 },
                 child: Container(
                   padding: EdgeInsets.all(10),

@@ -10,6 +10,8 @@ const Gradient scaffoldGradient = LinearGradient(
   stops: [0.3, 0.7],
 );
 const Color kTertiary = Color(0xFFE8EAED);
+const Color kFillColor = Color(0xFFF5F7FF);
+const Color kBorderColor = Color(0xFFE1E7FF);
 const Color kInputFieldcolor = Color(0xFF6F7782);
 const Color kWhite = Color.fromARGB(255, 255, 255, 255);
 const Color kGrey = Color.fromARGB(255, 200, 200, 200);

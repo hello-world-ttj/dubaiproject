@@ -7,10 +7,12 @@ import 'package:dubaiprojectxyvin/Data/routes/nav_router.dart';
 import 'package:dubaiprojectxyvin/Data/utils/common_color.dart';
 import 'package:dubaiprojectxyvin/interface/components/shimmers/promotion_shimmers.dart';
 import 'package:dubaiprojectxyvin/interface/screens/main_pages/business_page.dart';
+import 'package:dubaiprojectxyvin/interface/screens/main_pages/chat/chat_dash.dart';
+import 'package:dubaiprojectxyvin/interface/screens/main_pages/chat_page.dart';
 
 import 'package:dubaiprojectxyvin/interface/screens/main_pages/home_page.dart';
 import 'package:dubaiprojectxyvin/interface/screens/main_pages/news_page.dart';
-import 'package:dubaiprojectxyvin/interface/screens/main_pages/people_page.dart';
+
 import 'package:dubaiprojectxyvin/interface/screens/main_pages/profile_page.dart';
 import 'package:dubaiprojectxyvin/interface/screens/onboarding/welcome_screen.dart';
 import 'package:flutter/material.dart';
@@ -79,7 +81,7 @@ class _MainPageState extends ConsumerState<MainPage>
 
     _animationController = AnimationController(
       vsync: this,
-      duration: const Duration(milliseconds: 300),
+      duration: const Duration(milliseconds: 500),
     );
 
     _slideAnimation = Tween<Offset>(
@@ -150,8 +152,9 @@ class _MainPageState extends ConsumerState<MainPage>
     return Consumer(builder: (context, ref, child) {
       final asyncUser = ref.watch(userProvider);
       final selectedIndex = ref.watch(selectedIndexProvider);
-    return  asyncUser.when(
-        data: (user) {    _initialize(user: user);
+      return asyncUser.when(
+        data: (user) {
+          _initialize(user: user);
           return PopScope(
             canPop: selectedIndex == 0,
             onPopInvokedWithResult: (didPop, result) {
@@ -270,7 +273,7 @@ class _MainPageState extends ConsumerState<MainPage>
         loading: () {
           log('im inside details main page loading');
           return Scaffold(
-              backgroundColor: kPrimaryLightColor,
+              backgroundColor: kWhite,
               body: buildShimmerPromotionsColumn(context: context));
         },
         error: (error, stackTrace) {
@@ -278,7 +281,6 @@ class _MainPageState extends ConsumerState<MainPage>
           return WelcomeScreen();
         },
       );
-  
     });
   }
 }
