@@ -34,7 +34,7 @@ class _ShowAdddBusinessSheetState extends State<ShowAdddBusinessSheet> {
   final cropController = CustomImageCropController();
 
   Future<void> _handleImagePick(BuildContext context) async {
-    final File? pickedImage = await ImageService.pickAndCropImage(
+    final File? pickedImage = await MediaService.pickAndCropImage(
       context: context,
       cropController: cropController,
       source: ImageSource.gallery,
@@ -195,7 +195,7 @@ class _ShowAdddBusinessSheetState extends State<ShowAdddBusinessSheet> {
                         print(selectedType);
 
                         if (selectedImage != null) {
-                          mediaUrl = await ImageService.imageUpload(
+                          mediaUrl = await MediaService.mediaUpload(
                             selectedImage!.path,
                           );
                         }

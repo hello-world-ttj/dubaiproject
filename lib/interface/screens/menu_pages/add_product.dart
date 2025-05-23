@@ -12,7 +12,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:dotted_border/dotted_border.dart';
 
-
 class EnterProductsPage extends ConsumerStatefulWidget {
   final bool isEditing;
   final Product? product;
@@ -80,7 +79,7 @@ class _EnterProductsPageState extends ConsumerState<EnterProductsPage> {
     //   offerPrice: productOfferPriceController.text,
     //   description: productDescriptionController.text,
     //   moq: productMoqController.text,
-    //   productImage: await imageUpload(productImage!.path),
+    //   productImage: await mediaUpload(productImage!.path),
     //   productPriceType: productPriceType.text,
     // );
     // if (createdProduct == null) {
@@ -89,7 +88,7 @@ class _EnterProductsPageState extends ConsumerState<EnterProductsPage> {
     //   final newProduct = Product(
     //     id: createdProduct.id,
     //     name: productNameController.text,
-    //     image: await imageUpload(productImage!.path),
+    //     image: await mediaUpload(productImage!.path),
     //     description: productDescriptionController.text,
     //     moq: int.parse(productMoqController.text),
     //     offerPrice: double.parse(productOfferPriceController.text),
@@ -150,7 +149,9 @@ class _EnterProductsPageState extends ConsumerState<EnterProductsPage> {
                 child: SizedBox(
                   width: 100,
                   height: 100,
-                  child: Image.asset( 'assets/png/Logo.png',),
+                  child: Image.asset(
+                    'assets/png/Logo.png',
+                  ),
                 ),
               ),
               bottom: PreferredSize(
@@ -244,19 +245,24 @@ class _EnterProductsPageState extends ConsumerState<EnterProductsPage> {
                                 borderType: BorderType.RRect,
                                 radius: const Radius.circular(10),
                                 dashPattern: const [8, 4],
-                                color: state.hasError ? Colors.red : const Color.fromARGB(255, 158, 158, 158),
+                                color: state.hasError
+                                    ? Colors.red
+                                    : const Color.fromARGB(255, 158, 158, 158),
                                 child: Container(
                                   width: double.infinity,
                                   height: 110,
                                   color: Colors.grey[200],
-                                  child: productImage == null && !(widget.isEditing && widget.imageUrl != null)
+                                  child: productImage == null &&
+                                          !(widget.isEditing &&
+                                              widget.imageUrl != null)
                                       ? const Center(
                                           child: Column(
                                             mainAxisAlignment:
                                                 MainAxisAlignment.center,
                                             children: [
                                               Icon(Icons.add,
-                                                  size: 27, color: Color(0xFF004797)),
+                                                  size: 27,
+                                                  color: Color(0xFF004797)),
                                               SizedBox(height: 10),
                                               Text(
                                                 'Upload Image',
@@ -268,11 +274,10 @@ class _EnterProductsPageState extends ConsumerState<EnterProductsPage> {
                                           ),
                                         )
                                       : Padding(
-                                          padding: const EdgeInsets.all(
-                                              8.0),
+                                          padding: const EdgeInsets.all(8.0),
                                           child: Row(
-                                            mainAxisAlignment: MainAxisAlignment
-                                                .spaceBetween,
+                                            mainAxisAlignment:
+                                                MainAxisAlignment.spaceBetween,
                                             children: [
                                               Expanded(
                                                 child: productImage != null
@@ -441,7 +446,6 @@ class _EnterProductsPageState extends ConsumerState<EnterProductsPage> {
                       onPressed: () async {
                         if (_formKey.currentState!.validate()) {
                           if (widget.isEditing) {
-            
                             final bool confirmUpdate = await showDialog(
                               context: context,
                               builder: (context) => AlertDialog(
@@ -487,11 +491,11 @@ class _EnterProductsPageState extends ConsumerState<EnterProductsPage> {
                                 offerPrice: double.parse(
                                     productOfferPriceController.text),
                                 productPriceType: productPriceType.text,
-                                image: 
-                                // productImage != null
-                                //     ? await imageUpload(productImage!.path)
-                                //     :
-                                     widget.product?.image,
+                                image:
+                                    // productImage != null
+                                    //     ? await mediaUpload(productImage!.path)
+                                    //     :
+                                    widget.product?.image,
                                 seller: widget.product?.seller,
                                 status:
                                     "pending", // Ensure status is set to pending
@@ -519,7 +523,6 @@ class _EnterProductsPageState extends ConsumerState<EnterProductsPage> {
                           }
                         }
                       },
-                   
                     ),
                     const SizedBox(height: 30),
                   ],

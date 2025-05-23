@@ -66,7 +66,7 @@ class _BusinessViewState extends ConsumerState<BusinessView> {
 
   Future<File?> _pickFile() async {
     try {
-      final File? pickedImage = await ImageService.pickAndCropImage(
+      final File? pickedImage = await MediaService.pickAndCropImage(
         context: context,
         cropController: cropController,
         source: ImageSource.gallery,

@@ -180,7 +180,7 @@ class _EditUserState extends ConsumerState<EditUser> {
         });
         try {
           String profileUrl =
-              await ImageService.imageUpload(_profileImageFile!.path);
+              await MediaService.mediaUpload(_profileImageFile!.path);
           _profileImageSource = ImageSource.gallery;
           ref.read(userProvider.notifier).updateProfilePicture(profileUrl);
           print((profileUrl));
@@ -201,7 +201,7 @@ class _EditUserState extends ConsumerState<EditUser> {
           });
           try {
             String companyUrl =
-                await ImageService.imageUpload(_companyImageFile!.path);
+                await MediaService.mediaUpload(_companyImageFile!.path);
             _companyImageSource = ImageSource.gallery;
             final companyList = ref.read(userProvider).value?.company ?? [];
 
@@ -261,7 +261,7 @@ class _EditUserState extends ConsumerState<EditUser> {
   // }
 
   Future<void> _addNewAward() async {
-    await ImageService.imageUpload(_awardImageFIle!.path).then((url) {
+    await MediaService.mediaUpload(_awardImageFIle!.path).then((url) {
       final String awardUrl = url;
       final newAward = Award(
         name: awardNameController.text,
@@ -319,7 +319,7 @@ class _EditUserState extends ConsumerState<EditUser> {
   }
 
   Future<void> _addNewCertificate() async {
-    await ImageService.imageUpload(_certificateImageFIle!.path).then((url) {
+    await MediaService.mediaUpload(_certificateImageFIle!.path).then((url) {
       final String certificateUrl = url;
       final newCertificate =
           Link(name: certificateNameController.text, link: certificateUrl);
@@ -2281,7 +2281,7 @@ class _EditUserState extends ConsumerState<EditUser> {
       // If a new image is selected, upload it
       try {
         final String awardUrl =
-            await ImageService.imageUpload(_awardImageFIle!.path);
+            await MediaService.mediaUpload(_awardImageFIle!.path);
         final newAward = Award(
           name: awardNameController.text,
           image: awardUrl,
@@ -2365,7 +2365,7 @@ class _EditUserState extends ConsumerState<EditUser> {
             // If a new image is selected, upload it
             try {
               final String certificateUrl =
-                  await ImageService.imageUpload(_certificateImageFIle!.path);
+                  await MediaService.mediaUpload(_certificateImageFIle!.path);
               final newCertificate = Link(
                   name: certificateNameController.text, link: certificateUrl);
               ref

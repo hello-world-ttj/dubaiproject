@@ -5,6 +5,7 @@ import 'package:dubaiprojectxyvin/interface/screens/menu_pages/my_businesses.dar
 import 'package:dubaiprojectxyvin/interface/screens/menu_pages/my_products.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:dubaiprojectxyvin/interface/components/media_message_card.dart';
 
 
 class ReplyCard extends StatelessWidget {
@@ -15,6 +16,8 @@ class ReplyCard extends StatelessWidget {
     this.status,
     this.product,
     this.business,
+    this.media,
+    this.mediaType,
   });
 
   final String message;
@@ -22,13 +25,36 @@ class ReplyCard extends StatelessWidget {
   final ChatProduct? product;
   final String? status;
   final ChatBusiness? business;
+  final String? media;
+  final String? mediaType;
 
   @override
   Widget build(BuildContext context) {
+    if (media != null && mediaType != null) {
+      return Padding(
+        padding: const EdgeInsets.all(8.0),
+        child: Align(
+          alignment: Alignment.centerLeft,
+          child: ConstrainedBox(
+            constraints: BoxConstraints(
+              maxWidth: MediaQuery.of(context).size.width * 0.7,
+            ),
+            child: MediaMessageCard(
+              mediaUrl: media!,
+              mediaType: mediaType!,
+              time: time,
+              isMe: false,
+              fileName: message,
+            ),
+          ),
+        ),
+      );
+    }
+
     return Padding(
       padding: const EdgeInsets.all(8.0),
       child: Align(
-        alignment: Alignment.centerLeft, // Aligning for replies
+        alignment: Alignment.centerLeft,
         child: ConstrainedBox(
           constraints: BoxConstraints(
             maxWidth: MediaQuery.of(context).size.width * 0.7,
@@ -36,7 +62,7 @@ class ReplyCard extends StatelessWidget {
           child: Container(
             padding: const EdgeInsets.symmetric(horizontal: 15, vertical: 10),
             decoration: BoxDecoration(
-              color: const Color(0xFFF2F2F2), // Light color for reply message
+              color: const Color(0xFFF2F2F2),
               borderRadius: BorderRadius.circular(15),
               boxShadow: [
                 BoxShadow(
@@ -55,7 +81,7 @@ class ReplyCard extends StatelessWidget {
                     borderRadius: BorderRadius.circular(15),
                     child: Image.network(
                       product!.image!,
-                      height: 160, // Adjusted height to fit better
+                      height: 160,
                       width: double.infinity,
                       fit: BoxFit.cover,
                     ),
@@ -64,16 +90,17 @@ class ReplyCard extends StatelessWidget {
                   GestureDetector(
                     onTap: () {
                       Navigator.push(
-                          context,
-                          MaterialPageRoute(
-                            builder: (context) => MyBusinessesPage(),
-                          ));
+                        context,
+                        MaterialPageRoute(
+                          builder: (context) => MyBusinessesPage(),
+                        ),
+                      );
                     },
                     child: ClipRRect(
                       borderRadius: BorderRadius.circular(15),
                       child: Image.network(
                         business!.image!,
-                        height: 160, // Adjusted height to fit better
+                        height: 160,
                         width: double.infinity,
                         fit: BoxFit.cover,
                       ),
@@ -83,10 +110,11 @@ class ReplyCard extends StatelessWidget {
                   GestureDetector(
                     onTap: () {
                       Navigator.push(
-                          context,
-                          MaterialPageRoute(
-                            builder: (context) => MyProductPage(),
-                          ));
+                        context,
+                        MaterialPageRoute(
+                          builder: (context) => MyProductPage(),
+                        ),
+                      );
                     },
                     child: Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
@@ -96,19 +124,16 @@ class ReplyCard extends StatelessWidget {
                           style: const TextStyle(
                             fontSize: 18,
                             fontWeight: FontWeight.bold,
-                            color: Color(
-                                0xFF004797), // Using the same color for emphasis
+                            color: Color(0xFF004797),
                           ),
                         ),
-                        const SizedBox(
-                            height: 4), // Add spacing between name and price
+                        const SizedBox(height: 4),
                         Text(
-                          'PRICE INR ${product?.price?.toStringAsFixed(2) ?? ''}', // Format price to two decimals
+                          'PRICE INR ${product?.price?.toStringAsFixed(2) ?? ''}',
                           style: const TextStyle(
                             fontSize: 16,
                             fontWeight: FontWeight.w500,
-                            color: Colors
-                                .black87, // Subtle color for the price text
+                            color: Colors.black87,
                           ),
                         ),
                       ],
@@ -124,7 +149,6 @@ class ReplyCard extends StatelessWidget {
                     ),
                   ),
                 ),
-                // Spacing between message and time row
                 Row(
                   mainAxisSize: MainAxisSize.min,
                   children: [

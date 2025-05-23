@@ -34,7 +34,7 @@ class _CreateAccountScreenState extends ConsumerState<CreateAccountScreen> {
   final _formKey = GlobalKey<FormState>();
 
   Future<void> _pickImage() async {
-    final File? croppedImage = await ImageService.pickAndCropImage(
+    final File? croppedImage = await MediaService.pickAndCropImage(
       context: context,
       cropController: _cropController,
       ratio: Ratio(width: 1, height: 1),
@@ -58,7 +58,7 @@ class _CreateAccountScreenState extends ConsumerState<CreateAccountScreen> {
       },
       child: Consumer(
         builder: (context, ref, child) {
-     return     Scaffold(
+          return Scaffold(
             backgroundColor: kWhite,
             body: SafeArea(
               child: SingleChildScrollView(
@@ -216,7 +216,7 @@ class _CreateAccountScreenState extends ConsumerState<CreateAccountScreen> {
                                     .startLoading();
                                 try {
                                   if (_selectedImage != null) {
-                                    ImageService.imageUpload(
+                                    MediaService.mediaUpload(
                                         _selectedImage!.path);
                                   }
                                   await editUser({

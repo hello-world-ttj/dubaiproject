@@ -2,20 +2,78 @@ import 'package:dubaiprojectxyvin/Data/models/chat_model.dart';
 import 'package:dubaiprojectxyvin/Data/models/msg_model.dart';
 import 'package:dubaiprojectxyvin/Data/notifiers/user_notifier.dart';
 import 'package:dubaiprojectxyvin/Data/services/api_routes/chat_api/chat_api.dart';
+import 'package:dubaiprojectxyvin/Data/services/image_service.dart';
 import 'package:dubaiprojectxyvin/Data/utils/common_color.dart';
 import 'package:dubaiprojectxyvin/interface/components/dialogs/blockPersonDialog.dart';
 import 'package:dubaiprojectxyvin/interface/components/dialogs/report_dialog.dart';
 import 'package:dubaiprojectxyvin/interface/components/own_message_card.dart';
 import 'package:dubaiprojectxyvin/interface/components/reply_card.dart';
+import 'package:dubaiprojectxyvin/interface/components/audio_message_card.dart';
 import 'package:dubaiprojectxyvin/interface/screens/profile/profile_preview.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_svg/svg.dart';
 
 import 'package:intl/intl.dart';
+import 'package:record/record.dart';
+import 'package:path_provider/path_provider.dart';
+import 'package:permission_handler/permission_handler.dart';
+import 'dart:io';
+import 'dart:async';
 
 import '../../../../Data/services/api_routes/user_api/user_data/user_data.dart';
+import 'package:image_picker/image_picker.dart';
+
+// Helper function to check if two DateTimes are on the same day
+bool isSameDay(DateTime date1, DateTime date2) {
+  return date1.year == date2.year &&
+      date1.month == date2.month &&
+      date1.day == date2.day;
+}
+
+// Widget for displaying date separators
+class DateSeparator extends StatelessWidget {
+  final DateTime date;
+
+  const DateSeparator({Key? key, required this.date}) : super(key: key);
+
+  String _getDateLabel(DateTime date) {
+    final now = DateTime.now();
+    final today = DateTime(now.year, now.month, now.day);
+    final yesterday = DateTime(now.year, now.month, now.day - 1);
+    final messageDate = DateTime(date.year, date.month, date.day);
+
+    if (messageDate == today) {
+      return 'Today';
+    } else if (messageDate == yesterday) {
+      return 'Yesterday';
+    } else {
+      return DateFormat('dd/MM/yyyy').format(date); // Format for other dates
+    }
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return Padding(
+      padding: const EdgeInsets.symmetric(vertical: 20.0),
+      child: Center(
+        child: Container(
+          padding: const EdgeInsets.symmetric(horizontal: 12.0, vertical: 6.0),
+          decoration: BoxDecoration(
+            color: Colors.black26,
+            borderRadius: BorderRadius.circular(20.0),
+          ),
+          child: Text(
+            _getDateLabel(date),
+            style: const TextStyle(color: Colors.white, fontSize: 12.0),
+          ),
+        ),
+      ),
+    );
+  }
+}
 
 class IndividualPage extends ConsumerStatefulWidget {
   IndividualPage({required this.receiver, required this.sender, super.key});
@@ -33,10 +91,19 @@ class _IndividualPageState extends ConsumerState<IndividualPage> {
   TextEditingController _controller = TextEditingController();
   ScrollController _scrollController = ScrollController();
 
+  // Audio recording variables
+  final _audioRecorder = AudioRecorder();
+  bool _isRecording = false;
+  bool _isLocked = false;
+  String? _recordingPath;
+  Duration _recordingDuration = Duration.zero;
+  Timer? _recordingTimer;
+
   @override
   void initState() {
     super.initState();
     getMessageHistory();
+    _requestPermissions();
   }
 
   void getMessageHistory() async {
@@ -56,17 +123,152 @@ class _IndividualPageState extends ConsumerState<IndividualPage> {
   }
 
   Future<void> _loadBlockStatus() async {
-    final asyncUser = ref.watch(userProvider);
-    asyncUser.whenData(
-      (user) {
+    ref.watch(userProvider).whenData((user) {
+      if (mounted) {
         setState(() {
-          if (user.blockedUsers != null) {
-            isBlocked = user.blockedUsers!
-                .any((blockedUser) => blockedUser == widget.receiver.id);
-          }
+          isBlocked = user.blockedUsers
+                  ?.any((blockedUser) => blockedUser == widget.receiver.id) ??
+              false;
         });
-      },
+      }
+    });
+  }
+
+  Future<void> _requestPermissions() async {
+    await Permission.microphone.request();
+  }
+
+  void _startRecordingTimer() {
+    _recordingTimer = Timer.periodic(const Duration(seconds: 1), (timer) {
+      if (mounted) {
+        setState(() {
+          _recordingDuration += const Duration(seconds: 1);
+        });
+      }
+    });
+  }
+
+  void _stopRecordingTimer() {
+    _recordingTimer?.cancel();
+    _recordingTimer = null;
+    if (mounted) {
+      setState(() {
+        _recordingDuration = Duration.zero;
+      });
+    }
+  }
+
+  Future<void> _startRecording() async {
+    try {
+      if (await Permission.microphone.isGranted) {
+        final directory = await getTemporaryDirectory();
+        _recordingPath =
+            '${directory.path}/audio_message_${DateTime.now().millisecondsSinceEpoch}.m4a';
+
+        await _audioRecorder.start(
+          RecordConfig(
+            encoder: AudioEncoder.aacLc,
+            bitRate: 128000,
+            sampleRate: 44100,
+          ),
+          path: _recordingPath!,
+        );
+
+        if (mounted) {
+          setState(() {
+            _isRecording = true;
+            _isLocked = false;
+          });
+        }
+        _startRecordingTimer();
+      }
+    } catch (e) {
+      debugPrint('Error starting recording: $e');
+      if (mounted) {
+        setState(() {
+          _isRecording = false;
+          _isLocked = false;
+        });
+      }
+    }
+  }
+
+  Future<void> _stopRecording() async {
+    try {
+      final path = await _audioRecorder.stop();
+      _stopRecordingTimer();
+      if (mounted) {
+        setState(() {
+          _isRecording = false;
+          _isLocked = false;
+        });
+      }
+
+      if (path != null) {
+        final audioFile = File(path);
+        if (await audioFile.exists()) {
+          await _sendAudioMessage(path);
+        } else {
+          debugPrint('Recorded file not found at path: $path');
+        }
+      } else {
+        debugPrint('Recording stop returned null path');
+      }
+    } catch (e) {
+      debugPrint('Error stopping recording: $e');
+      if (mounted) {
+        setState(() {
+          _isRecording = false;
+          _isLocked = false;
+        });
+      }
+    }
+  }
+
+  Future<void> _cancelRecording() async {
+    try {
+      await _audioRecorder.stop();
+      _stopRecordingTimer();
+      if (mounted) {
+        setState(() {
+          _isRecording = false;
+          _isLocked = false;
+        });
+      }
+      if (_recordingPath != null) {
+        final audioFile = File(_recordingPath!);
+        if (await audioFile.exists()) {
+          await audioFile.delete();
+          debugPrint('Canceled recording file deleted: $_recordingPath');
+        }
+        _recordingPath = null;
+      }
+    } catch (e) {
+      debugPrint('Error canceling recording: $e');
+      if (mounted) {
+        setState(() {
+          _isRecording = false;
+          _isLocked = false;
+        });
+      }
+    }
+  }
+
+  Future<void> _sendAudioMessage(String audioPath) async {
+    final String audioUrl = await MediaService.audioUpload(audioPath);
+    final messageId = await ChatApiService.sendChatMessage(
+      Id: widget.receiver.id!,
+      content: 'Audio message',
+      mediaType: 'audio',
+      media: audioUrl,
     );
+
+    if (messageId.isNotEmpty) {
+      if (mounted) {
+        setMessage("sent", "Audio message", widget.sender.id!,
+            media: audioPath, mediaType: 'audio');
+      }
+    }
   }
 
   @override
@@ -75,6 +277,8 @@ class _IndividualPageState extends ConsumerState<IndividualPage> {
     _controller.dispose();
     _scrollController.dispose();
     focusNode.dispose();
+    _audioRecorder.dispose();
+    _stopRecordingTimer();
     super.dispose();
   }
 
@@ -89,17 +293,22 @@ class _IndividualPageState extends ConsumerState<IndividualPage> {
     }
   }
 
-  void setMessage(String type, String message, String fromId) {
+  void setMessage(String type, String message, String fromId,
+      {String? media, String? mediaType}) {
     final messageModel = MessageModel(
       from: fromId,
       status: type,
       content: message,
       createdAt: DateTime.now(),
+      media: media,
+      mediaType: mediaType ?? 'text',
     );
 
-    setState(() {
-      messages.add(messageModel);
-    });
+    if (mounted) {
+      setState(() {
+        messages.add(messageModel);
+      });
+    }
   }
 
   @override
@@ -107,24 +316,26 @@ class _IndividualPageState extends ConsumerState<IndividualPage> {
     final messageStream = ref.watch(messageStreamProvider);
 
     messageStream.whenData((newMessage) {
-      bool messageExists = messages.any((message) =>
-          message.createdAt == newMessage.createdAt &&
-          message.content == newMessage.content);
+      if (mounted) {
+        bool messageExists = messages.any((message) =>
+            message.createdAt == newMessage.createdAt &&
+            message.content == newMessage.content);
 
-      if (!messageExists) {
-        setState(() {
-          messages.add(newMessage);
-        });
+        if (!messageExists) {
+          setState(() {
+            messages.add(newMessage);
+          });
+        }
       }
     });
 
-    return GestureDetector(
-      onTap: () {
-        FocusScope.of(context).unfocus();
-      },
-      child: Stack(
-        children: [
-          Scaffold(
+    return Stack(
+      children: [
+        GestureDetector(
+          onTap: () {
+            FocusScope.of(context).unfocus();
+          },
+          child: Scaffold(
             appBar: PreferredSize(
                 preferredSize: const Size.fromHeight(60),
                 child: AppBar(
@@ -145,9 +356,11 @@ class _IndividualPageState extends ConsumerState<IndividualPage> {
                             userId: widget.receiver.id ?? '',
                             onBlockStatusChanged: () {
                               Future.delayed(const Duration(seconds: 1), () {
-                                setState(() {
-                                  isBlocked = !isBlocked;
-                                });
+                                if (mounted) {
+                                  setState(() {
+                                    isBlocked = !isBlocked;
+                                  });
+                                }
                               });
                             },
                           );
@@ -178,13 +391,10 @@ class _IndividualPageState extends ConsumerState<IndividualPage> {
                         ),
                       ],
                       shape: RoundedRectangleBorder(
-                        borderRadius: BorderRadius.circular(
-                            12), // Border radius for the menu
+                        borderRadius: BorderRadius.circular(12),
                       ),
-                      color: Colors
-                          .white, // Optional: set background color for the menu
-                      offset: const Offset(
-                          0, 40), // Optional: adjust the position of the menu
+                      color: Colors.white,
+                      offset: const Offset(0, 40),
                     )
                   ],
                   elevation: 1,
@@ -251,7 +461,6 @@ class _IndividualPageState extends ConsumerState<IndividualPage> {
                         },
                         loading: () => Text(
                           widget.receiver.name ?? '',
-                          style: const TextStyle(fontSize: 18),
                         ),
                         error: (error, stackTrace) {
                           // Handle error state
@@ -265,16 +474,7 @@ class _IndividualPageState extends ConsumerState<IndividualPage> {
                   ),
                 )),
             body: Container(
-              decoration: const BoxDecoration(
-                gradient: RadialGradient(
-                  colors: [
-                    Color(0xFFFBFAF8),
-                    Color(0xFFE8D5B5),
-                  ],
-                  center: Alignment.center,
-                  radius: 0.8,
-                ),
-              ),
+              decoration: const BoxDecoration(color: kFillColor),
               height: MediaQuery.of(context).size.height,
               width: MediaQuery.of(context).size.width,
               child: PopScope(
@@ -287,40 +487,84 @@ class _IndividualPageState extends ConsumerState<IndividualPage> {
                               controller: _scrollController,
                               itemCount: messages.length,
                               itemBuilder: (context, index) {
-                                final message = messages[messages.length -
-                                    1 -
-                                    index]; // Reverse the index to get the latest message first
+                                final message =
+                                    messages[messages.length - 1 - index];
+                                final previousMessage =
+                                    index < messages.length - 1
+                                        ? messages[messages.length - 2 - index]
+                                        : null;
+
+                                final messageDate =
+                                    message.createdAt?.toLocal() ??
+                                        DateTime.now();
+                                final previousMessageDate =
+                                    previousMessage?.createdAt?.toLocal() ??
+                                        messageDate
+                                            .subtract(const Duration(days: 1));
+
+                                final bool showDateSeparator =
+                                    previousMessage == null ||
+                                        !isSameDay(
+                                            messageDate, previousMessageDate);
+
+                                Widget messageWidget;
                                 if (message.from == widget.sender.id) {
-                                  return OwnMessageCard(
-                                    requirement: message.feed,
-                                    status: message.status!,
-                                    message: message.content ?? '',
-                                    time: DateFormat('h:mm a').format(
-                                      DateTime.parse(
-                                              message.createdAt.toString())
-                                          .toLocal(),
-                                    ),
-                                  );
-                                } else {
-                                  return GestureDetector(
-                                    onLongPress: () {
-                                      showReportPersonDialog(
-                                          reportedItemId: message.id ?? '',
-                                          context: context,
-                                          onReportStatusChanged: () {},
-                                          reportType: 'Message');
-                                    },
-                                    child: ReplyCard(
-                                      business: message.feed,
+                                  if (message.mediaType == 'audio') {
+                                    messageWidget = AudioMessageCard(
+                                      audioUrl: message.media!,
+                                      isMe: true,
+                                      time: DateFormat('h:mm a')
+                                          .format(messageDate),
+                                    );
+                                  } else {
+                                    messageWidget = OwnMessageCard(
+                                      media: message.media,
+                                      mediaType: message.mediaType,
+                                      product: message.product,
+                                      requirement: message.feed,
+                                      status: message.status!,
                                       message: message.content ?? '',
-                                      time: DateFormat('h:mm a').format(
-                                        DateTime.parse(
-                                                message.createdAt.toString())
-                                            .toLocal(),
+                                      time: DateFormat('h:mm a')
+                                          .format(messageDate),
+                                    );
+                                  }
+                                } else {
+                                  if (message.mediaType == 'audio') {
+                                    messageWidget = AudioMessageCard(
+                                      audioUrl: message.media!,
+                                      isMe: false,
+                                      time: DateFormat('h:mm a')
+                                          .format(messageDate),
+                                    );
+                                  } else {
+                                    messageWidget = GestureDetector(
+                                      onLongPress: () {
+                                        showReportPersonDialog(
+                                            reportedItemId: message.id ?? '',
+                                            context: context,
+                                            onReportStatusChanged: () {},
+                                            reportType: 'Message');
+                                      },
+                                      child: ReplyCard(
+                                        media: message.media,
+                                        mediaType: message.mediaType,
+                                        product: message.product,
+                                        business: message.feed,
+                                        message: message.content ?? '',
+                                        time: DateFormat('h:mm a')
+                                            .format(messageDate),
                                       ),
-                                    ),
-                                  );
+                                    );
+                                  }
                                 }
+
+                                return Column(
+                                  children: [
+                                    if (showDateSeparator)
+                                      DateSeparator(date: messageDate),
+                                    messageWidget,
+                                  ],
+                                );
                               },
                             )
                           : Padding(
@@ -330,132 +574,185 @@ class _IndividualPageState extends ConsumerState<IndividualPage> {
                                       'assets/png/startConversation.png')),
                             ),
                     ),
-                    isBlocked
-                        ? Container(
-                            width: double.infinity,
-                            padding: const EdgeInsets.symmetric(
-                              vertical: 20,
-                            ),
-                            decoration: const BoxDecoration(
-                              color: kPrimaryColor,
-                              boxShadow: [
-                                BoxShadow(
-                                  color: Colors.black26,
-                                  blurRadius: 10,
-                                  offset: Offset(4, 4),
-                                ),
-                              ],
-                            ),
-                            child: const Center(
-                              child: Text(
-                                'This user is blocked',
-                                style: TextStyle(
-                                  fontSize: 20,
-                                  fontWeight: FontWeight.bold,
-                                  color: Colors.white,
-                                  letterSpacing: 1.5,
-                                  shadows: [
-                                    // Shadow(
-                                    //   color: Colors.black45,
-                                    //   blurRadius: 5,
-                                    //   offset: Offset(2, 2),
-                                    // ),
-                                  ],
+                    if (!isBlocked)
+                      Container(
+                        padding: const EdgeInsets.symmetric(
+                            horizontal: 8.0, vertical: 10),
+                        child: Row(
+                          children: [
+                            if (!_isRecording)
+                              Padding(
+                                padding: const EdgeInsets.only(right: 8.0),
+                                child: GestureDetector(
+                                  onTap: () {
+                                    showModalBottomSheet(
+                                      enableDrag: true,
+                                      isScrollControlled: true,
+                                      context: context,
+                                      builder: (builder) => bottomSheet(),
+                                    );
+                                  },
+                                  child: const Icon(Icons.attach_file,
+                                      color: Colors.grey),
                                 ),
                               ),
-                            ),
-                          )
-                        : Align(
-                            alignment: Alignment.bottomCenter,
-                            child: Container(
-                              padding: const EdgeInsets.symmetric(
-                                  horizontal: 8.0, vertical: 12.0),
-                              color: kPrimaryLightColor,
-                              child: Row(
-                                children: [
-                                  Expanded(
-                                    child: Card(
-                                      elevation: 1,
-                                      color: Colors.white,
-                                      shape: RoundedRectangleBorder(
-                                        side: const BorderSide(
-                                          color: Color.fromARGB(
-                                              255, 220, 215, 215),
-                                          width: 0.5,
+                            Expanded(
+                              child: AnimatedSwitcher(
+                                duration: const Duration(milliseconds: 200),
+                                transitionBuilder: (Widget child,
+                                    Animation<double> animation) {
+                                  const begin = Offset(-1.0, 0.0);
+                                  const end = Offset.zero;
+                                  final tween = Tween(begin: begin, end: end);
+                                  final offsetAnimation =
+                                      animation.drive(tween);
+                                  return SlideTransition(
+                                    position: offsetAnimation,
+                                    child: child,
+                                  );
+                                },
+                                child: _isRecording
+                                    ? Container(
+                                        key: const ValueKey<bool>(true),
+                                        child: Row(
+                                          children: [
+                                            IconButton(
+                                              icon: const Icon(Icons.delete,
+                                                  color: Colors.red),
+                                              onPressed: _cancelRecording,
+                                            ),
+                                            const SizedBox(width: 8),
+                                            Text(
+                                              _formatDuration(
+                                                  _recordingDuration),
+                                              style:
+                                                  const TextStyle(fontSize: 16),
+                                            ),
+                                            const SizedBox(width: 8),
+                                            Expanded(child: Container()),
+                                            if (!_isLocked) ...[
+                                              const Icon(Icons.lock_open,
+                                                  color: Colors.grey),
+                                              const SizedBox(width: 8),
+                                              const Text(
+                                                'Slide up to lock',
+                                                style: TextStyle(
+                                                    fontSize: 14,
+                                                    color: Colors.grey),
+                                              ),
+                                            ] else ...[
+                                              const Text(
+                                                'Recording locked',
+                                                style: TextStyle(
+                                                    fontSize: 14,
+                                                    color: Colors.grey),
+                                              ),
+                                              const SizedBox(width: 8),
+                                            ]
+                                          ],
                                         ),
-                                        borderRadius:
-                                            BorderRadius.circular(15.0),
-                                      ),
-                                      child: Padding(
-                                        padding: const EdgeInsets.symmetric(
-                                            horizontal: 8.0, vertical: 5.0),
-                                        child: Container(
-                                          constraints: const BoxConstraints(
-                                            maxHeight: 150, // Limit the height
-                                          ),
-                                          child: Scrollbar(
-                                            thumbVisibility: true,
-                                            child: SingleChildScrollView(
-                                              scrollDirection: Axis.vertical,
-                                              reverse:
-                                                  true, // Start from bottom
+                                      )
+                                    : Container(
+                                        key: const ValueKey<bool>(false),
+                                        decoration: BoxDecoration(
+                                          color: Colors.white,
+                                          borderRadius:
+                                              BorderRadius.circular(25),
+                                        ),
+                                        child: Row(
+                                          children: [
+                                            Expanded(
                                               child: TextField(
                                                 controller: _controller,
                                                 focusNode: focusNode,
-                                                keyboardType:
-                                                    TextInputType.multiline,
-                                                maxLines:
-                                                    null, // Allows for unlimited lines
-                                                minLines:
-                                                    1, // Starts with a single line
                                                 decoration:
                                                     const InputDecoration(
-                                                  border: InputBorder.none,
                                                   hintText: "Type a message",
+                                                  border: InputBorder.none,
                                                   contentPadding:
                                                       EdgeInsets.symmetric(
-                                                          horizontal: 10),
+                                                          horizontal: 20),
                                                 ),
                                               ),
                                             ),
-                                          ),
+                                            IconButton(
+                                              icon: const Icon(Icons.send,
+                                                  color: kPrimaryColor),
+                                              onPressed: sendMessage,
+                                            ),
+                                          ],
                                         ),
                                       ),
-                                    ),
-                                  ),
-                                  Padding(
-                                    padding: const EdgeInsets.only(
-                                      right: 2,
-                                      left: 2,
-                                    ),
-                                    child: Container(
-                                      decoration: BoxDecoration(
-                                          color: kPrimaryColor,
-                                          borderRadius:
-                                              BorderRadius.circular(5)),
-                                      child: IconButton(
-                                        icon: const Icon(
-                                          Icons.send,
-                                          color: Colors.white,
-                                        ),
-                                        onPressed: () {
-                                          sendMessage();
-                                        },
-                                      ),
-                                    ),
-                                  ),
-                                ],
                               ),
                             ),
-                          )
+                            const SizedBox(width: 8),
+                            Stack(
+                              clipBehavior: Clip.none,
+                              alignment: Alignment.bottomCenter,
+                              children: [
+                                GestureDetector(
+                                  onLongPressStart: (_) => _startRecording(),
+                                  onLongPressEnd: (_) {
+                                    if (!_isLocked) {
+                                      _stopRecording();
+                                    }
+                                  },
+                                  onLongPressMoveUpdate: (details) {
+                                    if (!_isLocked &&
+                                        details.localOffsetFromOrigin.dy <
+                                            -50) {
+                                      if (mounted) {
+                                        setState(() {
+                                          _isLocked = true;
+                                        });
+                                      }
+                                      HapticFeedback.vibrate();
+                                    }
+                                  },
+                                  onTap: () {
+                                    if (_isLocked) {
+                                      _stopRecording();
+                                    }
+                                  },
+                                  child: Container(
+                                    width: 40,
+                                    height: 40,
+                                    decoration: BoxDecoration(
+                                      color: _isRecording && !_isLocked
+                                          ? Colors.red
+                                          : kPrimaryColor,
+                                      shape: BoxShape.circle,
+                                    ),
+                                    child: Icon(
+                                      _isLocked ? Icons.send : Icons.mic,
+                                      color: Colors.white,
+                                    ),
+                                  ),
+                                ),
+                                if (_isRecording && _isLocked)
+                                  Positioned(
+                                    bottom: 30,
+                                    child: Icon(
+                                      Icons.lock,
+                                      color: kPrimaryColor,
+                                      size: 20,
+                                    ),
+                                  ),
+                              ],
+                            ),
+                          ],
+                        ),
+                      ),
                   ],
                 ),
                 onPopInvoked: (didPop) {
                   if (didPop) {
                     if (show) {
-                      setState(() {
-                        show = false;
-                      });
+                      if (mounted) {
+                        setState(() {
+                          show = false;
+                        });
+                      }
                     } else {
                       focusNode.unfocus();
                       WidgetsBinding.instance.addPostFrameCallback((_) {
@@ -470,14 +767,14 @@ class _IndividualPageState extends ConsumerState<IndividualPage> {
               ),
             ),
           ),
-        ],
-      ),
+        ),
+      ],
     );
   }
 
   Widget bottomSheet() {
     return Container(
-      height: 278,
+      height: 178,
       width: MediaQuery.of(context).size.width,
       child: Card(
         margin: const EdgeInsets.all(18.0),
@@ -490,34 +787,128 @@ class _IndividualPageState extends ConsumerState<IndividualPage> {
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
                   iconCreation(
-                      Icons.insert_drive_file, Colors.indigo, "Document"),
-                  const SizedBox(
-                    width: 40,
+                    Icons.insert_drive_file,
+                    Colors.indigo,
+                    "Document",
+                    onTap: () async {
+                      final File? document = await MediaService.pickDocument();
+                      if (document != null) {
+                        try {
+                          final String documentUrl =
+                              await MediaService.documentUpload(document.path);
+                          final messageId =
+                              await ChatApiService.sendChatMessage(
+                            Id: widget.receiver.id!,
+                            content: 'Document',
+                            mediaType: 'document',
+                            media: documentUrl,
+                          );
+
+                          if (messageId.isNotEmpty && mounted) {
+                            setMessage(
+                              "sent",
+                              "Document",
+                              widget.sender.id!,
+                              media: documentUrl,
+                              mediaType: 'document',
+                            );
+                          }
+                        } catch (e) {
+                          debugPrint('Error sending document: $e');
+                        }
+                      }
+                      Navigator.pop(context);
+                    },
                   ),
-                  iconCreation(Icons.camera_alt, Colors.pink, "Camera"),
-                  const SizedBox(
-                    width: 40,
+                  const SizedBox(width: 40),
+                  iconCreation(
+                    Icons.insert_photo,
+                    Colors.purple,
+                    "Gallery",
+                    onTap: () async {
+                      final XFile? image = await ImagePicker()
+                          .pickImage(source: ImageSource.gallery);
+                      if (image != null) {
+                        try {
+                          final String imageUrl =
+                              await MediaService.mediaUpload(image.path);
+                          final messageId =
+                              await ChatApiService.sendChatMessage(
+                            Id: widget.receiver.id!,
+                            content: 'Image',
+                            mediaType: 'image',
+                            media: imageUrl,
+                          );
+
+                          if (messageId.isNotEmpty && mounted) {
+                            setMessage(
+                              "sent",
+                              "Image",
+                              widget.sender.id!,
+                              media: imageUrl,
+                              mediaType: 'image',
+                            );
+                          }
+                        } catch (e) {
+                          debugPrint('Error sending image: $e');
+                        }
+                      }
+                      Navigator.pop(context);
+                    },
                   ),
-                  iconCreation(Icons.insert_photo, Colors.purple, "Gallery"),
+                  const SizedBox(width: 40),
+                  iconCreation(
+                    Icons.video_library,
+                    Colors.red,
+                    "Video",
+                    onTap: () async {
+                      final XFile? video = await ImagePicker()
+                          .pickVideo(source: ImageSource.gallery);
+                      if (video != null) {
+                        try {
+                          final String videoUrl =
+                              await MediaService.videoUpload(video.path);
+                          final messageId =
+                              await ChatApiService.sendChatMessage(
+                            Id: widget.receiver.id!,
+                            content: 'Video',
+                            mediaType: 'video',
+                            media: videoUrl,
+                          );
+
+                          if (messageId.isNotEmpty && mounted) {
+                            setMessage(
+                              "sent",
+                              "Video",
+                              widget.sender.id!,
+                              media: videoUrl,
+                              mediaType: 'video',
+                            );
+                          }
+                        } catch (e) {
+                          debugPrint('Error sending video: $e');
+                        }
+                      }
+                      Navigator.pop(context);
+                    },
+                  ),
                 ],
               ),
-              const SizedBox(
-                height: 30,
-              ),
-              Row(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                  iconCreation(Icons.headset, Colors.orange, "Audio"),
-                  const SizedBox(
-                    width: 40,
-                  ),
-                  iconCreation(Icons.location_pin, Colors.teal, "Location"),
-                  const SizedBox(
-                    width: 40,
-                  ),
-                  iconCreation(Icons.person, Colors.blue, "Contact"),
-                ],
-              ),
+              // const SizedBox(height: 30),
+              // Row(
+              //   mainAxisAlignment: MainAxisAlignment.center,
+              //   children: [
+              //     iconCreation(
+              //       Icons.person,
+              //       Colors.blue,
+              //       "Contact",
+              //       onTap: () {
+              //         // TODO: Implement contact sharing
+              //         Navigator.pop(context);
+              //       },
+              //     ),
+              //   ],
+              // ),
             ],
           ),
         ),
@@ -525,9 +916,10 @@ class _IndividualPageState extends ConsumerState<IndividualPage> {
     );
   }
 
-  Widget iconCreation(IconData icons, Color color, String text) {
+  Widget iconCreation(IconData icons, Color color, String text,
+      {required VoidCallback onTap}) {
     return InkWell(
-      onTap: () {},
+      onTap: onTap,
       child: Column(
         children: [
           CircleAvatar(
@@ -539,17 +931,19 @@ class _IndividualPageState extends ConsumerState<IndividualPage> {
               color: Colors.white,
             ),
           ),
-          const SizedBox(
-            height: 5,
-          ),
+          const SizedBox(height: 5),
           Text(
             text,
-            style: const TextStyle(
-              fontSize: 12,
-            ),
+            style: const TextStyle(fontSize: 12),
           )
         ],
       ),
     );
+  }
+
+  String _formatDuration(Duration duration) {
+    final minutes = duration.inMinutes.toString().padLeft(2, '0');
+    final seconds = duration.inSeconds.remainder(60).toString().padLeft(2, '0');
+    return '$minutes:$seconds';
   }
 }

@@ -13,12 +13,10 @@ import 'package:riverpod_annotation/riverpod_annotation.dart';
 
 part 'chat_api.g.dart';
 
-
 class SocketIoClientService {
   late IO.Socket _socket;
 
   final _messageController = StreamController<MessageModel>.broadcast();
-
 
   Stream<MessageModel> get messageStream => _messageController.stream;
 
@@ -40,19 +38,16 @@ class SocketIoClientService {
     _socket.on('message', (data) {
       log('Received message: $data');
 
-
-        final messageModel = MessageModel.fromJson(data);
-        ref.invalidate(fetchChatThreadProvider);
-        if (!_messageController.isClosed) {
-          _messageController.add(messageModel);
-        }
- 
+      final messageModel = MessageModel.fromJson(data);
+      ref.invalidate(fetchChatThreadProvider);
+      if (!_messageController.isClosed) {
+        _messageController.add(messageModel);
+      }
     });
 
     _socket.on('connect_error', (error) {
       log('Connection Error: $error');
       if (!_messageController.isClosed) _messageController.addError(error);
-      
     });
 
     _socket.onDisconnect((_) => log('Disconnected from server'));
@@ -64,7 +59,6 @@ class SocketIoClientService {
     _socket.disconnect();
     _socket.dispose();
     if (!_messageController.isClosed) _messageController.close();
-  
   }
 }
 
@@ -72,13 +66,10 @@ final socketIoClientProvider = Provider<SocketIoClientService>((ref) {
   return SocketIoClientService();
 });
 
-
 final messageStreamProvider = StreamProvider.autoDispose<MessageModel>((ref) {
   final socketService = ref.read(socketIoClientProvider);
   return socketService.messageStream;
 });
-
-
 
 class ChatApiService {
   static Future<String> sendChatMessage({
@@ -87,6 +78,8 @@ class ChatApiService {
     String? productId,
     bool isGroup = false,
     String? businessId,
+    String? mediaType = 'text',
+    String? media,
   }) async {
     final url = Uri.parse('$baseUrl/chat/send-message/$Id');
     final headers = {
@@ -98,6 +91,8 @@ class ChatApiService {
       if (content != null) 'content': content,
       if (productId != null) 'product': productId,
       if (businessId != null) 'feed': businessId,
+      if (media != null) 'media': media,
+      if (mediaType != null) 'mediaType': mediaType,
       'isGroup': isGroup,
     });
 
@@ -133,6 +128,7 @@ class ChatApiService {
 
       if (response.statusCode == 200) {
         final List<dynamic> data = json.decode(response.body)['data'];
+        log(name: 'chat data', response.body.toString());
         return data.map((item) => MessageModel.fromJson(item)).toList();
       } else {
         log('Error fetching chat: ${response.statusCode}');
@@ -168,7 +164,6 @@ class ChatApiService {
     }
   }
 }
-
 
 @riverpod
 Future<List<ChatModel>> fetchChatThread(FetchChatThreadRef ref) async {

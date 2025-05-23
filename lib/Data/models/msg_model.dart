@@ -4,10 +4,13 @@ class MessageModel {
   final String? to;
   final String? content;
   final ChatBusiness? feed;
+    final ChatProduct? product;
   final String? status;
   final DateTime? createdAt;
   final DateTime? updatedAt;
   final int? v;
+  final String? media;
+  final String? mediaType;
 
   MessageModel({
     this.id,
@@ -15,13 +18,16 @@ class MessageModel {
     this.to,
     this.content,
     this.feed,
+    this.product,
     this.status,
     this.createdAt,
     this.updatedAt,
     this.v,
+    this.media,
+    this.mediaType = 'text',
   });
 
-  // fromJson method
+
   factory MessageModel.fromJson(Map<String, dynamic> json) {
     return MessageModel(
       id: json['_id'] as String?,
@@ -29,14 +35,19 @@ class MessageModel {
       to: json['to'] as String?,
       content: json['content'] as String?,
       feed: json['feed'] != null ? ChatBusiness.fromJson(json['feed']) : null,
+      product: json['product'] != null ? ChatProduct.fromJson(json['product']) : null,
       status: json['status'] as String?,
-      createdAt: json['createdAt'] != null ? DateTime.parse(json['createdAt']) : null,
-      updatedAt: json['updatedAt'] != null ? DateTime.parse(json['updatedAt']) : null,
+      createdAt:
+          json['createdAt'] != null ? DateTime.parse(json['createdAt']) : null,
+      updatedAt:
+          json['updatedAt'] != null ? DateTime.parse(json['updatedAt']) : null,
       v: json['__v'] as int?,
+      media: json['media'] as String?,
+      mediaType: json['mediaType'] as String? ?? 'text',
     );
   }
 
-  // toJson method
+
   Map<String, dynamic> toJson() {
     return {
       '_id': id,
@@ -44,14 +55,16 @@ class MessageModel {
       'to': to,
       'content': content,
       'feed': feed?.toJson(),
+      'product': product?.toJson(),
       'status': status,
       'createdAt': createdAt?.toIso8601String(),
       'updatedAt': updatedAt?.toIso8601String(),
       '__v': v,
+      'media': media,
+      'mediaType': mediaType,
     };
   }
 }
-
 
 class ChatBusiness {
   String? id;

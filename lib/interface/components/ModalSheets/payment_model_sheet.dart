@@ -180,7 +180,7 @@
 //               }
 
 //               try {
-//                 final String paymentImageUrl = await imageUpload(
+//                 final String paymentImageUrl = await mediaUpload(
 //                   widget.paymentImage!.path,
 //                 );
 //                 // Attempt to upload the payment details
